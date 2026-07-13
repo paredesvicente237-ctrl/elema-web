@@ -18,10 +18,10 @@ export default function HomePage() {
   return (
     <main className="overflow-x-hidden bg-[#efe8dc] text-[#171717]">
       <section className="relative isolate min-h-[100svh] overflow-hidden bg-[#12141a]">
-        <div className="absolute inset-0 bg-[url('/images/hero-elema.svg')] bg-cover bg-center" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(245,239,230,0.16),transparent_34%),radial-gradient(circle_at_80%_18%,rgba(190,183,170,0.12),transparent_24%),linear-gradient(95deg,rgba(10,10,12,0.84)_0%,rgba(9,10,13,0.7)_42%,rgba(12,13,16,0.32)_100%)]" />
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.04),transparent_40%,rgba(6,6,6,0.24))]" />
-        <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-[#101218] to-transparent" />
+        <Image src="/images/hero-luxury-waterfront.png" alt="" fill sizes="100vw" className="object-cover object-center" quality={90} priority />
+        <div className="absolute inset-0 bg-black/25" />
+        <div className="absolute inset-0 bg-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-48 bg-transparent" />
 
         <div className="relative mx-auto flex min-h-[100svh] max-w-7xl flex-col justify-center px-4 py-24 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
