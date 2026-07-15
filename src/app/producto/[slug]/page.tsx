@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { products } from '@/data/products';
@@ -15,10 +16,14 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
     <main className="min-h-screen bg-elema-black px-4 py-20 sm:px-6 lg:px-8">
       <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1.1fr_0.9fr]">
         <div className="space-y-4">
-          <div className="aspect-[4/3] rounded-[2rem] border border-elema-steel/20 bg-elema-soft" />
+          <div className="overflow-hidden rounded-[2rem] border border-elema-steel/20 bg-elema-soft">
+            <Image src={product.images[0]} alt={product.name} width={1200} height={900} className="aspect-[4/3] w-full object-cover" priority />
+          </div>
           <div className="grid gap-4 sm:grid-cols-2">
             {product.images.map((image, index) => (
-              <div key={`${image}-${index}`} className="aspect-[4/3] rounded-[1.5rem] border border-elema-steel/20 bg-elema-graphite" />
+              <div key={`${image}-${index}`} className="overflow-hidden rounded-[1.5rem] border border-elema-steel/20 bg-elema-graphite">
+                <Image src={image} alt={`${product.name}, vista ${index + 1}`} width={900} height={700} className="aspect-[4/3] w-full object-cover" />
+              </div>
             ))}
           </div>
         </div>

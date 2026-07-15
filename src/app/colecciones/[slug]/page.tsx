@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { products } from '@/data/products';
@@ -29,7 +30,9 @@ export default async function CollectionPage({ params }: { params: Promise<{ slu
         <div className="mt-10 grid gap-6 md:grid-cols-2">
           {products.filter((product) => product.category.toLowerCase() === collection.title.toLowerCase()).map((product) => (
             <article key={product.id} className="rounded-[1.75rem] border border-elema-steel/20 bg-elema-soft p-5">
-              <div className="aspect-[4/3] rounded-[1.25rem] bg-elema-graphite" />
+              <div className="overflow-hidden rounded-[1.25rem] bg-elema-graphite">
+                <Image src={product.images[0]} alt={product.name} width={900} height={700} className="aspect-[4/3] w-full object-cover transition duration-500 hover:scale-[1.02]" />
+              </div>
               <h2 className="mt-5 text-2xl font-semibold text-elema-warm">{product.name}</h2>
               <p className="mt-3 text-sm leading-7 text-elema-silver">{product.shortDescription}</p>
               <Link href={`/producto/${product.slug}`} className="mt-6 inline-flex items-center gap-2 text-sm uppercase tracking-[0.25em] text-elema-warm">

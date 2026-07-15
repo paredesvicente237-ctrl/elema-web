@@ -111,7 +111,7 @@ export default function HomePage() {
           </div>
 
           <div className="overflow-hidden rounded-[1.7rem] border border-[#171717]/10 bg-[#101010]">
-            <Image src="/images/hero-elema.svg" alt="Producto destacado ELEMA" width={1200} height={900} className="h-full w-full object-cover" />
+            <Image src="/images/campana-noctis.png" alt="Campana vertical Noctis en cocina contemporánea" width={1200} height={900} className="h-full w-full object-cover" />
           </div>
         </div>
       </section>

@@ -29,7 +29,7 @@ export default function StorePage() {
           {products.map((product) => (
             <article key={product.id} className="overflow-hidden rounded-[1.75rem] border border-[#161616]/10 bg-[#f6efe6] p-5 shadow-[0_16px_40px_rgba(0,0,0,0.05)]">
               <div className="overflow-hidden rounded-[1.25rem] bg-[#101010]">
-                <Image src="/images/hero-elema.svg" alt={product.name} width={900} height={700} className="aspect-[4/3] w-full object-cover transition duration-500 hover:scale-[1.02]" />
+                <Image src={product.images[0]} alt={product.name} width={900} height={700} className="aspect-[4/3] w-full object-cover transition duration-500 hover:scale-[1.02]" />
               </div>
               <div className="mt-5 flex items-center justify-between">
                 <p className="text-[0.7rem] uppercase tracking-[0.28em] text-[#7a7269]">{product.category}</p>
