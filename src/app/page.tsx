@@ -4,10 +4,10 @@ import { ArrowRight, ChevronDown } from 'lucide-react';
 import { featuredProducts } from '@/data/products';
 
 const collections = [
-  { title: 'Cocinas', description: 'Composiciones de alto impacto para residencias y proyectos singulares.', href: '/colecciones/cocinas', image: '/images/coleccion-cocinas.svg' },
-  { title: 'Parrillas', description: 'Arte funcional para exteriores, hosting y experiencias de fuego.', href: '/colecciones/parrillas', image: '/images/coleccion-parrillas.svg' },
-  { title: 'Campanas', description: 'Elementos escultóricos que sostienen la narrativa del espacio.', href: '/colecciones/campanas', image: '/images/coleccion-campanas.svg' },
-  { title: 'Soluciones a medida', description: 'Proyectos de arquitectura, mobiliario y fabricación especial.', href: '/colecciones/soluciones-personalizadas', image: '/images/hero-elema.svg' },
+  { title: 'Cocinas', description: 'Composiciones de alto impacto para residencias y proyectos singulares.', href: '/colecciones/cocinas', image: '/images/cocina-aurora.png' },
+  { title: 'Parrillas', description: 'Arte funcional para exteriores, hosting y experiencias de fuego.', href: '/colecciones/parrillas', image: '/images/parrilla-lumen.png' },
+  { title: 'Campanas', description: 'Elementos escultóricos que sostienen la narrativa del espacio.', href: '/colecciones/campanas', image: '/images/campana-noctis.png' },
+  { title: 'Soluciones a medida', description: 'Proyectos de arquitectura, mobiliario y fabricación especial.', href: '/diseno-a-medida', image: '/images/taller-elema-editorial.png' },
 ];
 
 const materials = [
@@ -72,7 +72,7 @@ export default function HomePage() {
       <section className="mx-auto max-w-7xl px-4 pb-24 sm:px-6 lg:px-8">
         <div className="grid gap-6 xl:grid-cols-[1.1fr_0.9fr]">
           <Link href={collections[0].href} className="group relative min-h-[460px] overflow-hidden rounded-[2rem] border border-white/10 bg-[#14161d] shadow-[0_20px_70px_rgba(0,0,0,0.16)]">
-            <div className="absolute inset-0 bg-[url('/images/coleccion-cocinas.svg')] bg-cover bg-center" />
+            <Image src={collections[0].image} alt="" fill sizes="(min-width: 1280px) 55vw, 100vw" className="object-cover transition duration-700 group-hover:scale-[1.025]" />
             <div className="absolute inset-0 bg-[linear-gradient(95deg,rgba(10,12,16,0.9)_0%,rgba(10,12,16,0.48)_55%,rgba(10,12,16,0.2)_100%)]" />
             <div className="relative z-10 flex h-full flex-col justify-end p-8 sm:p-10">
               <p className="text-[0.72rem] uppercase tracking-[0.34em] text-[#cfc7bc]">Colección</p>
@@ -93,6 +93,21 @@ export default function HomePage() {
                 </div>
               </Link>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="relative isolate min-h-[620px] overflow-hidden bg-[#0b0c0f] text-[#f6efe6]">
+        <Image src="/images/taller-elema-editorial.png" alt="Fabricación de una pieza de acero en taller" fill sizes="100vw" className="object-cover object-center" />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(8,9,11,0.9)_0%,rgba(8,9,11,0.62)_40%,rgba(8,9,11,0.12)_75%)]" />
+        <div className="relative mx-auto flex min-h-[620px] max-w-7xl items-center px-4 py-24 sm:px-6 lg:px-8">
+          <div className="max-w-xl">
+            <p className="text-[0.72rem] uppercase tracking-[0.38em] text-[#b8afa4]">Del plano a la materia</p>
+            <h2 className="mt-5 font-serif text-4xl leading-tight sm:text-5xl">Diseño que entiende cómo se fabrica.</h2>
+            <p className="mt-6 max-w-lg text-base leading-8 text-[#d8d0c4]">Cada unión, pliegue y terminación se resuelve como parte de una misma arquitectura. Precisión técnica sin perder presencia.</p>
+            <Link href="/diseno-a-medida" className="mt-9 inline-flex items-center gap-3 border-b border-white/40 pb-2 text-xs uppercase tracking-[0.3em] transition hover:border-white">
+              Conocer el proceso <ArrowRight size={14} />
+            </Link>
           </div>
         </div>
       </section>

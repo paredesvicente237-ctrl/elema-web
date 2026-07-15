@@ -20,26 +20,40 @@ export default async function CollectionPage({ params }: { params: Promise<{ slu
   if (!collection) notFound();
 
   return (
-    <main className="min-h-screen bg-elema-black px-4 py-20 sm:px-6 lg:px-8">
+    <main className="min-h-screen bg-[#eee7dc] px-4 pb-24 pt-40 text-[#171717] sm:px-6 lg:px-8 lg:pt-48">
       <div className="mx-auto max-w-7xl">
-        <div className="max-w-3xl">
-          <p className="text-sm uppercase tracking-[0.35em] text-elema-steel">Colección</p>
-          <h1 className="mt-4 text-4xl font-semibold text-elema-warm sm:text-5xl">{collection.title}</h1>
-          <p className="mt-6 text-lg leading-8 text-elema-silver">{collection.description}</p>
+        <div className="grid gap-8 border-b border-black/15 pb-14 lg:grid-cols-[1.25fr_0.75fr] lg:items-end">
+          <div>
+            <p className="text-[0.7rem] uppercase tracking-[0.4em] text-[#777067]">Colección</p>
+            <h1 className="mt-5 font-serif text-5xl leading-none sm:text-6xl lg:text-7xl">{collection.title}</h1>
+          </div>
+          <p className="max-w-md text-base leading-8 text-[#56514b]">{collection.description}</p>
         </div>
-        <div className="mt-10 grid gap-6 md:grid-cols-2">
+        <div className="mt-14 grid gap-x-8 gap-y-16 md:grid-cols-2">
           {products.filter((product) => product.category.toLowerCase() === collection.title.toLowerCase()).map((product) => (
-            <article key={product.id} className="rounded-[1.75rem] border border-elema-steel/20 bg-elema-soft p-5">
-              <div className="overflow-hidden rounded-[1.25rem] bg-elema-graphite">
-                <Image src={product.images[0]} alt={product.name} width={900} height={700} className="aspect-[4/3] w-full object-cover transition duration-500 hover:scale-[1.02]" />
+            <article key={product.id} className="group">
+              <div className="overflow-hidden bg-[#171717]">
+                <Image src={product.images[0]} alt={product.name} width={1200} height={900} className="aspect-[4/3] w-full object-cover transition duration-700 group-hover:scale-[1.025]" />
               </div>
-              <h2 className="mt-5 text-2xl font-semibold text-elema-warm">{product.name}</h2>
-              <p className="mt-3 text-sm leading-7 text-elema-silver">{product.shortDescription}</p>
-              <Link href={`/producto/${product.slug}`} className="mt-6 inline-flex items-center gap-2 text-sm uppercase tracking-[0.25em] text-elema-warm">
+              <div className="mt-5 border-t border-black/20 pt-5">
+                <p className="text-[0.68rem] uppercase tracking-[0.3em] text-[#777067]">{product.category}</p>
+                <h2 className="mt-3 font-serif text-3xl">{product.name}</h2>
+                <p className="mt-3 text-sm leading-7 text-[#56514b]">{product.shortDescription}</p>
+              </div>
+              <Link href={`/producto/${product.slug}`} className="mt-6 inline-flex border-b border-black/30 pb-2 text-[0.7rem] uppercase tracking-[0.28em] transition group-hover:border-black">
                 Ver producto
               </Link>
             </article>
           ))}
+          {products.filter((product) => product.category.toLowerCase() === collection.title.toLowerCase()).length === 0 ? (
+            <div className="col-span-full grid min-h-[420px] place-items-center border border-black/15 bg-[#e7ded1] px-6 text-center">
+              <div className="max-w-xl">
+                <p className="text-[0.7rem] uppercase tracking-[0.35em] text-[#777067]">Fabricación especial</p>
+                <h2 className="mt-5 font-serif text-4xl">Cada solución comienza con tu espacio.</h2>
+                <Link href="/contacto" className="mt-8 inline-flex border-b border-black/30 pb-2 text-[0.7rem] uppercase tracking-[0.28em]">Conversar sobre un proyecto</Link>
+              </div>
+            </div>
+          ) : null}
         </div>
       </div>
     </main>
