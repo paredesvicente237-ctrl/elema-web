@@ -18,13 +18,17 @@ const cormorant = Cormorant_Garamond({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('http://localhost:3000'),
-  title: 'ELEMA | Diseño y fabricación premium',
-  description: 'ELEMA crea cocinas, parrillas y soluciones arquitectónicas personalizadas para espacios extraordinarios.',
+  title: {
+    default: 'ELEMA | Diseño y fabricación en acero',
+    template: '%s | ELEMA',
+  },
+  description: 'Cocinas, parrillas, campanas y soluciones arquitectónicas fabricadas a medida en Chile con diseño, ingeniería y precisión metalmecánica.',
+  keywords: ['cocinas a medida', 'parrillas premium', 'campanas de acero', 'mobiliario inoxidable', 'fabricación en acero', 'diseño a medida Chile'],
   openGraph: {
-    title: 'ELEMA | Diseño y fabricación premium',
-    description: 'ELEMA crea cocinas, parrillas y soluciones arquitectónicas personalizadas para espacios extraordinarios.',
+    title: 'ELEMA | Diseño y fabricación en acero',
+    description: 'Cocinas, parrillas, campanas y soluciones arquitectónicas fabricadas a medida en Chile.',
     type: 'website',
+    locale: 'es_CL',
   },
 };
 

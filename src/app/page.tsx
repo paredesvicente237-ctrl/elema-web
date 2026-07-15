@@ -10,7 +10,12 @@ const collections = [
   { title: 'Soluciones a medida', description: 'Proyectos de arquitectura, mobiliario y fabricación especial.', href: '/colecciones/soluciones-personalizadas', image: '/images/hero-elema.svg' },
 ];
 
-const materials = ['Acero', 'Piedra', 'Fuego', 'Precisión'];
+const materials = [
+  { title: 'Acero inoxidable', description: 'Resistencia, higiene y terminaciones sobrias para cocinas, campanas y equipamiento de uso intensivo.' },
+  { title: 'Acero al carbono', description: 'Estructura y presencia material para piezas especiales, parrillas y soluciones arquitectónicas.' },
+  { title: 'Metales especiales', description: 'Aluminio, cobre, bronce y planchas perforadas o diamantadas según el lenguaje del proyecto.' },
+  { title: 'Procesos de precisión', description: 'Corte, plegado, curvado y soldadura para convertir una intención de diseño en una pieza fabricable.' },
+];
 
 export default function HomePage() {
   const featured = featuredProducts[0];
@@ -142,10 +147,10 @@ export default function HomePage() {
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
             {materials.map((material) => (
-              <div key={material} className="rounded-[1.5rem] border border-[#161616]/10 bg-[#f8f2e8] p-6">
+              <div key={material.title} className="rounded-[1.5rem] border border-[#161616]/10 bg-[#f8f2e8] p-6">
                 <div className="mb-5 h-2 w-16 bg-[#171717]" />
-                <h3 className="text-xl font-medium text-[#171717]">{material}</h3>
-                <p className="mt-3 text-sm leading-7 text-[#4a453f]">Acabados y materiales seleccionados para una presencia elegante, durable y de alto nivel.</p>
+                <h3 className="text-xl font-medium text-[#171717]">{material.title}</h3>
+                <p className="mt-3 text-sm leading-7 text-[#4a453f]">{material.description}</p>
               </div>
             ))}
           </div>

@@ -16,7 +16,9 @@ export function Footer() {
           <p className="mt-4 max-w-md text-sm leading-7 text-[#d8d0c4]">
             Diseño, ingeniería y fabricación premium para cocinas, parrillas y soluciones arquitectónicas personalizadas.
           </p>
-          <p className="mt-4 text-sm text-[#a89d90]">Datos empresariales por confirmar.</p>
+          <a href="https://wa.me/56930751812" target="_blank" rel="noreferrer" className="mt-4 inline-flex text-sm text-[#a89d90] transition hover:text-[#f6efe6]">
+            +56 9 3075 1812 · Santiago, Chile
+          </a>
         </div>
         <div>
           <h3 className="text-[0.72rem] uppercase tracking-[0.34em] text-[#a89d90]">Navegación</h3>
@@ -41,7 +43,7 @@ export function Footer() {
       </div>
       <div className="mx-auto mt-10 flex max-w-7xl flex-col gap-3 border-t border-white/10 pt-6 text-sm text-[#a89d90] sm:flex-row sm:items-center sm:justify-between">
         <p>© {new Date().getFullYear()} ELEMA. Todos los derechos reservados.</p>
-        <p>Contenido provisional para revisión.</p>
+        <p>Diseñado y fabricado en Chile.</p>
       </div>
     </footer>
   );

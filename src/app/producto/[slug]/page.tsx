@@ -65,7 +65,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
           <div className="mt-8 rounded-[1.5rem] border border-elema-steel/20 bg-elema-soft p-6 text-sm leading-7 text-elema-silver">
             <p><span className="text-elema-warm">Tiempo estimado:</span> {product.estimatedTime}</p>
             <p className="mt-3"><span className="text-elema-warm">Despacho:</span> {product.shipping}</p>
-            <p className="mt-3"><span className="text-elema-warm">Fabricación:</span> Proceso de demostración para revisión visual y estructura comercial.</p>
+            <p className="mt-3"><span className="text-elema-warm">Fabricación:</span> Corte, plegado, armado y soldadura definidos según la materialidad y configuración final.</p>
           </div>
         </div>
       </div>
