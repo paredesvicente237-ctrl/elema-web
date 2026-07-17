@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import type { Metadata } from 'next';
 import { products } from '@/data/products';
 
 const COLLECTIONS = {
@@ -12,6 +13,12 @@ const COLLECTIONS = {
 
 export function generateStaticParams() {
   return Object.keys(COLLECTIONS).map((slug) => ({ slug }));
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const collection = COLLECTIONS[slug as keyof typeof COLLECTIONS];
+  return collection ? { title: `Colección ${collection.title}`, description: collection.description } : {};
 }
 
 export default async function CollectionPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -39,6 +46,10 @@ export default async function CollectionPage({ params }: { params: Promise<{ slu
                 <p className="text-[0.68rem] uppercase tracking-[0.3em] text-[#777067]">{product.category}</p>
                 <h2 className="mt-3 font-serif text-3xl">{product.name}</h2>
                 <p className="mt-3 text-sm leading-7 text-[#56514b]">{product.shortDescription}</p>
+                <div className="mt-4 flex items-center justify-between gap-4 text-[0.68rem] uppercase tracking-[0.22em] text-[#777067]">
+                  <span>{product.demo ? 'Concepto a cotizar' : product.tag}</span>
+                  <span>{product.demo ? null : product.price ? `$${product.price.toLocaleString('es-CL')} CLP` : 'Precio a solicitud'}</span>
+                </div>
               </div>
               <Link href={`/producto/${product.slug}`} className="mt-6 inline-flex border-b border-black/30 pb-2 text-[0.7rem] uppercase tracking-[0.28em] transition group-hover:border-black">
                 Ver producto

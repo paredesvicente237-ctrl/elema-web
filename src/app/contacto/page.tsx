@@ -29,7 +29,7 @@ export default function ContactPage() {
   };
 
   return (
-    <main className="min-h-screen bg-elema-black px-4 py-20 sm:px-6 lg:px-8">
+    <main className="min-h-screen bg-elema-black px-4 pb-24 pt-32 sm:px-6 lg:px-8 lg:pt-40">
       <div className="mx-auto max-w-7xl grid gap-8 lg:grid-cols-[0.8fr_1.2fr]">
         <div>
           <p className="text-sm uppercase tracking-[0.35em] text-elema-steel">Contacto</p>

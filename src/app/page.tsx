@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, ChevronDown } from 'lucide-react';
-import { featuredProducts } from '@/data/products';
+import { availableProducts } from '@/data/products';
 
 const collections = [
   { title: 'Cocinas', description: 'Composiciones de alto impacto para residencias y proyectos singulares.', href: '/colecciones/cocinas', image: '/images/cocina-aurora.png' },
@@ -18,7 +18,7 @@ const materials = [
 ];
 
 export default function HomePage() {
-  const featured = featuredProducts[0];
+  const featured = availableProducts[0];
 
   return (
     <main className="overflow-x-hidden bg-[#efe8dc] text-[#171717]">
@@ -117,13 +117,13 @@ export default function HomePage() {
           <div className="flex flex-col justify-between">
             <div>
               <p className="text-[0.72rem] uppercase tracking-[0.35em] text-[#7a7269]">Producto protagonista</p>
-              <h2 className="mt-4 font-serif text-3xl text-[#171717] sm:text-4xl">Campana vertical Noctis</h2>
+              <h2 className="mt-4 font-serif text-3xl text-[#171717] sm:text-4xl">{featured.name}</h2>
               <p className="mt-4 max-w-xl text-base leading-8 text-[#4a453f]">
-                Un elemento escultórico de acero cepillado, concebido para sostener la identidad visual de un espacio de alta precisión.
+                {featured.shortDescription} Una pieza disponible que lleva el lenguaje material de ELEMA al centro de la experiencia exterior.
               </p>
             </div>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-              <p className="text-sm uppercase tracking-[0.25em] text-[#7a7269]">Precio a solicitud</p>
+              <p className="text-sm uppercase tracking-[0.25em] text-[#7a7269]">${featured.price?.toLocaleString('es-CL')} CLP</p>
               <Link href={`/producto/${featured.slug}`} className="inline-flex items-center gap-2 border border-[#171717]/15 bg-[#17181d] px-5 py-3 text-sm uppercase tracking-[0.24em] text-[#f6efe6] transition hover:bg-[#23262e]">
                 Ver pieza <ArrowRight size={14} />
               </Link>
@@ -131,7 +131,7 @@ export default function HomePage() {
           </div>
 
           <div className="overflow-hidden rounded-[1.7rem] border border-[#171717]/10 bg-[#101010]">
-            <Image src="/images/campana-noctis.png" alt="Campana vertical Noctis en cocina contemporánea" width={1200} height={900} className="h-full w-full object-cover" />
+            <Image src={featured.images[0]} alt={featured.name} width={1200} height={900} className="h-full w-full object-cover" />
           </div>
         </div>
       </section>

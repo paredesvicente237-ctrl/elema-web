@@ -90,3 +90,4 @@ export const products: Product[] = [
 
 export const collectionSlugs = ['cocinas', 'parrillas', 'campanas', 'soluciones-personalizadas'];
 export const featuredProducts = products.filter((product) => product.featured);
+export const availableProducts = products.filter((product) => product.available && !product.demo && typeof product.price === 'number');

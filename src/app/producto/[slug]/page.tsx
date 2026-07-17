@@ -1,11 +1,23 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import type { Metadata } from 'next';
 import { products } from '@/data/products';
 import { AddToCartButton } from '@/components/add-to-cart-button';
 
 export function generateStaticParams() {
   return products.map((product) => ({ slug: product.slug }));
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const product = products.find((entry) => entry.slug === slug);
+  if (!product) return {};
+  return {
+    title: product.name,
+    description: product.shortDescription,
+    openGraph: { images: [product.images[0]] },
+  };
 }
 
 export default async function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -34,12 +46,12 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
           <p className="mt-7 text-base leading-8 text-[#56514b]">{product.description}</p>
           <div className="mt-9 border-y border-black/15 py-6">
             <div className="flex items-center justify-between">
-              <p className="text-[0.68rem] uppercase tracking-[0.28em] text-[#777067]">Valor referencial</p>
-              <p className="font-serif text-2xl">{product.priceOnRequest ? 'Precio a solicitud' : `CLP ${product.price?.toLocaleString('es-CL')}`}</p>
+              <p className="text-[0.68rem] uppercase tracking-[0.28em] text-[#777067]">{product.demo ? 'Modalidad' : 'Precio'}</p>
+              <p className="font-serif text-2xl">{product.demo ? 'Proyecto a cotizar' : product.priceOnRequest ? 'Precio a solicitud' : `$${product.price?.toLocaleString('es-CL')} CLP`}</p>
             </div>
-            {product.priceOnRequest ? (
+            {product.demo || product.priceOnRequest ? (
               <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-                <Link href={`/contacto?producto=${product.slug}`} className="bg-[#171717] px-5 py-3 text-center text-xs uppercase tracking-[0.22em] text-[#f6efe6]">Solicitar propuesta</Link>
+                <Link href={`/contacto?producto=${product.slug}`} className="bg-[#171717] px-5 py-3 text-center text-xs uppercase tracking-[0.22em] text-[#f6efe6]">Cotizar esta pieza</Link>
                 <Link href="/diseno-a-medida" className="border border-black/20 px-5 py-3 text-center text-xs uppercase tracking-[0.22em]">Diseñar mi espacio</Link>
               </div>
             ) : (

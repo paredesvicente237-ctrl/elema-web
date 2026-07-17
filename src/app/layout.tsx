@@ -18,6 +18,10 @@ const cormorant = Cormorant_Garamond({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL ??
+    (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : 'http://localhost:3000'),
+  ),
   title: {
     default: 'ELEMA | Diseño y fabricación en acero',
     template: '%s | ELEMA',
@@ -29,7 +33,9 @@ export const metadata: Metadata = {
     description: 'Cocinas, parrillas, campanas y soluciones arquitectónicas fabricadas a medida en Chile.',
     type: 'website',
     locale: 'es_CL',
+    images: ['/images/hero-luxury-waterfront.png'],
   },
+  robots: { index: true, follow: true },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

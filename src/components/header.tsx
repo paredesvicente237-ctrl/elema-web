@@ -3,19 +3,22 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
 import { Menu, Search, ShoppingBag, UserRound, X } from 'lucide-react';
 
 const navItems = [
   { label: 'Colecciones', href: '/colecciones' },
+  { label: 'Tienda', href: '/tienda' },
   { label: 'Diseño a medida', href: '/diseno-a-medida' },
   { label: 'Profesionales', href: '/profesionales' },
   { label: 'Nosotros', href: '/nosotros' },
 ];
 
-const leftItems = navItems.slice(0, 2);
-const rightItems = navItems.slice(2);
+const leftItems = navItems.slice(0, 3);
+const rightItems = navItems.slice(3);
 
 export function Header() {
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [cartCount, setCartCount] = useState(0);
@@ -42,7 +45,7 @@ export function Header() {
   }, []);
 
   return (
-    <header className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${scrolled ? 'border-b border-white/10 bg-[#0b0d12]/90 shadow-[0_10px_45px_rgba(0,0,0,0.24)] backdrop-blur-xl' : 'bg-transparent'}`}>
+    <header className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${scrolled || pathname !== '/' ? 'border-b border-white/10 bg-[#0b0d12]/90 shadow-[0_10px_45px_rgba(0,0,0,0.24)] backdrop-blur-xl' : 'bg-transparent'}`}>
       <div className="relative mx-auto flex h-20 max-w-7xl items-center px-4 sm:px-6 lg:px-8">
         <nav className="hidden flex-1 items-center gap-6 text-[0.72rem] uppercase tracking-[0.32em] text-[#d7d0c7] lg:flex">
           {leftItems.map((item) => (
