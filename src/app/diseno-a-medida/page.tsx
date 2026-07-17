@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 const steps = [
   { number: '01', title: 'Levantamiento', description: 'Definimos el uso, las medidas, la materialidad, las tolerancias y la factibilidad técnica de la propuesta.' },
@@ -12,10 +13,15 @@ export default function CustomDesignPage() {
   return (
     <main className="min-h-screen bg-elema-black px-4 pb-24 pt-32 sm:px-6 lg:px-8 lg:pt-40">
       <div className="mx-auto max-w-7xl">
-        <div className="max-w-3xl">
-          <p className="text-sm uppercase tracking-[0.35em] text-elema-steel">Diseño a medida</p>
-          <h1 className="mt-4 text-4xl font-semibold text-elema-warm sm:text-5xl">Proyectos concebidos desde la arquitectura y la intención.</h1>
-          <p className="mt-6 text-lg leading-8 text-elema-silver">Cada proyecto avanza desde un requerimiento concreto hasta una solución fabricable, con decisiones visibles sobre proporción, materialidad, tolerancias y montaje.</p>
+        <div className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-end">
+          <div>
+            <p className="text-sm uppercase tracking-[0.35em] text-elema-steel">Diseño a medida</p>
+            <h1 className="mt-4 text-4xl font-semibold text-elema-warm sm:text-5xl">Proyectos concebidos desde la arquitectura y la intención.</h1>
+            <p className="mt-6 text-lg leading-8 text-elema-silver">Cada proyecto avanza desde un requerimiento concreto hasta una solución fabricable, con decisiones visibles sobre proporción, materialidad, tolerancias y montaje.</p>
+          </div>
+          <div className="overflow-hidden border border-white/10 bg-elema-soft">
+            <Image src="/images/editorial-diseno.jpg" alt="Mesa editorial de diseño técnico con planos y muestras metálicas" width={1536} height={1024} className="aspect-[16/10] w-full object-cover" priority />
+          </div>
         </div>
         <div className="mt-10 grid gap-6 md:grid-cols-2">
           {steps.map((step) => (

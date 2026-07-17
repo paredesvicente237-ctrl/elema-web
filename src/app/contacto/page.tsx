@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from 'react';
+import Image from 'next/image';
 
 const clientTypes = ['Particular', 'Arquitecto', 'Diseñador', 'Constructora', 'Inmobiliaria'];
 const projectTypes = ['Residencia', 'Proyecto comercial', 'Interiorismo', 'Exterior', 'Otro'];
@@ -36,6 +37,9 @@ export default function ContactPage() {
           <h1 className="mt-4 text-4xl font-semibold text-elema-warm sm:text-5xl">Solicitar una propuesta.</h1>
           <p className="mt-6 text-lg leading-8 text-elema-silver">Cuéntanos qué quieres fabricar. Revisaremos alcance, materialidad, factibilidad y próximos pasos para preparar una propuesta.</p>
           <a href="https://wa.me/56930751812" target="_blank" rel="noreferrer" className="mt-8 inline-flex text-sm uppercase tracking-[0.25em] text-elema-warm">WhatsApp · +56 9 3075 1812</a>
+          <div className="mt-10 overflow-hidden border border-white/10 bg-elema-soft">
+            <Image src="/images/editorial-contacto.jpg" alt="Terraza contemporánea con parrilla y mobiliario metálico" width={1792} height={895} className="aspect-[16/10] w-full object-cover" priority />
+          </div>
         </div>
         <form onSubmit={handleSubmit} className="rounded-[2rem] border border-elema-steel/20 bg-elema-soft p-6 sm:p-8">
           <div className="grid gap-4 sm:grid-cols-2">

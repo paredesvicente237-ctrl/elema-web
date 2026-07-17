@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 const capabilities = [
   { title: 'Desarrollo técnico', description: 'Interpretación de planos, modelado CAD/Inventor, revisión de factibilidad y preparación para fabricación.' },
@@ -11,10 +12,15 @@ export default function ProfessionalsPage() {
   return (
     <main className="min-h-screen bg-elema-black px-4 pb-24 pt-32 sm:px-6 lg:px-8 lg:pt-40">
       <div className="mx-auto max-w-7xl">
-        <div className="max-w-3xl">
-          <p className="text-sm uppercase tracking-[0.35em] text-elema-steel">Profesionales</p>
-          <h1 className="mt-4 text-4xl font-semibold text-elema-warm sm:text-5xl">Colaboraciones para arquitectos, diseñadores y constructoras.</h1>
-          <p className="mt-6 text-lg leading-8 text-elema-silver">ELEMA trabaja con equipos que exigen detalle y coordinación, transformando planos, prototipos o requerimientos funcionales en soluciones fabricables.</p>
+        <div className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-end">
+          <div>
+            <p className="text-sm uppercase tracking-[0.35em] text-elema-steel">Profesionales</p>
+            <h1 className="mt-4 text-4xl font-semibold text-elema-warm sm:text-5xl">Colaboraciones para arquitectos, diseñadores y constructoras.</h1>
+            <p className="mt-6 text-lg leading-8 text-elema-silver">ELEMA trabaja con equipos que exigen detalle y coordinación, transformando planos, prototipos o requerimientos funcionales en soluciones fabricables.</p>
+          </div>
+          <div className="overflow-hidden border border-white/10 bg-elema-soft">
+            <Image src="/images/editorial-profesionales.jpg" alt="Equipo profesional revisando planos junto a una pieza metálica" width={1536} height={1024} className="aspect-[16/10] w-full object-cover" priority />
+          </div>
         </div>
         <div className="mt-10 grid gap-6 md:grid-cols-2">
           {capabilities.map((capability) => (

@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 const principles = [
   { title: 'Diseño fabricable', description: 'Cada decisión estética se contrasta con materiales, tolerancias, uniones y condiciones reales de montaje.' },
@@ -10,10 +11,15 @@ export default function AboutPage() {
   return (
     <main className="min-h-screen bg-elema-black px-4 pb-24 pt-32 sm:px-6 lg:px-8 lg:pt-40">
       <div className="mx-auto max-w-7xl">
-        <div className="max-w-3xl">
-          <p className="text-sm uppercase tracking-[0.35em] text-elema-steel">La marca</p>
-          <h1 className="mt-4 text-4xl font-semibold text-elema-warm sm:text-5xl">Más que productos. Presencia.</h1>
-          <p className="mt-6 text-lg leading-8 text-elema-silver">ELEMA reúne diseño, ingeniería y fabricación metalmecánica para crear cocinas, parrillas, campanas y piezas arquitectónicas con carácter propio.</p>
+        <div className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-end">
+          <div>
+            <p className="text-sm uppercase tracking-[0.35em] text-elema-steel">La marca</p>
+            <h1 className="mt-4 text-4xl font-semibold text-elema-warm sm:text-5xl">Más que productos. Presencia.</h1>
+            <p className="mt-6 text-lg leading-8 text-elema-silver">ELEMA reúne diseño, ingeniería y fabricación metalmecánica para crear cocinas, parrillas, campanas y piezas arquitectónicas con carácter propio.</p>
+          </div>
+          <div className="overflow-hidden border border-white/10 bg-elema-soft">
+            <Image src="/images/editorial-nosotros.jpg" alt="Detalle editorial de mobiliario metálico y cubierta de piedra" width={1536} height={1024} className="aspect-[16/10] w-full object-cover" priority />
+          </div>
         </div>
         <div className="mt-10 grid gap-6 md:grid-cols-3">
           {principles.map((principle) => (
