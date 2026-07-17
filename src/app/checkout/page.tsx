@@ -3,27 +3,47 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
+type CartItem = {
+  id: string;
+  name: string;
+  price?: number;
+  quantity: number;
+};
+
 export default function CheckoutPage() {
   const [ready, setReady] = useState(false);
+  const [items, setItems] = useState<CartItem[]>([]);
 
   useEffect(() => {
+    const stored = window.localStorage.getItem('elema-cart');
+    if (stored) setItems(JSON.parse(stored));
     setReady(true);
   }, []);
+
+  const subtotal = items.reduce((sum, item) => sum + (item.price ?? 0) * item.quantity, 0);
 
   return (
     <main className="min-h-screen bg-elema-black px-4 py-20 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
         <div className="max-w-3xl">
           <p className="text-sm uppercase tracking-[0.35em] text-elema-steel">Checkout</p>
-          <h1 className="mt-4 text-4xl font-semibold text-elema-warm sm:text-5xl">Estructura visual de demostración.</h1>
-          <p className="mt-6 text-lg leading-8 text-elema-silver">La integración de pagos aún no está activada. Esta vista presenta el flujo visual y la información necesaria para la siguiente etapa.</p>
+          <h1 className="mt-4 text-4xl font-semibold text-elema-warm sm:text-5xl">Finaliza tu pedido.</h1>
+          <p className="mt-6 text-lg leading-8 text-elema-silver">Revisa tu selección y déjanos tus datos. La integración de pagos aún no está activada.</p>
         </div>
         <div className="mt-10 grid gap-8 lg:grid-cols-[1fr_0.9fr]">
           <div className="rounded-[2rem] border border-elema-steel/20 bg-elema-soft p-6">
             <h2 className="text-2xl font-semibold text-elema-warm">Resumen de compra</h2>
             <div className="mt-6 space-y-3 text-sm text-elema-silver">
-              <div className="flex items-center justify-between rounded-2xl border border-elema-steel/20 px-4 py-3"> <span>Diseño de cocina</span><span>CLP 4.200.000</span></div>
-              <div className="flex items-center justify-between rounded-2xl border border-elema-steel/20 px-4 py-3"> <span>Parrilla personalizada</span><span>Precio a solicitud</span></div>
+              {items.map((item) => (
+                <div key={item.id} className="flex items-center justify-between gap-4 rounded-2xl border border-elema-steel/20 px-4 py-3">
+                  <span>{item.name} × {item.quantity}</span>
+                  <span>CLP {((item.price ?? 0) * item.quantity).toLocaleString('es-CL')}</span>
+                </div>
+              ))}
+              {ready && items.length === 0 ? <p>Tu carrito está vacío.</p> : null}
+            </div>
+            <div className="mt-6 flex items-center justify-between border-t border-elema-steel/20 pt-5 text-elema-warm">
+              <span>Subtotal</span><span>CLP {subtotal.toLocaleString('es-CL')}</span>
             </div>
             <div className="mt-6 rounded-[1.5rem] border border-elema-steel/20 bg-elema-black/60 p-4 text-sm leading-7 text-elema-silver">
               <p>Modo: demostración</p>

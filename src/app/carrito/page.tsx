@@ -6,6 +6,7 @@ import { Trash2 } from 'lucide-react';
 
 type CartItem = {
   id: string;
+  slug?: string;
   name: string;
   price?: number;
   quantity: number;
@@ -40,14 +41,14 @@ export default function CartPage() {
       <div className="mx-auto max-w-7xl">
         <div className="max-w-3xl">
           <p className="text-sm uppercase tracking-[0.35em] text-elema-steel">Carrito</p>
-          <h1 className="mt-4 text-4xl font-semibold text-elema-warm sm:text-5xl">Tu selección de demostración.</h1>
+          <h1 className="mt-4 text-4xl font-semibold text-elema-warm sm:text-5xl">Tu selección.</h1>
         </div>
         <div className="mt-10 grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
           <div className="space-y-4">
             {items.length === 0 ? (
               <div className="rounded-[2rem] border border-elema-steel/20 bg-elema-soft p-8 text-elema-silver">
                 <p className="text-lg text-elema-warm">El carrito está vacío.</p>
-                <p className="mt-3 text-sm leading-7">Puedes continuar explorando productos y agregar piezas para revisar la experiencia.</p>
+                <p className="mt-3 text-sm leading-7">Explora la tienda y agrega las piezas que quieras comprar.</p>
                 <Link href="/tienda" className="mt-6 inline-flex rounded-full border border-elema-steel/40 px-5 py-3 text-sm text-elema-warm">Continuar comprando</Link>
               </div>
             ) : (
@@ -80,7 +81,7 @@ export default function CartPage() {
                 <span>Por cotizar</span>
               </div>
             </div>
-            <Link href="/checkout" className="mt-8 inline-flex w-full items-center justify-center rounded-full bg-elema-warm px-5 py-3 text-sm font-medium text-elema-black">Avanzar al checkout</Link>
+            {items.length > 0 ? <Link href="/checkout" className="mt-8 inline-flex w-full items-center justify-center rounded-full bg-elema-warm px-5 py-3 text-sm font-medium text-elema-black">Avanzar al checkout</Link> : null}
             <Link href="/tienda" className="mt-3 inline-flex w-full items-center justify-center rounded-full border border-elema-steel/40 px-5 py-3 text-sm text-elema-warm">Continuar comprando</Link>
           </div>
         </div>

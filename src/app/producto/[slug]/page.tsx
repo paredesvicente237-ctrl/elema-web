@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { products } from '@/data/products';
+import { AddToCartButton } from '@/components/add-to-cart-button';
 
 export function generateStaticParams() {
   return products.map((product) => ({ slug: product.slug }));
@@ -43,8 +44,8 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
               </div>
             ) : (
               <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-                <Link href="/carrito" className="bg-[#171717] px-5 py-3 text-center text-xs uppercase tracking-[0.22em] text-[#f6efe6]">Agregar al carrito</Link>
-                <Link href="/checkout" className="border border-black/20 px-5 py-3 text-center text-xs uppercase tracking-[0.22em]">Ver carrito</Link>
+                <AddToCartButton product={{ id: product.id, slug: product.slug, name: product.name, price: product.price!, customizable: product.customizable }} />
+                <Link href="/carrito" className="border border-black/20 px-5 py-3 text-center text-xs uppercase tracking-[0.22em]">Ver carrito</Link>
               </div>
             )}
           </div>
