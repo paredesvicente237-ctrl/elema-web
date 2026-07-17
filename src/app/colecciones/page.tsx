@@ -5,7 +5,7 @@ const collections = [
   { title: 'Cocinas', href: '/colecciones/cocinas', description: 'Composiciones arquitectónicas redefinidas para residencias de alto nivel.', image: '/images/cocina-aurora.png' },
   { title: 'Parrillas', href: '/colecciones/parrillas', description: 'Piezas de fuego con presencia, precisión y sofisticación.', image: '/images/parrilla-lumen.png' },
   { title: 'Campanas', href: '/colecciones/campanas', description: 'Elementos escultóricos que articulan el espacio.', image: '/images/campana-noctis.png' },
-  { title: 'Soluciones personalizadas', href: '/colecciones/soluciones-personalizadas', description: 'Diseño, ingeniería y fabricación a medida para proyectos singulares.', image: '/images/diseno-a-medida.svg' },
+  { title: 'Soluciones personalizadas', href: '/colecciones/soluciones-personalizadas', description: 'Diseño, ingeniería y fabricación a medida para proyectos singulares.', image: '/images/editorial-diseno.jpg' },
 ];
 
 export default function CollectionsPage() {

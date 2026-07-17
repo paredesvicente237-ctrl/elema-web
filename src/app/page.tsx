@@ -149,7 +149,7 @@ export default function HomePage() {
             </Link>
           </div>
           <div className="overflow-hidden rounded-[1.7rem] border border-white/10 bg-[#121212]">
-            <Image src="/images/diseno-a-medida.svg" alt="Diseño a medida ELEMA" width={1200} height={900} className="h-full w-full object-cover" />
+            <Image src="/images/editorial-diseno.jpg" alt="Mesa de diseño técnico con planos y muestras metálicas" width={1536} height={1024} className="h-full w-full object-cover" />
           </div>
         </div>
       </section>
@@ -186,7 +186,7 @@ export default function HomePage() {
               </Link>
             </div>
             <div className="overflow-hidden rounded-[1.7rem] border border-white/10">
-              <Image src="/images/profesionales-elema.svg" alt="Profesionales ELEMA" width={1200} height={900} className="h-full w-full object-cover" />
+              <Image src="/images/editorial-profesionales.jpg" alt="Profesionales revisando planos junto a una pieza metálica" width={1536} height={1024} className="h-full w-full object-cover" />
             </div>
           </div>
         </div>
@@ -194,7 +194,7 @@ export default function HomePage() {
 
       <section className="mx-auto max-w-7xl px-4 pb-24 sm:px-6 lg:px-8">
         <div className="relative overflow-hidden rounded-[2.2rem] bg-[#13161d]">
-          <div className="absolute inset-0 bg-[url('/images/hero-elema.svg')] bg-cover bg-center opacity-45" />
+          <Image src="/images/editorial-contacto.jpg" alt="" fill sizes="100vw" className="object-cover object-center opacity-55" />
           <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(10,12,16,0.83)_0%,rgba(10,12,16,0.62)_100%)]" />
           <div className="relative z-10 flex min-h-[360px] flex-col justify-center px-6 py-16 sm:px-8 lg:px-12">
             <p className="text-[0.72rem] uppercase tracking-[0.35em] text-[#c8c0b6]">Cierre</p>
