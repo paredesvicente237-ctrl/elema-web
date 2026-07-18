@@ -54,6 +54,12 @@ export function Header() {
 
   useEffect(() => {
     setOpen(false);
+
+    // Remove any scroll lock left by an older menu implementation. The mobile
+    // navigation is a dropdown, so the page should remain scrollable while it
+    // is open and after every client-side route change.
+    document.body.style.removeProperty('overflow');
+    document.documentElement.style.removeProperty('overflow');
   }, [pathname]);
 
   useEffect(() => {
@@ -63,12 +69,9 @@ export function Header() {
       if (event.key === 'Escape') setOpen(false);
     };
 
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
     window.addEventListener('keydown', onKeyDown);
 
     return () => {
-      document.body.style.overflow = previousOverflow;
       window.removeEventListener('keydown', onKeyDown);
     };
   }, [open]);
