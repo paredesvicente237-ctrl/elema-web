@@ -5,10 +5,10 @@ import { availableProducts } from '@/data/products';
 import { HeroCarousel } from '@/components/hero-carousel';
 
 const collections = [
-  { title: 'Cocinas', description: 'Composiciones de alto impacto para residencias y proyectos singulares.', href: '/colecciones/cocinas', image: '/images/elema-generated/cocina-costera-hero.png' },
-  { title: 'Parrillas', description: 'Arte funcional para exteriores, hosting y experiencias de fuego.', href: '/colecciones/parrillas', image: '/images/elema-generated/parrilla-montana-hero.png' },
-  { title: 'Campanas', description: 'Elementos escultóricos que sostienen la narrativa del espacio.', href: '/colecciones/campanas', image: '/images/elema-generated/campana-noctis-editorial.png' },
-  { title: 'Soluciones a medida', description: 'Proyectos de arquitectura, mobiliario y fabricación especial.', href: '/diseno-a-medida', image: '/images/elema-generated/taller-precision-editorial.png' },
+  { title: 'Cocinas', description: 'Composiciones de alto impacto para residencias y proyectos singulares.', href: '/colecciones/cocinas', image: '/images/elema-generated/cocina-costera-hero.webp' },
+  { title: 'Parrillas', description: 'Arte funcional para exteriores, hosting y experiencias de fuego.', href: '/colecciones/parrillas', image: '/images/elema-generated/parrilla-montana-hero.webp' },
+  { title: 'Campanas', description: 'Elementos escultóricos que sostienen la narrativa del espacio.', href: '/colecciones/campanas', image: '/images/elema-generated/campana-noctis-editorial.webp' },
+  { title: 'Soluciones a medida', description: 'Proyectos de arquitectura, mobiliario y fabricación especial.', href: '/diseno-a-medida', image: '/images/elema-generated/taller-precision-editorial.webp' },
 ];
 
 const principles = [
@@ -104,7 +104,7 @@ export default function HomePage() {
       </section>
 
       <section className="reveal-on-scroll relative isolate min-h-[620px] overflow-hidden bg-[#0b0c0f] text-[#f6efe6]">
-        <Image src="/images/elema-generated/taller-precision-editorial.png" alt="Trabajo de precisión sobre una pieza de acero" fill sizes="100vw" className="object-cover object-center" />
+        <Image src="/images/elema-generated/taller-precision-editorial.webp" alt="Trabajo de precisión sobre una pieza de acero" fill sizes="100vw" className="object-cover object-center" />
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(8,9,11,0.9)_0%,rgba(8,9,11,0.62)_40%,rgba(8,9,11,0.12)_75%)]" />
         <div className="relative mx-auto flex min-h-[620px] max-w-7xl items-center px-4 py-24 sm:px-6 lg:px-8">
           <div className="max-w-xl">
@@ -155,7 +155,7 @@ export default function HomePage() {
             </Link>
           </div>
           <div className="group overflow-hidden border border-white/10 bg-[#121212]">
-            <Image src="/images/elema-generated/instalacion-metalica.png" alt="Instalación arquitectónica de mobiliario metálico" width={1672} height={941} className="h-full w-full object-cover transition duration-1000 group-hover:scale-[1.025]" />
+            <Image src="/images/elema-generated/instalacion-metalica.webp" alt="Instalación arquitectónica de mobiliario metálico" width={1672} height={941} className="h-full w-full object-cover transition duration-1000 group-hover:scale-[1.025]" />
           </div>
         </div>
       </section>
@@ -166,7 +166,7 @@ export default function HomePage() {
             <p className="text-[0.72rem] uppercase tracking-[0.35em] text-[#7a7269]">Materiales</p>
             <h2 className="mt-4 font-serif text-3xl text-[#171717] sm:text-4xl">Acero, piedra, fuego y precisión en cada terminación.</h2>
             <div className="group mt-8 overflow-hidden bg-[#171717]">
-              <Image src="/images/elema-generated/material-acero-piedra.png" alt="Encuentro de acero cepillado y piedra clara" width={1774} height={887} className="aspect-[2/1] w-full object-cover transition duration-1000 group-hover:scale-[1.035]" />
+              <Image src="/images/elema-generated/material-acero-piedra.webp" alt="Encuentro de acero cepillado y piedra clara" width={1774} height={887} className="aspect-[2/1] w-full object-cover transition duration-1000 group-hover:scale-[1.035]" />
             </div>
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
@@ -195,7 +195,7 @@ export default function HomePage() {
               </Link>
             </div>
             <div className="group overflow-hidden border border-white/10">
-              <Image src="/images/elema-generated/colaboracion-arquitectos.png" alt="Arquitectos y especialistas revisando detalles de fabricación" width={1536} height={1024} className="h-full w-full object-cover transition duration-1000 group-hover:scale-[1.025]" />
+              <Image src="/images/elema-generated/colaboracion-arquitectos.webp" alt="Arquitectos y especialistas revisando detalles de fabricación" width={1536} height={1024} className="h-full w-full object-cover transition duration-1000 group-hover:scale-[1.025]" />
             </div>
           </div>
         </div>
@@ -203,7 +203,7 @@ export default function HomePage() {
 
       <section className="reveal-on-scroll mx-auto max-w-7xl px-4 pb-24 sm:px-6 lg:px-8">
         <div className="relative overflow-hidden bg-[#13161d]">
-          <Image src="/images/elema-generated/isla-monumental.png" alt="" fill sizes="100vw" className="object-cover object-center opacity-55" />
+          <Image src="/images/elema-generated/isla-monumental.webp" alt="" fill sizes="100vw" className="object-cover object-center opacity-55" />
           <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(10,12,16,0.83)_0%,rgba(10,12,16,0.62)_100%)]" />
           <div className="relative z-10 flex min-h-[360px] flex-col justify-center px-6 py-16 sm:px-8 lg:px-12">
             <p className="text-[0.72rem] uppercase tracking-[0.35em] text-[#c8c0b6]">Cierre</p>
