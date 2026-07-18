@@ -1,9 +1,10 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
-import { ArrowRight, LogOut, Package, ShoppingBag, Truck } from 'lucide-react';
+import { ArrowRight, LogOut, Package, ShieldCheck, ShoppingBag, Truck } from 'lucide-react';
 import { createClient } from '@/lib/supabase/server';
 import { hasSupabasePublicConfig } from '@/lib/supabase/config';
+import { isAdminEmail } from '@/lib/admin';
 import { formatClp, formatOrderDate, orderStatuses, type OrderStatus } from '@/lib/orders';
 import { signOut } from './actions';
 import { MarketingPreference } from './marketing-preference';
@@ -32,7 +33,7 @@ export default async function AccountPage() {
       <div className="mx-auto max-w-7xl">
         <div className="flex flex-col justify-between gap-6 border-b border-black/15 pb-8 sm:flex-row sm:items-end">
           <div><p className="text-[0.68rem] uppercase tracking-[0.34em] text-[#77716a]">Cuenta personal</p><h1 className="mt-4 font-serif text-5xl sm:text-6xl">Hola, {firstName}.</h1><p className="mt-3 text-sm text-[#69635d]">Consulta tus compras y mantén tus preferencias al día.</p></div>
-          <form action={signOut}><button className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-[#69635d] hover:text-black"><LogOut size={15} /> Cerrar sesión</button></form>
+          <div className="flex flex-wrap items-center gap-5">{isAdminEmail(user.email) ? <Link href="/admin" className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-[#171717]"><ShieldCheck size={15} /> Administración</Link> : null}<form action={signOut}><button className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-[#69635d] hover:text-black"><LogOut size={15} /> Cerrar sesión</button></form></div>
         </div>
 
         <div className="mt-9 grid gap-5 sm:grid-cols-3">

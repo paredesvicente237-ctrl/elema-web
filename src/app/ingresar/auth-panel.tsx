@@ -15,7 +15,8 @@ export function AuthPanel() {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState(params.get('error') ?? '');
   const [success, setSuccess] = useState(false);
-  const next = params.get('next')?.startsWith('/') ? params.get('next')! : '/mi-elema';
+  const requestedNext = params.get('next');
+  const next = requestedNext?.startsWith('/') && !requestedNext.startsWith('//') ? requestedNext : '/mi-elema';
 
   async function submit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
