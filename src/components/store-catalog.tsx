@@ -48,7 +48,7 @@ export function StoreCatalog({ products }: { products: Product[] }) {
             <p className="mt-3 min-h-14 text-sm leading-7 text-[#56514b]">{product.shortDescription}</p>
             <div className="mt-5 flex items-end justify-between gap-4">
               <p className="text-sm text-[#35312d]">
-                {product.demo ? 'Proyecto a cotizar' : product.priceOnRequest ? 'Precio a solicitud' : `$${product.price?.toLocaleString('es-CL')} CLP`}
+                {product.demo ? 'Proyecto a cotizar' : product.priceOnRequest ? 'Precio a solicitud' : `CLP ${product.price?.toLocaleString('es-CL')}`}
               </p>
               <Link href={`/producto/${product.slug}`} aria-label={`Ver ${product.name}`} className="inline-flex items-center gap-2 border-b border-black/25 pb-1 text-[0.68rem] uppercase tracking-[0.22em] transition hover:border-black">
                 Ver pieza <ArrowRight size={13} />

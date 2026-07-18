@@ -13,8 +13,10 @@ export function AuthPanel() {
   const [mode, setMode] = useState<Mode>('login');
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [resending, setResending] = useState(false);
   const [message, setMessage] = useState(params.get('error') ?? '');
   const [success, setSuccess] = useState(false);
+  const [confirmationEmail, setConfirmationEmail] = useState('');
   const requestedNext = params.get('next');
   const next = requestedNext?.startsWith('/') && !requestedNext.startsWith('//') ? requestedNext : '/mi-elema';
 
@@ -37,7 +39,7 @@ export function AuthPanel() {
     if (mode === 'login') {
       const { error } = await supabase.auth.signInWithPassword({ email, password });
       if (error) {
-        setMessage(error.message === 'Invalid login credentials' ? 'Correo o contraseña incorrectos.' : error.message);
+        setMessage(authErrorMessage(error.message));
       } else {
         window.location.assign(next);
       }
@@ -52,14 +54,31 @@ export function AuthPanel() {
           emailRedirectTo: `${window.location.origin}/auth/callback?next=${encodeURIComponent(next)}`,
         },
       });
-      if (error) setMessage(error.message);
+      if (error) setMessage(authErrorMessage(error.message));
       else if (data.session) window.location.assign(next);
       else {
         setSuccess(true);
-        setMessage('Revisa tu correo para confirmar la cuenta. Después podrás entrar a Mi ELEMA.');
+        setConfirmationEmail(email);
+        setMessage('Revisa tu correo y confirma la cuenta para entrar a Mi ELEMA. Si ya tenías una cuenta o recibiste una invitación, recupera tu contraseña en lugar de volver a registrarte.');
       }
     }
     setLoading(false);
+  }
+
+  async function resendConfirmation() {
+    if (!confirmationEmail || resending) return;
+    const supabase = createClient();
+    if (!supabase) return;
+
+    setResending(true);
+    const { error } = await supabase.auth.resend({
+      type: 'signup',
+      email: confirmationEmail,
+      options: { emailRedirectTo: `${window.location.origin}/auth/callback?next=${encodeURIComponent(next)}` },
+    });
+    setSuccess(!error);
+    setMessage(error ? authErrorMessage(error.message) : 'Enviamos un nuevo enlace de confirmación. Revisa también la carpeta de correo no deseado.');
+    setResending(false);
   }
 
   return (
@@ -87,7 +106,7 @@ export function AuthPanel() {
 
           <div className="mt-8 grid grid-cols-2 border-b border-black/15" role="tablist" aria-label="Acceso o registro">
             {(['login', 'register'] as Mode[]).map((item) => (
-              <button key={item} type="button" role="tab" aria-selected={mode === item} onClick={() => { setMode(item); setMessage(''); }} className={`border-b-2 px-2 py-4 text-xs uppercase tracking-[0.2em] transition ${mode === item ? 'border-black text-black' : 'border-transparent text-[#888078] hover:text-black'}`}>
+              <button key={item} type="button" role="tab" aria-selected={mode === item} onClick={() => { setMode(item); setMessage(''); setSuccess(false); setConfirmationEmail(''); }} className={`border-b-2 px-2 py-4 text-xs uppercase tracking-[0.2em] transition ${mode === item ? 'border-black text-black' : 'border-transparent text-[#888078] hover:text-black'}`}>
                 {item === 'login' ? 'Ingresar' : 'Crear cuenta'}
               </button>
             ))}
@@ -103,7 +122,19 @@ export function AuthPanel() {
               </span>
             </label>
             {mode === 'login' ? <div className="text-right"><Link href="/recuperar" className="text-xs text-[#66615b] underline underline-offset-4 hover:text-black">Olvidé mi contraseña</Link></div> : <p className="text-xs leading-5 text-[#77716a]">Al crear tu cuenta aceptas nuestros <Link href="/terminos" className="underline">términos</Link> y la <Link href="/privacidad" className="underline">política de privacidad</Link>.</p>}
-            {message ? <p role="status" className={`border px-4 py-3 text-sm leading-6 ${success ? 'border-emerald-700/20 bg-emerald-50 text-emerald-900' : 'border-red-800/20 bg-red-50 text-red-900'}`}>{message}</p> : null}
+            {message ? (
+              <div role="status" aria-live="polite" className={`border px-4 py-3 text-sm leading-6 ${success ? 'border-emerald-700/20 bg-emerald-50 text-emerald-900' : 'border-red-800/20 bg-red-50 text-red-900'}`}>
+                <p>{message}</p>
+                {success && confirmationEmail ? (
+                  <div className="mt-3 flex flex-wrap gap-x-5 gap-y-2 text-xs">
+                    <button type="button" onClick={resendConfirmation} disabled={resending} className="underline underline-offset-4 disabled:opacity-50">
+                      {resending ? 'Reenviando…' : 'Reenviar confirmación'}
+                    </button>
+                    <Link href="/recuperar" className="underline underline-offset-4">Recuperar contraseña</Link>
+                  </div>
+                ) : null}
+              </div>
+            ) : null}
             <button disabled={loading} className="group inline-flex w-full items-center justify-center gap-3 bg-[#171717] px-5 py-4 text-xs uppercase tracking-[0.22em] text-white transition hover:bg-black disabled:cursor-wait disabled:opacity-60">
               {loading ? 'Procesando…' : mode === 'login' ? 'Ingresar a Mi ELEMA' : 'Crear mi cuenta'} <ArrowRight size={15} className="transition-transform group-hover:translate-x-1" />
             </button>
@@ -112,6 +143,13 @@ export function AuthPanel() {
       </div>
     </main>
   );
+}
+
+function authErrorMessage(message: string) {
+  if (message === 'Invalid login credentials') return 'Correo o contraseña incorrectos.';
+  if (message === 'Email not confirmed') return 'Debes confirmar tu correo antes de ingresar. Revisa tu bandeja de entrada o solicita un nuevo enlace.';
+  if (message.toLowerCase().includes('rate limit')) return 'Se hicieron demasiados intentos. Espera unos minutos antes de volver a intentar.';
+  return message;
 }
 
 function AuthField({ label, name, type = 'text', autoComplete }: { label: string; name: string; type?: string; autoComplete: string }) {

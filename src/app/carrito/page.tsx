@@ -81,7 +81,7 @@ export default function CartPage() {
                 <span>Por cotizar</span>
               </div>
             </div>
-            {items.length > 0 ? <Link href="/checkout" className="mt-8 inline-flex w-full items-center justify-center bg-[#171717] px-5 py-3.5 text-xs uppercase tracking-[0.18em] text-white">Avanzar al checkout</Link> : null}
+            {items.length > 0 ? <><p className="mt-7 text-xs leading-6 text-[#77716a]">El siguiente paso envía una solicitud de compra. No se realizará un cobro todavía.</p><Link href="/checkout" className="mt-4 inline-flex w-full items-center justify-center bg-[#171717] px-5 py-3.5 text-xs uppercase tracking-[0.18em] text-white">Continuar solicitud</Link></> : null}
             <Link href="/tienda" className="mt-3 inline-flex w-full items-center justify-center border border-black/20 px-5 py-3.5 text-xs uppercase tracking-[0.18em]">Continuar comprando</Link>
           </div>
         </div>

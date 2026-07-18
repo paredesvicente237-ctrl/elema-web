@@ -70,7 +70,7 @@ export default function HomePage() {
 
             <div className="mt-8 flex items-end justify-between border-y border-black/12 py-5">
               <div>
-                <p className="text-[0.6rem] uppercase tracking-[0.28em] text-[#8a837a]">Valor referencial</p>
+                <p className="text-[0.6rem] uppercase tracking-[0.28em] text-[#8a837a]">Precio del producto</p>
                 <p className="mt-2 flex items-baseline gap-2 text-[#171717]"><span className="text-[0.6rem] uppercase tracking-[0.2em] text-[#777067]">CLP</span><span className="text-3xl font-medium tracking-[-0.04em] tabular-nums">{featured.price?.toLocaleString('es-CL')}</span></p>
               </div>
               <span className="h-2.5 w-2.5 rounded-full bg-[#4d7254] shadow-[0_0_0_5px_rgba(77,114,84,0.12)]" aria-label="Disponible" />
@@ -80,7 +80,7 @@ export default function HomePage() {
               <AddToCartButton product={{ id: featured.id, slug: featured.slug, name: featured.name, price: featured.price!, customizable: featured.customizable }} />
               <Link href={`/producto/${featured.slug}`} className="inline-flex items-center justify-center gap-2 border border-black/20 px-5 py-3 text-xs uppercase tracking-[0.22em] text-[#171717] transition hover:bg-[#f4f1ea]">Ver detalles <ArrowRight size={14} /></Link>
             </div>
-            <p className="mt-5 text-xs leading-6 text-[#777067]">Despacho cotizado según ubicación. Revisa materiales, dimensiones y condiciones antes de comprar.</p>
+            <p className="mt-5 text-xs leading-6 text-[#777067]">No se realizará un cobro al agregar al carrito. Confirmaremos disponibilidad, despacho y forma de pago antes de procesar la compra.</p>
           </div>
         </div>
       </section>
