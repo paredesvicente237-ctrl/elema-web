@@ -3,6 +3,7 @@ import { Cormorant_Garamond, Manrope } from 'next/font/google';
 import './globals.css';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
+import { AuthUrlHandler } from '@/components/auth-url-handler';
 
 const manrope = Manrope({
   subsets: ['latin'],
@@ -42,6 +43,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="es" className={`${manrope.variable} ${cormorant.variable}`}>
       <body>
+        <AuthUrlHandler />
         <Header />
         {children}
         <Footer />
