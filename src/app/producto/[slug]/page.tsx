@@ -25,6 +25,8 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
   const product = products.find((entry) => entry.slug === slug);
   if (!product) notFound();
 
+  const formattedPrice = product.price?.toLocaleString('es-CL');
+
   return (
     <main className="min-h-screen bg-[#eee7dc] px-4 pb-24 pt-32 text-[#171717] sm:px-6 lg:px-8 lg:pt-36">
       <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[1.2fr_0.8fr]">
@@ -45,9 +47,18 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
           <h1 className="mt-5 font-serif text-5xl leading-[0.98] sm:text-6xl">{product.name}</h1>
           <p className="mt-7 text-base leading-8 text-[#56514b]">{product.description}</p>
           <div className="mt-9 border-y border-black/15 py-6">
-            <div className="flex items-center justify-between">
-              <p className="text-[0.68rem] uppercase tracking-[0.28em] text-[#777067]">{product.demo ? 'Modalidad' : 'Precio'}</p>
-              <p className="font-serif text-2xl">{product.demo ? 'Proyecto a cotizar' : product.priceOnRequest ? 'Precio a solicitud' : `$${product.price?.toLocaleString('es-CL')} CLP`}</p>
+            <div className="flex items-end justify-between gap-8">
+              <p className="pb-1 text-[0.68rem] uppercase tracking-[0.28em] text-[#777067]">{product.demo ? 'Modalidad' : 'Valor referencial'}</p>
+              {product.demo || product.priceOnRequest ? (
+                <p className="max-w-[15rem] text-right text-sm font-medium uppercase tracking-[0.18em] text-[#24221f]">
+                  {product.demo ? 'Proyecto a cotizar' : 'Precio a solicitud'}
+                </p>
+              ) : (
+                <p className="flex shrink-0 items-baseline gap-2.5 text-[#171717]">
+                  <span className="text-[0.62rem] font-medium uppercase tracking-[0.22em] text-[#777067]">CLP</span>
+                  <span className="text-[1.65rem] font-medium tracking-[-0.045em] tabular-nums sm:text-[1.8rem]">{formattedPrice}</span>
+                </p>
+              )}
             </div>
             {product.demo || product.priceOnRequest ? (
               <div className="mt-6 flex flex-col gap-3 sm:flex-row">
