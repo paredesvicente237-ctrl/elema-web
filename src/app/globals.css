@@ -50,6 +50,10 @@ body::after {
   color: #f6efe6;
 }
 
+a[aria-current='page'] {
+  color: #f4efe6;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html:focus-within {
     scroll-behavior: auto;

@@ -177,7 +177,7 @@ export default function HomePage() {
           <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
             <div>
               <p className="text-[0.72rem] uppercase tracking-[0.35em] text-[#a89d90]">Profesionales</p>
-              <h2 className="mt-4 max-w-xl font-serif text-3xl sm:text-4xl">Para arquitectos, constructoras, diseñadores e inmobiliarias de alto exigencia.</h2>
+              <h2 className="mt-4 max-w-xl font-serif text-3xl sm:text-4xl">Para arquitectos, constructoras, diseñadores e inmobiliarias de alta exigencia.</h2>
               <p className="mt-5 max-w-xl text-base leading-8 text-[#d8d0c4]">
                 Una colaboración técnica, discreta y precisa para proyectos que no admiten improvisación.
               </p>
