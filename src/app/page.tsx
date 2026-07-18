@@ -10,6 +10,12 @@ const collections = [
   { title: 'Soluciones a medida', description: 'Proyectos de arquitectura, mobiliario y fabricación especial.', href: '/diseno-a-medida', image: '/images/taller-elema-editorial.png' },
 ];
 
+const principles = [
+  { number: '01', title: 'Diseño', detail: 'Proporciones que ordenan el espacio.' },
+  { number: '02', title: 'Ingeniería', detail: 'Soluciones pensadas para durar.' },
+  { number: '03', title: 'Fabricación', detail: 'Materia trabajada con precisión.' },
+];
+
 const materials = [
   { title: 'Acero inoxidable', description: 'Resistencia, higiene y terminaciones sobrias para cocinas, campanas y equipamiento de uso intensivo.' },
   { title: 'Acero al carbono', description: 'Estructura y presencia material para piezas especiales, parrillas y soluciones arquitectónicas.' },
@@ -67,29 +73,59 @@ export default function HomePage() {
             Cada pieza se concibe como una intervención sobria y poderosa: materialidad, proporción, fuego y presencia.
           </p>
         </div>
+
+        <div className="mt-16 grid border-y border-[#1b1b1b]/15 sm:grid-cols-3">
+          {principles.map((principle) => (
+            <div key={principle.number} className="group grid grid-cols-[auto_1fr] gap-5 border-b border-[#1b1b1b]/15 py-7 last:border-b-0 sm:block sm:border-b-0 sm:border-r sm:px-7 sm:first:pl-0 sm:last:border-r-0 sm:last:pr-0">
+              <span className="font-serif text-2xl text-[#9a9186] transition-colors group-hover:text-[#171717]">{principle.number}</span>
+              <div className="sm:mt-8">
+                <h3 className="text-xs font-medium uppercase tracking-[0.3em] text-[#171717]">{principle.title}</h3>
+                <p className="mt-2 text-sm leading-6 text-[#655f57]">{principle.detail}</p>
+              </div>
+            </div>
+          ))}
+        </div>
       </section>
 
       <section className="mx-auto max-w-7xl px-4 pb-24 sm:px-6 lg:px-8">
+        <div className="mb-8 flex items-end justify-between border-b border-[#1b1b1b]/15 pb-5">
+          <div>
+            <p className="text-[0.68rem] uppercase tracking-[0.36em] text-[#7a7269]">Áreas de trabajo</p>
+            <h2 className="mt-3 font-serif text-3xl text-[#171717] sm:text-4xl">Colecciones y soluciones</h2>
+          </div>
+          <Link href="/colecciones" className="hidden items-center gap-2 text-[0.68rem] uppercase tracking-[0.3em] text-[#4a453f] transition hover:text-black sm:inline-flex">
+            Ver todas <ArrowRight size={13} />
+          </Link>
+        </div>
         <div className="grid gap-6 xl:grid-cols-[1.1fr_0.9fr]">
-          <Link href={collections[0].href} className="group relative min-h-[460px] overflow-hidden rounded-[2rem] border border-white/10 bg-[#14161d] shadow-[0_20px_70px_rgba(0,0,0,0.16)]">
+          <Link href={collections[0].href} className="group relative min-h-[500px] overflow-hidden border border-white/10 bg-[#14161d] shadow-[0_20px_70px_rgba(0,0,0,0.16)]">
             <Image src={collections[0].image} alt="" fill sizes="(min-width: 1280px) 55vw, 100vw" className="object-cover transition duration-700 group-hover:scale-[1.025]" />
             <div className="absolute inset-0 bg-[linear-gradient(95deg,rgba(10,12,16,0.9)_0%,rgba(10,12,16,0.48)_55%,rgba(10,12,16,0.2)_100%)]" />
-            <div className="relative z-10 flex h-full flex-col justify-end p-8 sm:p-10">
-              <p className="text-[0.72rem] uppercase tracking-[0.34em] text-[#cfc7bc]">Colección</p>
+            <div className="relative z-10 flex h-full flex-col justify-between p-8 sm:p-10">
+              <div className="flex items-center justify-between border-b border-white/25 pb-4 text-[0.68rem] uppercase tracking-[0.34em] text-[#cfc7bc]">
+                <span>Colección</span><span className="font-serif text-base tracking-normal">01</span>
+              </div>
+              <div>
               <h3 className="mt-4 font-serif text-3xl text-[#f6efe6] sm:text-4xl">{collections[0].title}</h3>
               <p className="mt-3 max-w-md text-base leading-7 text-[#d8d0c4]">{collections[0].description}</p>
+                <span className="mt-7 inline-flex items-center gap-3 text-[0.68rem] uppercase tracking-[0.3em] text-white">Explorar <ArrowRight size={13} className="transition-transform group-hover:translate-x-1" /></span>
+              </div>
             </div>
           </Link>
 
           <div className="grid gap-6">
-            {collections.slice(1).map((collection) => (
-              <Link key={collection.title} href={collection.href} className="group relative min-h-[210px] overflow-hidden rounded-[1.75rem] border border-white/10 bg-[#151922] shadow-[0_12px_45px_rgba(0,0,0,0.14)]">
+            {collections.slice(1).map((collection, index) => (
+              <Link key={collection.title} href={collection.href} className="group relative min-h-[226px] overflow-hidden border border-white/10 bg-[#151922] shadow-[0_12px_45px_rgba(0,0,0,0.14)]">
                 <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url('${collection.image}')` }} />
                 <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,12,16,0.18)_0%,rgba(10,12,16,0.8)_100%)]" />
-                <div className="relative z-10 flex h-full flex-col justify-end p-7">
-                  <p className="text-[0.7rem] uppercase tracking-[0.3em] text-[#cfc7bc]">Colección</p>
+                <div className="relative z-10 flex h-full flex-col justify-between p-7">
+                  <div className="flex items-center justify-between border-b border-white/20 pb-3 text-[0.65rem] uppercase tracking-[0.3em] text-[#cfc7bc]">
+                    <span>{index === 2 ? 'Servicio' : 'Colección'}</span><span className="font-serif text-sm tracking-normal">0{index + 2}</span>
+                  </div>
+                  <div>
                   <h3 className="mt-3 font-serif text-2xl text-[#f6efe6]">{collection.title}</h3>
                   <p className="mt-2 max-w-sm text-sm leading-7 text-[#d8d0c4]">{collection.description}</p>
+                  </div>
                 </div>
               </Link>
             ))}
