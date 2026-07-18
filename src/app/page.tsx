@@ -1,8 +1,10 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import { availableProducts } from '@/data/products';
 import { HeroCarousel } from '@/components/hero-carousel';
+import { MotionController } from '@/components/motion-controller';
+import { AddToCartButton } from '@/components/add-to-cart-button';
 
 const collections = [
   { title: 'Cocinas', description: 'Composiciones de alto impacto para residencias y proyectos singulares.', href: '/colecciones/cocinas', image: '/images/elema-generated/cocina-costera-hero.webp' },
@@ -17,6 +19,13 @@ const principles = [
   { number: '03', title: 'Fabricación', detail: 'Materia trabajada con precisión.' },
 ];
 
+const quickLinks = [
+  { number: '01', label: 'Comprar online', detail: 'Piezas disponibles', href: '/tienda' },
+  { number: '02', label: 'Cocinas', detail: 'Ver colección', href: '/colecciones/cocinas' },
+  { number: '03', label: 'Parrillas', detail: 'Ver colección', href: '/colecciones/parrillas' },
+  { number: '04', label: 'Diseño a medida', detail: 'Cotizar proyecto', href: '/diseno-a-medida' },
+];
+
 const materials = [
   { title: 'Acero inoxidable', description: 'Resistencia, higiene y terminaciones sobrias para cocinas, campanas y equipamiento de uso intensivo.' },
   { title: 'Acero al carbono', description: 'Estructura y presencia material para piezas especiales, parrillas y soluciones arquitectónicas.' },
@@ -28,25 +37,76 @@ export default function HomePage() {
   const featured = availableProducts[0];
 
   return (
-    <main className="overflow-x-hidden bg-[#efe8dc] text-[#171717]">
+    <main className="overflow-x-hidden bg-[#f4f1ea] text-[#171717]">
+      <MotionController />
       <HeroCarousel />
 
-      <section className="reveal-on-scroll mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8 lg:py-28">
+      <nav className="border-b border-black/10 bg-white" aria-label="Accesos principales">
+        <div className="mx-auto grid max-w-7xl sm:grid-cols-2 lg:grid-cols-4">
+          {quickLinks.map((item, index) => (
+            <Link key={item.href} href={item.href} data-reveal data-reveal-delay={index * 80} className="group flex items-center justify-between border-b border-black/10 px-5 py-6 transition-colors hover:bg-[#f4f1ea] sm:border-r lg:border-b-0 lg:px-7">
+              <div>
+                <p className="text-[0.58rem] uppercase tracking-[0.28em] text-[#8a837a]">{item.number} · {item.detail}</p>
+                <p className="mt-2 text-sm font-medium uppercase tracking-[0.18em] text-[#171717]">{item.label}</p>
+              </div>
+              <ArrowUpRight size={17} className="text-[#777067] transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-black" />
+            </Link>
+          ))}
+        </div>
+      </nav>
+
+      <section id="comprar" className="scroll-mt-20 bg-white px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+          <Link href={`/producto/${featured.slug}`} data-reveal="left" className="group relative min-h-[440px] overflow-hidden bg-[#e9e4dc] lg:min-h-[620px]">
+            <Image src={featured.images[0]} alt={featured.name} fill sizes="(min-width: 1024px) 56vw, 100vw" className="object-cover transition duration-1000 group-hover:scale-[1.035]" />
+            <div className="absolute left-5 top-5 bg-white px-4 py-2 text-[0.62rem] font-medium uppercase tracking-[0.26em] text-[#171717]">Disponible online</div>
+            <span className="absolute bottom-5 right-5 grid h-12 w-12 place-items-center bg-white text-black transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1"><ArrowUpRight size={18} /></span>
+          </Link>
+
+          <div data-reveal="right" className="lg:px-8">
+            <p className="text-[0.65rem] uppercase tracking-[0.34em] text-[#777067]">Compra directa · Parrillas</p>
+            <h2 className="mt-5 font-serif text-4xl leading-[0.98] text-[#171717] sm:text-5xl">{featured.name}</h2>
+            <p className="mt-6 max-w-lg text-base leading-8 text-[#56514b]">{featured.shortDescription} Una pieza ELEMA disponible para comprar directamente en nuestra tienda.</p>
+
+            <div className="mt-8 flex items-end justify-between border-y border-black/12 py-5">
+              <div>
+                <p className="text-[0.6rem] uppercase tracking-[0.28em] text-[#8a837a]">Valor referencial</p>
+                <p className="mt-2 flex items-baseline gap-2 text-[#171717]"><span className="text-[0.6rem] uppercase tracking-[0.2em] text-[#777067]">CLP</span><span className="text-3xl font-medium tracking-[-0.04em] tabular-nums">{featured.price?.toLocaleString('es-CL')}</span></p>
+              </div>
+              <span className="h-2.5 w-2.5 rounded-full bg-[#4d7254] shadow-[0_0_0_5px_rgba(77,114,84,0.12)]" aria-label="Disponible" />
+            </div>
+
+            <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+              <AddToCartButton product={{ id: featured.id, slug: featured.slug, name: featured.name, price: featured.price!, customizable: featured.customizable }} />
+              <Link href={`/producto/${featured.slug}`} className="inline-flex items-center justify-center gap-2 border border-black/20 px-5 py-3 text-xs uppercase tracking-[0.22em] text-[#171717] transition hover:bg-[#f4f1ea]">Ver detalles <ArrowRight size={14} /></Link>
+            </div>
+            <p className="mt-5 text-xs leading-6 text-[#777067]">Despacho cotizado según ubicación. Revisa materiales, dimensiones y condiciones antes de comprar.</p>
+          </div>
+        </div>
+      </section>
+
+      <div className="overflow-hidden border-y border-black/10 bg-[#e8e2d8] py-4" aria-hidden="true">
+        <div className="material-marquee flex w-max items-center whitespace-nowrap text-[0.62rem] uppercase tracking-[0.35em] text-[#655f57]">
+          {[...materials, ...materials].map((material, index) => <span key={`${material.title}-${index}`} className="flex items-center"><span className="px-8">{material.title}</span><span className="h-1 w-1 rounded-full bg-[#777067]" /></span>)}
+        </div>
+      </div>
+
+      <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-24">
         <div className="grid gap-10 border-t border-[#1b1b1b]/10 pt-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-end">
-          <div>
+          <div data-reveal="left">
             <p className="text-[0.72rem] uppercase tracking-[0.35em] text-[#7a7269]">Más que productos. Presencia.</p>
             <h2 className="mt-4 max-w-3xl font-serif text-3xl leading-tight text-[#161616] sm:text-4xl">
               ELEMA combina diseño, ingeniería y fabricación para transformar espacios con precisión y autoridad.
             </h2>
           </div>
-          <p className="max-w-xl text-base leading-8 text-[#4a453f] sm:text-lg">
+          <p data-reveal="right" className="max-w-xl text-base leading-8 text-[#4a453f] sm:text-lg">
             Cada pieza se concibe como una intervención sobria y poderosa: materialidad, proporción, fuego y presencia.
           </p>
         </div>
 
         <div className="mt-16 grid border-y border-[#1b1b1b]/15 sm:grid-cols-3">
           {principles.map((principle) => (
-            <div key={principle.number} className="group grid grid-cols-[auto_1fr] gap-5 border-b border-[#1b1b1b]/15 py-7 last:border-b-0 sm:block sm:border-b-0 sm:border-r sm:px-7 sm:first:pl-0 sm:last:border-r-0 sm:last:pr-0">
+            <div key={principle.number} data-reveal data-reveal-delay={Number(principle.number) * 80} className="group grid grid-cols-[auto_1fr] gap-5 border-b border-[#1b1b1b]/15 py-7 last:border-b-0 sm:block sm:border-b-0 sm:border-r sm:px-7 sm:first:pl-0 sm:last:border-r-0 sm:last:pr-0">
               <span className="font-serif text-2xl text-[#9a9186] transition-colors group-hover:text-[#171717]">{principle.number}</span>
               <div className="sm:mt-8">
                 <h3 className="text-xs font-medium uppercase tracking-[0.3em] text-[#171717]">{principle.title}</h3>
@@ -57,8 +117,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="reveal-on-scroll mx-auto max-w-7xl px-4 pb-24 sm:px-6 lg:px-8">
-        <div className="mb-8 flex items-end justify-between border-b border-[#1b1b1b]/15 pb-5">
+      <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-24">
+        <div data-reveal className="mb-8 flex items-end justify-between border-b border-[#1b1b1b]/15 pb-5">
           <div>
             <p className="text-[0.68rem] uppercase tracking-[0.36em] text-[#7a7269]">Áreas de trabajo</p>
             <h2 className="mt-3 font-serif text-3xl text-[#171717] sm:text-4xl">Colecciones y soluciones</h2>
@@ -68,7 +128,7 @@ export default function HomePage() {
           </Link>
         </div>
         <div className="grid gap-6 xl:grid-cols-[1.1fr_0.9fr]">
-          <Link href={collections[0].href} className="group relative min-h-[500px] overflow-hidden border border-white/10 bg-[#14161d] shadow-[0_20px_70px_rgba(0,0,0,0.16)]">
+          <Link href={collections[0].href} data-reveal="left" className="group relative min-h-[500px] overflow-hidden border border-white/10 bg-[#14161d] shadow-[0_20px_70px_rgba(0,0,0,0.16)]">
             <Image src={collections[0].image} alt="" fill sizes="(min-width: 1280px) 55vw, 100vw" className="object-cover transition duration-700 group-hover:scale-[1.025]" />
             <div className="absolute inset-0 bg-[linear-gradient(95deg,rgba(10,12,16,0.9)_0%,rgba(10,12,16,0.48)_55%,rgba(10,12,16,0.2)_100%)]" />
             <div className="relative z-10 flex h-full flex-col justify-between p-8 sm:p-10">
@@ -83,7 +143,7 @@ export default function HomePage() {
             </div>
           </Link>
 
-          <div className="grid gap-6">
+          <div data-reveal="right" className="grid gap-6">
             {collections.slice(1).map((collection, index) => (
               <Link key={collection.title} href={collection.href} className="group relative min-h-[226px] overflow-hidden border border-white/10 bg-[#151922] shadow-[0_12px_45px_rgba(0,0,0,0.14)]">
                 <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url('${collection.image}')` }} />
@@ -103,66 +163,43 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="reveal-on-scroll relative isolate min-h-[620px] overflow-hidden bg-[#0b0c0f] text-[#f6efe6]">
-        <Image src="/images/elema-generated/taller-precision-editorial.webp" alt="Trabajo de precisión sobre una pieza de acero" fill sizes="100vw" className="object-cover object-center" />
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(8,9,11,0.9)_0%,rgba(8,9,11,0.62)_40%,rgba(8,9,11,0.12)_75%)]" />
-        <div className="relative mx-auto flex min-h-[620px] max-w-7xl items-center px-4 py-24 sm:px-6 lg:px-8">
-          <div className="max-w-xl">
-            <p className="text-[0.72rem] uppercase tracking-[0.38em] text-[#b8afa4]">Del plano a la materia</p>
-            <h2 className="mt-5 font-serif text-4xl leading-tight sm:text-5xl">Diseño que entiende cómo se fabrica.</h2>
-            <p className="mt-6 max-w-lg text-base leading-8 text-[#d8d0c4]">Cada unión, pliegue y terminación se resuelve como parte de una misma arquitectura. Precisión técnica sin perder presencia.</p>
-            <Link href="/diseno-a-medida" className="mt-9 inline-flex items-center gap-3 border-b border-white/40 pb-2 text-xs uppercase tracking-[0.3em] transition hover:border-white">
+      <section className="bg-[#e9e4dc] px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+        <div className="mx-auto grid max-w-7xl lg:grid-cols-[1.15fr_0.85fr]">
+          <div data-reveal="left" className="group relative min-h-[460px] overflow-hidden lg:min-h-[620px]">
+            <Image src="/images/elema-generated/taller-precision-editorial.webp" alt="Trabajo de precisión sobre una pieza de acero" fill sizes="(min-width: 1024px) 58vw, 100vw" className="object-cover object-center transition duration-1000 group-hover:scale-[1.025]" />
+          </div>
+          <div data-reveal="right" className="flex flex-col justify-center bg-white p-8 sm:p-12 lg:p-14">
+            <p className="text-[0.68rem] uppercase tracking-[0.36em] text-[#777067]">Del plano a la materia</p>
+            <h2 className="mt-5 font-serif text-4xl leading-tight text-[#171717] sm:text-5xl">Diseño que entiende cómo se fabrica.</h2>
+            <p className="mt-6 max-w-lg text-base leading-8 text-[#56514b]">Cada unión, pliegue y terminación se resuelve como parte de una misma arquitectura. Precisión técnica sin perder presencia.</p>
+            <Link href="/diseno-a-medida" className="mt-9 inline-flex w-fit items-center gap-3 bg-[#171717] px-6 py-3.5 text-xs uppercase tracking-[0.26em] text-white transition hover:bg-[#34312d]">
               Conocer el proceso <ArrowRight size={14} />
             </Link>
           </div>
         </div>
       </section>
 
-      <section className="reveal-on-scroll mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-        <div className="grid gap-8 rounded-[2.2rem] border border-[#1c2027]/10 bg-[linear-gradient(145deg,#f9efe2_0%,#efe2cf_100%)] p-6 shadow-[0_24px_60px_rgba(0,0,0,0.06)] sm:p-8 lg:grid-cols-[0.95fr_1.05fr] lg:p-10">
-          <div className="flex flex-col justify-between">
-            <div>
-              <p className="text-[0.72rem] uppercase tracking-[0.35em] text-[#7a7269]">Producto protagonista</p>
-              <h2 className="mt-4 font-serif text-3xl text-[#171717] sm:text-4xl">{featured.name}</h2>
-              <p className="mt-4 max-w-xl text-base leading-8 text-[#4a453f]">
-                {featured.shortDescription} Una pieza disponible que lleva el lenguaje material de ELEMA al centro de la experiencia exterior.
-              </p>
-            </div>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-              <p className="text-sm uppercase tracking-[0.25em] text-[#7a7269]">${featured.price?.toLocaleString('es-CL')} CLP</p>
-              <Link href={`/producto/${featured.slug}`} className="inline-flex items-center gap-2 border border-[#171717]/15 bg-[#17181d] px-5 py-3 text-sm uppercase tracking-[0.24em] text-[#f6efe6] transition hover:bg-[#23262e]">
-                Ver pieza <ArrowRight size={14} />
-              </Link>
-            </div>
-          </div>
-
-          <div className="overflow-hidden rounded-[1.7rem] border border-[#171717]/10 bg-[#101010]">
-            <Image src={featured.images[0]} alt={featured.name} width={1200} height={900} className="h-full w-full object-cover" />
-          </div>
-        </div>
-      </section>
-
-      <section className="reveal-on-scroll mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-        <div className="grid gap-8 overflow-hidden bg-[linear-gradient(135deg,#161a22_0%,#12151c_45%,#171d27_100%)] p-6 text-[#f6efe6] shadow-[0_25px_70px_rgba(0,0,0,0.16)] sm:p-8 lg:grid-cols-[0.95fr_1.05fr] lg:p-12">
-          <div className="flex flex-col justify-center">
-            <p className="text-[0.72rem] uppercase tracking-[0.35em] text-[#a89d90]">Diseño a medida</p>
-            <h2 className="mt-4 max-w-xl font-serif text-3xl sm:text-4xl">Un proceso de arquitectura, ingeniería y fabricación pensado para espacios singulares.</h2>
-            <p className="mt-5 max-w-xl text-base leading-8 text-[#d8d0c4]">
+      <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+        <div className="grid gap-8 overflow-hidden border border-black/10 bg-white p-6 shadow-[0_20px_60px_rgba(0,0,0,0.05)] sm:p-8 lg:grid-cols-[0.95fr_1.05fr] lg:p-12">
+          <div data-reveal="left" className="flex flex-col justify-center">
+            <p className="text-[0.68rem] uppercase tracking-[0.35em] text-[#777067]">Diseño a medida</p>
+            <h2 className="mt-4 max-w-xl font-serif text-3xl text-[#171717] sm:text-4xl">Un proceso de arquitectura, ingeniería y fabricación pensado para espacios singulares.</h2>
+            <p className="mt-5 max-w-xl text-base leading-8 text-[#56514b]">
               Desde la primera conversación hasta la instalación, cada proyecto se desarrolla con precisión, soberbia materialidad y una lectura arquitectónica inequívoca.
             </p>
-            <Link href="/diseno-a-medida" className="mt-8 inline-flex items-center gap-2 text-sm uppercase tracking-[0.26em] text-[#f6efe6] transition hover:text-[#d7c8ae]">
+            <Link href="/diseno-a-medida" className="mt-8 inline-flex items-center gap-2 text-sm uppercase tracking-[0.26em] text-[#171717] transition hover:text-[#777067]">
               Comenzar un proyecto <ArrowRight size={14} />
             </Link>
           </div>
-          <div className="group overflow-hidden border border-white/10 bg-[#121212]">
+          <div data-reveal="right" className="group overflow-hidden bg-[#e9e4dc]">
             <Image src="/images/elema-generated/instalacion-metalica.webp" alt="Instalación arquitectónica de mobiliario metálico" width={1672} height={941} className="h-full w-full object-cover transition duration-1000 group-hover:scale-[1.025]" />
           </div>
         </div>
       </section>
 
-      <section className="reveal-on-scroll mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+      <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
         <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-          <div>
+          <div data-reveal="left">
             <p className="text-[0.72rem] uppercase tracking-[0.35em] text-[#7a7269]">Materiales</p>
             <h2 className="mt-4 font-serif text-3xl text-[#171717] sm:text-4xl">Acero, piedra, fuego y precisión en cada terminación.</h2>
             <div className="group mt-8 overflow-hidden bg-[#171717]">
@@ -170,9 +207,9 @@ export default function HomePage() {
             </div>
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
-            {materials.map((material) => (
-              <div key={material.title} className="rounded-[1.5rem] border border-[#161616]/10 bg-[#f8f2e8] p-6">
-                <div className="mb-5 h-2 w-16 bg-[#171717]" />
+            {materials.map((material, index) => (
+              <div key={material.title} data-reveal data-reveal-delay={index * 90} className="group border border-[#161616]/10 bg-white p-6 transition duration-500 hover:-translate-y-1 hover:shadow-[0_18px_45px_rgba(0,0,0,0.07)]">
+                <div className="mb-5 h-1 w-12 origin-left bg-[#171717] transition-transform duration-500 group-hover:scale-x-150" />
                 <h3 className="text-xl font-medium text-[#171717]">{material.title}</h3>
                 <p className="mt-3 text-sm leading-7 text-[#4a453f]">{material.description}</p>
               </div>
@@ -181,34 +218,34 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="reveal-on-scroll mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-        <div className="border border-white/10 bg-[linear-gradient(135deg,#171b24_0%,#11141c_100%)] p-6 text-[#f6efe6] shadow-[0_20px_60px_rgba(0,0,0,0.15)] sm:p-8 lg:p-12">
+      <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+        <div className="border border-black/10 bg-white p-6 text-[#171717] shadow-[0_20px_60px_rgba(0,0,0,0.05)] sm:p-8 lg:p-12">
           <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
-            <div>
-              <p className="text-[0.72rem] uppercase tracking-[0.35em] text-[#a89d90]">Profesionales</p>
+            <div data-reveal="left">
+              <p className="text-[0.72rem] uppercase tracking-[0.35em] text-[#777067]">Profesionales</p>
               <h2 className="mt-4 max-w-xl font-serif text-3xl sm:text-4xl">Para arquitectos, constructoras, diseñadores e inmobiliarias de alta exigencia.</h2>
-              <p className="mt-5 max-w-xl text-base leading-8 text-[#d8d0c4]">
+              <p className="mt-5 max-w-xl text-base leading-8 text-[#56514b]">
                 Una colaboración técnica, discreta y precisa para proyectos que no admiten improvisación.
               </p>
-              <Link href="/profesionales" className="mt-8 inline-flex items-center gap-2 border border-white/15 px-5 py-3 text-sm uppercase tracking-[0.25em] text-[#f6efe6] transition hover:bg-white/10">
+              <Link href="/profesionales" className="mt-8 inline-flex items-center gap-2 border border-black/20 px-5 py-3 text-sm uppercase tracking-[0.25em] text-[#171717] transition hover:bg-[#f4f1ea]">
                 Trabajar con ELEMA <ArrowRight size={14} />
               </Link>
             </div>
-            <div className="group overflow-hidden border border-white/10">
+            <div data-reveal="right" className="group overflow-hidden bg-[#e9e4dc]">
               <Image src="/images/elema-generated/colaboracion-arquitectos.webp" alt="Arquitectos y especialistas revisando detalles de fabricación" width={1536} height={1024} className="h-full w-full object-cover transition duration-1000 group-hover:scale-[1.025]" />
             </div>
           </div>
         </div>
       </section>
 
-      <section className="reveal-on-scroll mx-auto max-w-7xl px-4 pb-24 sm:px-6 lg:px-8">
-        <div className="relative overflow-hidden bg-[#13161d]">
+      <section data-reveal className="mx-auto max-w-7xl px-4 pb-24 sm:px-6 lg:px-8">
+        <div className="group relative overflow-hidden bg-[#13161d]">
           <Image src="/images/elema-generated/isla-monumental.webp" alt="" fill sizes="100vw" className="object-cover object-center opacity-55" />
           <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(10,12,16,0.83)_0%,rgba(10,12,16,0.62)_100%)]" />
           <div className="relative z-10 flex min-h-[360px] flex-col justify-center px-6 py-16 sm:px-8 lg:px-12">
             <p className="text-[0.72rem] uppercase tracking-[0.35em] text-[#c8c0b6]">Cierre</p>
             <h2 className="mt-4 max-w-3xl font-serif text-3xl text-[#f6efe6] sm:text-4xl">Tu espacio puede decir más.</h2>
-            <Link href="/contacto" className="mt-8 inline-flex w-fit items-center gap-2 border border-white/20 px-6 py-3 text-sm uppercase tracking-[0.24em] text-[#f6efe6] transition hover:bg-white/10">
+            <Link href="/contacto" className="mt-8 inline-flex w-fit items-center gap-2 bg-white px-6 py-3 text-sm uppercase tracking-[0.24em] text-[#171717] transition group-hover:translate-x-1 hover:bg-[#f4f1ea]">
               Solicitar asesoría privada <ArrowRight size={14} />
             </Link>
           </div>

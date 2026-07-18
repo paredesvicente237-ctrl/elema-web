@@ -4,11 +4,11 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
-import { Menu, Search, ShoppingBag, UserRound, X } from 'lucide-react';
+import { Menu, Search, ShoppingBag, X } from 'lucide-react';
 
 const navItems = [
-  { label: 'Colecciones', href: '/colecciones' },
   { label: 'Tienda', href: '/tienda' },
+  { label: 'Colecciones', href: '/colecciones' },
   { label: 'Diseño a medida', href: '/diseno-a-medida' },
   { label: 'Profesionales', href: '/profesionales' },
   { label: 'Nosotros', href: '/nosotros' },
@@ -104,12 +104,13 @@ export function Header() {
           <Link href="/buscar" className="p-2.5 text-[#4f4b45] transition hover:text-black" aria-label="Buscar">
             <Search size={16} />
           </Link>
-          <Link href="/contacto" className="p-2.5 text-[#4f4b45] transition hover:text-black" aria-label="Cuenta">
-            <UserRound size={16} />
+          <Link href="/contacto" className="border-l border-black/10 px-4 py-2.5 text-[0.64rem] font-medium uppercase tracking-[0.22em] text-[#171717] transition hover:bg-white" aria-label="Cotizar un proyecto">
+            Cotizar
           </Link>
           <Link href="/carrito" className="inline-flex items-center gap-2 border border-black/15 px-3 py-2 text-sm text-[#4f4b45] transition hover:border-black/30 hover:text-black" aria-label="Carrito">
             <ShoppingBag size={16} />
-            <span>{cartCount}</span>
+            <span className="text-[0.62rem] uppercase tracking-[0.18em]">Carrito</span>
+            <span className="tabular-nums">{cartCount}</span>
           </Link>
         </div>
 

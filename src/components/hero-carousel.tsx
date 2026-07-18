@@ -68,8 +68,8 @@ export function HeroCarousel() {
           />
         ))}
       </div>
-      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(5,7,9,0.86)_0%,rgba(5,7,9,0.56)_42%,rgba(5,7,9,0.08)_74%)]" />
-      <div className="absolute inset-x-0 bottom-0 h-52 bg-gradient-to-t from-black/45 to-transparent" />
+      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(5,7,9,0.68)_0%,rgba(5,7,9,0.34)_44%,rgba(5,7,9,0.03)_78%)]" />
+      <div className="absolute inset-x-0 bottom-0 h-52 bg-gradient-to-t from-black/30 to-transparent" />
 
       <div className="relative mx-auto flex min-h-[calc(100svh-5rem)] max-w-7xl flex-col justify-end px-4 pb-8 pt-24 sm:px-6 sm:pb-10 lg:px-8 lg:pb-12">
         <div key={active} className="hero-copy-enter max-w-3xl pb-16 sm:pb-20">
@@ -107,9 +107,9 @@ export function HeroCarousel() {
             ))}
           </div>
 
-          <div className="flex items-center gap-2 text-[0.62rem] uppercase tracking-[0.32em] text-white/65">
-            Explorar <ChevronDown size={14} className="animate-bounce" />
-          </div>
+          <Link href="#comprar" className="flex items-center gap-2 text-[0.62rem] uppercase tracking-[0.32em] text-white/65 transition hover:text-white">
+            Comprar <ChevronDown size={14} className="animate-bounce" />
+          </Link>
         </div>
       </div>
     </section>
