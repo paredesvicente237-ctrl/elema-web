@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     description: 'Cocinas, parrillas, campanas y soluciones arquitectónicas fabricadas a medida en Chile.',
     type: 'website',
     locale: 'es_CL',
-    images: ['/images/hero-luxury-waterfront.png'],
+    images: ['/images/elema-generated/cocina-costera-hero.png'],
   },
   robots: { index: true, follow: true },
 };
