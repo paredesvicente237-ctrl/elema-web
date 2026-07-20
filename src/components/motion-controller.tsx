@@ -6,10 +6,12 @@ export function MotionController() {
   useEffect(() => {
     const root = document.documentElement;
     const elements = Array.from(document.querySelectorAll<HTMLElement>('[data-reveal]'));
+    const ambientElements = Array.from(document.querySelectorAll<HTMLElement>('[data-ambient]'));
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     if (reduceMotion) {
       elements.forEach((element) => element.classList.add('is-visible'));
+      ambientElements.forEach((element) => element.classList.add('is-ambient-active'));
       return;
     }
 
@@ -32,8 +34,20 @@ export function MotionController() {
       observer.observe(element);
     });
 
+    const ambientObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          entry.target.classList.toggle('is-ambient-active', entry.isIntersecting);
+        });
+      },
+      { rootMargin: '12% 0px', threshold: 0.08 },
+    );
+
+    ambientElements.forEach((element) => ambientObserver.observe(element));
+
     return () => {
       observer.disconnect();
+      ambientObserver.disconnect();
       root.classList.remove('motion-enabled');
     };
   }, []);

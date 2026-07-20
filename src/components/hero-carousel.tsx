@@ -14,6 +14,7 @@ const slides = [
     href: '/colecciones/cocinas',
     cta: 'Explorar cocinas',
     position: 'object-center',
+    scene: 'coast',
   },
   {
     eyebrow: 'Parrillas · Experiencias de fuego',
@@ -23,6 +24,7 @@ const slides = [
     href: '/colecciones/parrillas',
     cta: 'Descubrir parrillas',
     position: 'object-center',
+    scene: 'fire',
   },
   {
     eyebrow: 'Diseño a medida · Piezas singulares',
@@ -32,6 +34,7 @@ const slides = [
     href: '/diseno-a-medida',
     cta: 'Iniciar un proyecto',
     position: 'object-center',
+    scene: 'daylight',
   },
 ];
 
@@ -61,18 +64,21 @@ export function HeroCarousel() {
             src={entry.image}
             alt=""
             fill
-            priority={index === 0}
+            priority={index < 2}
             quality={90}
             sizes="100vw"
-            className={`${entry.position} object-cover transition-[opacity,transform] duration-[1400ms] ease-out ${index === active ? 'scale-100 opacity-100' : 'scale-[1.035] opacity-0'}`}
+            className={`hero-ambient-media ${entry.position} object-cover ${index === active ? 'is-active opacity-100' : 'opacity-0'}`}
           />
+        ))}
+        {slides.map((entry, index) => (
+          <div key={`${entry.image}-light`} aria-hidden="true" className={`hero-ambient-overlay hero-ambient-overlay--${entry.scene} ${index === active ? 'is-active' : ''}`} />
         ))}
       </div>
       <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(5,7,9,0.68)_0%,rgba(5,7,9,0.34)_44%,rgba(5,7,9,0.03)_78%)]" />
       <div className="absolute inset-x-0 bottom-0 h-52 bg-gradient-to-t from-black/30 to-transparent" />
 
       <div className="relative mx-auto flex min-h-[calc(100svh-5rem)] max-w-7xl flex-col justify-end px-4 pb-8 pt-24 sm:px-6 sm:pb-10 lg:px-8 lg:pb-12">
-        <div key={active} className="hero-copy-enter max-w-3xl pb-16 sm:pb-20">
+        <div key={active} className="hero-copy-fade max-w-3xl pb-16 sm:pb-20">
           <p className="text-[0.68rem] uppercase tracking-[0.38em] text-[#d8d4cc]">{slide.eyebrow}</p>
           <h1 className="mt-6 max-w-[760px] font-serif text-5xl leading-[0.9] text-[#f4f1ea] sm:text-6xl lg:text-[5.5rem]">
             {slide.title}
@@ -102,13 +108,13 @@ export function HeroCarousel() {
           <div className="hidden items-center gap-3 sm:flex">
             {slides.map((entry, index) => (
               <button key={entry.image} type="button" onClick={() => setActive(index)} className="group py-3" aria-label={`Mostrar imagen ${index + 1}`} aria-current={index === active ? 'true' : undefined}>
-                <span className={`block h-px transition-all duration-500 ${index === active ? 'w-16 bg-white' : 'w-8 bg-white/35 group-hover:bg-white/70'}`} />
+                <span className={`block h-px w-10 transition-colors duration-500 ${index === active ? 'bg-white' : 'bg-white/35 group-hover:bg-white/70'}`} />
               </button>
             ))}
           </div>
 
           <Link href="#comprar" className="flex items-center gap-2 text-[0.62rem] uppercase tracking-[0.32em] text-white/65 transition hover:text-white">
-            Comprar <ChevronDown size={14} className="animate-bounce" />
+            Comprar <ChevronDown size={14} />
           </Link>
         </div>
       </div>

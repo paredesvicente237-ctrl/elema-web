@@ -7,10 +7,10 @@ import { MotionController } from '@/components/motion-controller';
 import { AddToCartButton } from '@/components/add-to-cart-button';
 
 const collections = [
-  { title: 'Cocinas', description: 'Composiciones de alto impacto para residencias y proyectos singulares.', href: '/colecciones/cocinas', image: '/images/elema-generated/cocina-costera-hero.webp' },
-  { title: 'Parrillas', description: 'Arte funcional para exteriores, hosting y experiencias de fuego.', href: '/colecciones/parrillas', image: '/images/elema-generated/parrilla-montana-hero.webp' },
-  { title: 'Campanas', description: 'Elementos escultóricos que sostienen la narrativa del espacio.', href: '/colecciones/campanas', image: '/images/elema-generated/campana-noctis-editorial.webp' },
-  { title: 'Soluciones a medida', description: 'Proyectos de arquitectura, mobiliario y fabricación especial.', href: '/diseno-a-medida', image: '/images/elema-generated/taller-precision-editorial.webp' },
+  { title: 'Cocinas', description: 'Composiciones de alto impacto para residencias y proyectos singulares.', href: '/colecciones/cocinas', image: '/images/elema-generated/cocina-costera-hero.webp', scene: 'coast' },
+  { title: 'Parrillas', description: 'Arte funcional para exteriores, hosting y experiencias de fuego.', href: '/colecciones/parrillas', image: '/images/elema-generated/parrilla-montana-hero.webp', scene: 'fire' },
+  { title: 'Campanas', description: 'Elementos escultóricos que sostienen la narrativa del espacio.', href: '/colecciones/campanas', image: '/images/elema-generated/campana-noctis-editorial.webp', scene: 'daylight' },
+  { title: 'Soluciones a medida', description: 'Proyectos de arquitectura, mobiliario y fabricación especial.', href: '/diseno-a-medida', image: '/images/elema-generated/taller-precision-editorial.webp', scene: 'studio' },
 ];
 
 const principles = [
@@ -57,10 +57,11 @@ export default function HomePage() {
 
       <section id="comprar" className="scroll-mt-20 bg-white px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
-          <Link href={`/producto/${featured.slug}`} data-reveal="left" className="group relative min-h-[440px] overflow-hidden bg-[#e9e4dc] lg:min-h-[620px]">
-            <Image src={featured.images[0]} alt={featured.name} fill sizes="(min-width: 1024px) 56vw, 100vw" className="object-cover transition duration-1000 group-hover:scale-[1.035]" />
-            <div className="absolute left-5 top-5 bg-white px-4 py-2 text-[0.62rem] font-medium uppercase tracking-[0.26em] text-[#171717]">Disponible online</div>
-            <span className="absolute bottom-5 right-5 grid h-12 w-12 place-items-center bg-white text-black transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1"><ArrowUpRight size={18} /></span>
+          <Link href={`/producto/${featured.slug}`} data-reveal="left" data-ambient="fire" className="ambient-frame group relative min-h-[440px] overflow-hidden bg-[#e9e4dc] lg:min-h-[620px]">
+            <Image src={featured.images[0]} alt={featured.name} fill sizes="(min-width: 1024px) 56vw, 100vw" className="ambient-media ambient-media--push object-cover" />
+            <span className="ambient-light ambient-light--fire" aria-hidden="true" />
+            <div className="absolute left-5 top-5 z-10 bg-white px-4 py-2 text-[0.62rem] font-medium uppercase tracking-[0.26em] text-[#171717]">Disponible online</div>
+            <span className="absolute bottom-5 right-5 z-10 grid h-12 w-12 place-items-center bg-white text-black"><ArrowUpRight size={18} /></span>
           </Link>
 
           <div data-reveal="right" className="lg:px-8">
@@ -128,8 +129,9 @@ export default function HomePage() {
           </Link>
         </div>
         <div className="grid gap-6 xl:grid-cols-[1.1fr_0.9fr]">
-          <Link href={collections[0].href} data-reveal="left" className="group relative min-h-[500px] overflow-hidden border border-white/10 bg-[#14161d] shadow-[0_20px_70px_rgba(0,0,0,0.16)]">
-            <Image src={collections[0].image} alt="" fill sizes="(min-width: 1280px) 55vw, 100vw" className="object-cover transition duration-700 group-hover:scale-[1.025]" />
+          <Link href={collections[0].href} data-reveal="left" data-ambient={collections[0].scene} className="ambient-frame group relative min-h-[500px] overflow-hidden border border-white/10 bg-[#14161d] shadow-[0_20px_70px_rgba(0,0,0,0.16)]">
+            <Image src={collections[0].image} alt="" fill sizes="(min-width: 1280px) 55vw, 100vw" className="ambient-media ambient-media--drift object-cover" />
+            <span className={`ambient-light ambient-light--${collections[0].scene}`} aria-hidden="true" />
             <div className="absolute inset-0 bg-[linear-gradient(95deg,rgba(10,12,16,0.9)_0%,rgba(10,12,16,0.48)_55%,rgba(10,12,16,0.2)_100%)]" />
             <div className="relative z-10 flex h-full flex-col justify-between p-8 sm:p-10">
               <div className="flex items-center justify-between border-b border-white/25 pb-4 text-[0.68rem] uppercase tracking-[0.34em] text-[#cfc7bc]">
@@ -145,8 +147,10 @@ export default function HomePage() {
 
           <div data-reveal="right" className="grid gap-6">
             {collections.slice(1).map((collection, index) => (
-              <Link key={collection.title} href={collection.href} className="group relative min-h-[226px] overflow-hidden border border-white/10 bg-[#151922] shadow-[0_12px_45px_rgba(0,0,0,0.14)]">
-                <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url('${collection.image}')` }} />
+              <Link key={collection.title} href={collection.href} data-ambient={collection.scene} className="ambient-frame group relative min-h-[226px] overflow-hidden border border-white/10 bg-[#151922] shadow-[0_12px_45px_rgba(0,0,0,0.14)]">
+                <Image src={collection.image} alt="" fill sizes="(min-width: 1280px) 45vw, 100vw" className="ambient-media ambient-media--drift object-cover" />
+                <span className={`ambient-light ambient-light--${collection.scene}`} aria-hidden="true" />
+                {collection.scene === 'studio' ? <span className="ambient-particles ambient-particles--sparks" aria-hidden="true" /> : null}
                 <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,12,16,0.18)_0%,rgba(10,12,16,0.8)_100%)]" />
                 <div className="relative z-10 flex h-full flex-col justify-between p-7">
                   <div className="flex items-center justify-between border-b border-white/20 pb-3 text-[0.65rem] uppercase tracking-[0.3em] text-[#cfc7bc]">
@@ -165,8 +169,10 @@ export default function HomePage() {
 
       <section className="bg-[#e9e4dc] px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
         <div className="mx-auto grid max-w-7xl lg:grid-cols-[1.15fr_0.85fr]">
-          <div data-reveal="left" className="group relative min-h-[460px] overflow-hidden lg:min-h-[620px]">
-            <Image src="/images/elema-generated/taller-precision-editorial.webp" alt="Trabajo de precisión sobre una pieza de acero" fill sizes="(min-width: 1024px) 58vw, 100vw" className="object-cover object-center transition duration-1000 group-hover:scale-[1.025]" />
+          <div data-reveal="left" data-ambient="studio" className="ambient-frame relative min-h-[460px] overflow-hidden lg:min-h-[620px]">
+            <Image src="/images/elema-generated/taller-precision-editorial.webp" alt="Trabajo de precisión sobre una pieza de acero" fill sizes="(min-width: 1024px) 58vw, 100vw" className="ambient-media ambient-media--detail object-cover object-center" />
+            <span className="ambient-light ambient-light--studio" aria-hidden="true" />
+            <span className="ambient-particles ambient-particles--sparks" aria-hidden="true" />
           </div>
           <div data-reveal="right" className="flex flex-col justify-center bg-white p-8 sm:p-12 lg:p-14">
             <p className="text-[0.68rem] uppercase tracking-[0.36em] text-[#777067]">Del plano a la materia</p>
@@ -191,8 +197,9 @@ export default function HomePage() {
               Comenzar un proyecto <ArrowRight size={14} />
             </Link>
           </div>
-          <div data-reveal="right" className="group overflow-hidden bg-[#e9e4dc]">
-            <Image src="/images/elema-generated/instalacion-metalica.webp" alt="Instalación arquitectónica de mobiliario metálico" width={1672} height={941} className="h-full w-full object-cover transition duration-1000 group-hover:scale-[1.025]" />
+          <div data-reveal="right" data-ambient="daylight" className="ambient-frame relative overflow-hidden bg-[#e9e4dc]">
+            <Image src="/images/elema-generated/instalacion-metalica.webp" alt="Instalación arquitectónica de mobiliario metálico" width={1672} height={941} className="ambient-media ambient-media--push h-full w-full object-cover" />
+            <span className="ambient-light ambient-light--daylight" aria-hidden="true" />
           </div>
         </div>
       </section>
@@ -202,8 +209,9 @@ export default function HomePage() {
           <div data-reveal="left">
             <p className="text-[0.72rem] uppercase tracking-[0.35em] text-[#7a7269]">Materiales</p>
             <h2 className="mt-4 font-serif text-3xl text-[#171717] sm:text-4xl">Acero, piedra, fuego y precisión en cada terminación.</h2>
-            <div className="group mt-8 overflow-hidden bg-[#171717]">
-              <Image src="/images/elema-generated/material-acero-piedra.webp" alt="Encuentro de acero cepillado y piedra clara" width={1774} height={887} className="aspect-[2/1] w-full object-cover transition duration-1000 group-hover:scale-[1.035]" />
+            <div data-ambient="material" className="ambient-frame relative mt-8 overflow-hidden bg-[#171717]">
+              <Image src="/images/elema-generated/material-acero-piedra.webp" alt="Encuentro de acero cepillado y piedra clara" width={1774} height={887} className="ambient-media ambient-media--detail aspect-[2/1] w-full object-cover" />
+              <span className="ambient-light ambient-light--material" aria-hidden="true" />
             </div>
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
@@ -231,21 +239,23 @@ export default function HomePage() {
                 Trabajar con ELEMA <ArrowRight size={14} />
               </Link>
             </div>
-            <div data-reveal="right" className="group overflow-hidden bg-[#e9e4dc]">
-              <Image src="/images/elema-generated/colaboracion-arquitectos.webp" alt="Arquitectos y especialistas revisando detalles de fabricación" width={1536} height={1024} className="h-full w-full object-cover transition duration-1000 group-hover:scale-[1.025]" />
+            <div data-reveal="right" data-ambient="studio" className="ambient-frame relative overflow-hidden bg-[#e9e4dc]">
+              <Image src="/images/elema-generated/colaboracion-arquitectos.webp" alt="Arquitectos y especialistas revisando detalles de fabricación" width={1536} height={1024} className="h-full w-full object-cover" />
+              <span className="ambient-light ambient-light--studio" aria-hidden="true" />
             </div>
           </div>
         </div>
       </section>
 
       <section data-reveal className="mx-auto max-w-7xl px-4 pb-24 sm:px-6 lg:px-8">
-        <div className="group relative overflow-hidden bg-[#13161d]">
-          <Image src="/images/elema-generated/isla-monumental.webp" alt="" fill sizes="100vw" className="object-cover object-center opacity-55" />
+        <div data-ambient="daylight" className="ambient-frame relative overflow-hidden bg-[#13161d]">
+          <Image src="/images/elema-generated/isla-monumental.webp" alt="" fill sizes="100vw" className="ambient-media ambient-media--push object-cover object-center opacity-55" />
+          <span className="ambient-light ambient-light--daylight" aria-hidden="true" />
           <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(10,12,16,0.83)_0%,rgba(10,12,16,0.62)_100%)]" />
           <div className="relative z-10 flex min-h-[360px] flex-col justify-center px-6 py-16 sm:px-8 lg:px-12">
             <p className="text-[0.72rem] uppercase tracking-[0.35em] text-[#c8c0b6]">Cierre</p>
             <h2 className="mt-4 max-w-3xl font-serif text-3xl text-[#f6efe6] sm:text-4xl">Tu espacio puede decir más.</h2>
-            <Link href="/contacto" className="mt-8 inline-flex w-fit items-center gap-2 bg-white px-6 py-3 text-sm uppercase tracking-[0.24em] text-[#171717] transition group-hover:translate-x-1 hover:bg-[#f4f1ea]">
+            <Link href="/contacto" className="mt-8 inline-flex w-fit items-center gap-2 bg-white px-6 py-3 text-sm uppercase tracking-[0.24em] text-[#171717] transition-colors hover:bg-[#f4f1ea]">
               Solicitar asesoría privada <ArrowRight size={14} />
             </Link>
           </div>
