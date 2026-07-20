@@ -60,6 +60,7 @@ export default function HomePage() {
           <Link href={`/producto/${featured.slug}`} data-reveal="left" data-ambient="fire" className="ambient-frame group relative min-h-[440px] overflow-hidden bg-[#e9e4dc] lg:min-h-[620px]">
             <Image src={featured.images[0]} alt={featured.name} fill sizes="(min-width: 1024px) 56vw, 100vw" className="ambient-media ambient-media--push object-cover" />
             <span className="ambient-light ambient-light--fire" aria-hidden="true" />
+            <span className="ambient-particles ambient-particles--embers" aria-hidden="true" />
             <div className="absolute left-5 top-5 z-10 bg-white px-4 py-2 text-[0.62rem] font-medium uppercase tracking-[0.26em] text-[#171717]">Disponible online</div>
             <span className="absolute bottom-5 right-5 z-10 grid h-12 w-12 place-items-center bg-white text-black"><ArrowUpRight size={18} /></span>
           </Link>

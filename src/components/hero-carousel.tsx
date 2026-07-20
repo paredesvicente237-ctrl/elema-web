@@ -46,7 +46,7 @@ export function HeroCarousel() {
 
     const timer = window.setInterval(() => {
       setActive((current) => (current + 1) % slides.length);
-    }, 6500);
+    }, 7200);
 
     return () => window.clearInterval(timer);
   }, []);
@@ -73,6 +73,9 @@ export function HeroCarousel() {
         {slides.map((entry, index) => (
           <div key={`${entry.image}-light`} aria-hidden="true" className={`hero-ambient-overlay hero-ambient-overlay--${entry.scene} ${index === active ? 'is-active' : ''}`} />
         ))}
+        {slides.map((entry, index) => entry.scene === 'fire' ? (
+          <div key={`${entry.image}-embers`} aria-hidden="true" className={`hero-ambient-embers ${index === active ? 'is-active' : ''}`} />
+        ) : null)}
       </div>
       <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(5,7,9,0.68)_0%,rgba(5,7,9,0.34)_44%,rgba(5,7,9,0.03)_78%)]" />
       <div className="absolute inset-x-0 bottom-0 h-52 bg-gradient-to-t from-black/30 to-transparent" />
