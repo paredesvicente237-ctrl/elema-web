@@ -50,7 +50,7 @@ export const products: Product[] = [
     slug: 'parrilla-mediterranea-lumen',
     name: 'Parrilla Mediterránea Lumen',
     category: 'Parrillas',
-    shortDescription: 'Parrilla premium para patios de alto nivel.',
+    shortDescription: 'Arquitectura de fuego en acero inoxidable, piedra y cromo.',
     description: 'Una parrilla de presencia arquitectónica, concebida para transformar el fuego en el centro de la experiencia exterior.',
     price: 799990,
     images: ['/images/parrilla-lumen.png'],

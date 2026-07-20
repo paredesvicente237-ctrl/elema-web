@@ -4,14 +4,13 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
-import { CircleUserRound, Menu, Search, ShoppingBag, X } from 'lucide-react';
+import { CircleUserRound, Menu, ShoppingBag, X } from 'lucide-react';
 
 const navItems = [
-  { label: 'Tienda', href: '/tienda' },
   { label: 'Colecciones', href: '/colecciones' },
-  { label: 'Diseño a medida', href: '/diseno-a-medida' },
-  { label: 'Profesionales', href: '/profesionales' },
-  { label: 'Nosotros', href: '/nosotros' },
+  { label: 'Piezas', href: '/tienda' },
+  { label: 'A medida', href: '/diseno-a-medida' },
+  { label: 'Estudio', href: '/nosotros' },
 ];
 
 export function Header() {
@@ -95,7 +94,7 @@ export function Header() {
           </span>
         </Link>
 
-        <nav className="ml-auto hidden items-center gap-6 text-[0.68rem] uppercase tracking-[0.26em] text-[#4f4b45] lg:flex">
+        <nav className="ml-auto hidden items-center gap-7 text-[0.66rem] uppercase tracking-[0.24em] text-[#4f4b45] xl:flex">
           {navItems.map((item) => (
             <Link key={item.href} href={item.href} className="relative py-2 transition hover:text-black after:absolute after:inset-x-0 after:bottom-0 after:h-px after:origin-left after:scale-x-0 after:bg-black after:transition-transform hover:after:scale-x-100" aria-current={isActive(item.href) ? 'page' : undefined}>
               {item.label}
@@ -103,31 +102,27 @@ export function Header() {
           ))}
         </nav>
 
-        <div className="hidden items-center gap-2 lg:flex">
-          <Link href="/buscar" className="p-2.5 text-[#4f4b45] transition hover:text-black" aria-label="Buscar">
-            <Search size={16} />
+        <div className="hidden items-center gap-2 xl:flex">
+          <Link href="/contacto" className="border-l border-black/10 px-4 py-2.5 text-[0.62rem] font-medium uppercase tracking-[0.2em] text-[#171717] transition-colors hover:bg-white" aria-label="Solicitar una conversación privada">
+            Conversación privada
           </Link>
-          <Link href="/contacto" className="border-l border-black/10 px-4 py-2.5 text-[0.64rem] font-medium uppercase tracking-[0.22em] text-[#171717] transition hover:bg-white" aria-label="Cotizar un proyecto">
-            Cotizar
-          </Link>
-          <Link href="/mi-elema" className="inline-flex items-center gap-2 px-2 py-2.5 text-[#4f4b45] transition hover:text-black" aria-label="Ingresar a Mi ELEMA">
+          <Link href="/mi-elema" className="inline-flex items-center gap-2 px-2 py-2.5 text-[#4f4b45] transition-colors hover:text-black" aria-label="Ingresar a Mi ELEMA">
             <CircleUserRound size={17} />
             <span className="text-[0.62rem] uppercase tracking-[0.18em]">Mi ELEMA</span>
           </Link>
-          <Link href="/carrito" className="inline-flex items-center gap-2 border border-black/15 px-3 py-2 text-sm text-[#4f4b45] transition hover:border-black/30 hover:text-black" aria-label="Carrito">
+          <Link href="/carrito" className="inline-flex items-center gap-2 border border-black/15 px-3 py-2.5 text-sm text-[#4f4b45] transition-colors hover:border-black/30 hover:text-black" aria-label={`Carrito, ${cartCount} piezas`}>
             <ShoppingBag size={16} />
-            <span className="text-[0.62rem] uppercase tracking-[0.18em]">Carrito</span>
             <span className="tabular-nums">{cartCount}</span>
           </Link>
         </div>
 
-        <div className="ml-auto flex items-center gap-2 sm:gap-3 lg:hidden">
+        <div className="ml-auto flex items-center gap-2 sm:gap-3 xl:hidden">
           <Link href="/carrito" className="inline-flex items-center gap-2 border border-black/15 px-3 py-2 text-sm text-[#4f4b45] transition hover:border-black/30 hover:text-black" aria-label="Carrito">
             <ShoppingBag size={16} />
             <span>{cartCount}</span>
           </Link>
           <button
-            className="border border-black/15 p-2.5 text-[#4f4b45] lg:hidden"
+            className="border border-black/15 p-2.5 text-[#4f4b45] xl:hidden"
             aria-label={open ? 'Cerrar menú' : 'Abrir menú'}
             aria-expanded={open}
             aria-controls="mobile-navigation"
@@ -139,17 +134,17 @@ export function Header() {
       </div>
 
       {open ? (
-        <div id="mobile-navigation" className="border-t border-black/10 bg-[#f4f1ea] px-4 py-5 lg:hidden">
+        <div id="mobile-navigation" className="border-t border-black/10 bg-[#f4f1ea] px-4 py-5 xl:hidden">
           <div className="flex flex-col gap-4 text-[0.72rem] uppercase tracking-[0.3em] text-[#4f4b45]">
             {navItems.map((item) => (
-              <Link key={item.href} href={item.href} className="transition hover:text-[#f4efe6]" aria-current={isActive(item.href) ? 'page' : undefined} onClick={() => setOpen(false)}>
+              <Link key={item.href} href={item.href} className="transition-colors hover:text-black" aria-current={isActive(item.href) ? 'page' : undefined} onClick={() => setOpen(false)}>
                 {item.label}
               </Link>
             ))}
-            <Link href="/buscar" className="flex items-center gap-2 pt-2" onClick={() => setOpen(false)}>
-              <Search size={16} /> Buscar
+            <Link href="/contacto" className="border-t border-black/10 pt-4" onClick={() => setOpen(false)}>
+              Conversación privada
             </Link>
-            <Link href="/mi-elema" className="flex items-center gap-2 border-t border-black/10 pt-4" onClick={() => setOpen(false)}>
+            <Link href="/mi-elema" className="flex items-center gap-2 pt-2" onClick={() => setOpen(false)}>
               <CircleUserRound size={16} /> Mi ELEMA
             </Link>
           </div>

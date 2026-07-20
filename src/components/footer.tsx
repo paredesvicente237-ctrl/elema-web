@@ -2,8 +2,9 @@ import Link from 'next/link';
 
 const links = [
   { label: 'Colecciones', href: '/colecciones' },
-  { label: 'Tienda', href: '/tienda' },
-  { label: 'Contacto', href: '/contacto' },
+  { label: 'Piezas', href: '/tienda' },
+  { label: 'Proyectos a medida', href: '/diseno-a-medida' },
+  { label: 'Estudio', href: '/nosotros' },
   { label: 'Profesionales', href: '/profesionales' },
 ];
 
@@ -14,14 +15,17 @@ export function Footer() {
         <div>
           <p className="text-2xl font-semibold tracking-[0.35em]">ELEMA</p>
           <p className="mt-4 max-w-md text-sm leading-7 text-[#d8d0c4]">
-            Diseño, ingeniería y fabricación premium para cocinas, parrillas y soluciones arquitectónicas personalizadas.
+            Diseño, ingeniería y fabricación para cocinas, fuego y piezas arquitectónicas especiales.
           </p>
-          <a href="https://wa.me/56930751812" target="_blank" rel="noreferrer" className="mt-4 inline-flex text-sm text-[#a89d90] transition hover:text-[#f6efe6]">
+          <Link href="/contacto" className="mt-5 inline-flex border-b border-white/25 pb-1 text-[0.68rem] uppercase tracking-[0.22em] text-[#d8d0c4] transition-colors hover:text-white">
+            Solicitar una conversación
+          </Link>
+          <a href="https://wa.me/56930751812" target="_blank" rel="noreferrer" className="mt-5 block w-fit text-sm text-[#a89d90] transition hover:text-[#f6efe6]">
             +56 9 3075 1812 · Santiago, Chile
           </a>
         </div>
         <div>
-          <h3 className="text-[0.72rem] uppercase tracking-[0.34em] text-[#a89d90]">Navegación</h3>
+          <h3 className="text-[0.68rem] uppercase tracking-[0.3em] text-[#a89d90]">Explorar</h3>
           <ul className="mt-4 space-y-3 text-sm text-[#d8d0c4]">
             {links.map((link) => (
               <li key={link.href}>

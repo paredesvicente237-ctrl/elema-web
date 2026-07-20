@@ -54,19 +54,6 @@ a[aria-current='page'] {
   color: #090909;
 }
 
-@keyframes hero-copy-fade {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-.hero-copy-fade {
-  animation: hero-copy-fade 800ms ease-out both;
-}
-
 @keyframes hero-ambient-camera {
   from {
     transform: scale(1.03) translate3d(0.4%, 0.15%, 0);
@@ -155,17 +142,6 @@ a[aria-current='page'] {
   }
 }
 
-.hero-ambient-media {
-  transform: scale(1.03);
-  transition: opacity 1600ms ease-out;
-}
-
-.hero-ambient-media.is-active {
-  animation: hero-ambient-camera 7.2s cubic-bezier(0.18, 0.7, 0.3, 1) both;
-  will-change: transform;
-}
-
-.hero-ambient-overlay,
 .ambient-light,
 .ambient-particles {
   position: absolute;
@@ -173,33 +149,19 @@ a[aria-current='page'] {
   pointer-events: none;
 }
 
-.hero-ambient-overlay {
-  opacity: 0;
-  transition: opacity 1600ms ease-out;
-}
-
-.hero-ambient-overlay.is-active {
-  opacity: 1;
-}
-
-.hero-ambient-overlay--coast,
 .ambient-light--coast {
   background: radial-gradient(circle at 18% 32%, rgba(178, 211, 235, 0.28), transparent 30%), radial-gradient(circle at 76% 44%, rgba(255, 207, 142, 0.2), transparent 27%);
 }
 
-.hero-ambient-overlay--fire,
 .ambient-light--fire {
   background: radial-gradient(circle at 68% 57%, rgba(255, 132, 45, 0.62), transparent 15%), radial-gradient(circle at 61% 46%, rgba(255, 190, 96, 0.22), transparent 28%);
   mix-blend-mode: screen;
 }
 
-.hero-ambient-overlay--daylight,
 .ambient-light--daylight {
   background: radial-gradient(circle at 88% 28%, rgba(255, 244, 218, 0.3), transparent 31%), linear-gradient(112deg, transparent 45%, rgba(255, 255, 255, 0.13) 62%, transparent 78%);
 }
 
-.hero-ambient-overlay--coast.is-active,
-.hero-ambient-overlay--daylight.is-active,
 .motion-enabled [data-ambient].is-ambient-active .ambient-light--coast,
 .motion-enabled [data-ambient].is-ambient-active .ambient-light--daylight,
 .motion-enabled [data-ambient].is-ambient-active .ambient-light--studio,
@@ -207,7 +169,6 @@ a[aria-current='page'] {
   animation: ambient-light-drift 10s ease-in-out infinite alternate;
 }
 
-.hero-ambient-overlay--fire.is-active,
 .motion-enabled [data-ambient].is-ambient-active .ambient-light--fire {
   animation: ambient-fire-glow 3.8s ease-in-out infinite;
 }
@@ -218,6 +179,11 @@ a[aria-current='page'] {
 
 .ambient-media {
   transform: scale(1.025);
+}
+
+.motion-enabled [data-ambient].is-ambient-active .ambient-media--hero {
+  animation: hero-ambient-camera 12s cubic-bezier(0.18, 0.7, 0.3, 1) infinite alternate;
+  will-change: transform;
 }
 
 .motion-enabled [data-ambient].is-ambient-active .ambient-media--push {
@@ -254,8 +220,7 @@ a[aria-current='page'] {
   animation: ambient-sparks 4.6s ease-in-out infinite alternate;
 }
 
-.ambient-particles--embers,
-.hero-ambient-embers {
+.ambient-particles--embers {
   background-image: radial-gradient(circle at 18% 76%, rgba(255, 196, 105, 0.95) 0 1px, transparent 2.2px), radial-gradient(circle at 42% 54%, rgba(255, 121, 42, 0.9) 0 1.4px, transparent 2.8px), radial-gradient(circle at 67% 82%, rgba(255, 224, 165, 0.95) 0 1px, transparent 2px), radial-gradient(circle at 78% 32%, rgba(255, 146, 51, 0.82) 0 1.2px, transparent 2.4px), radial-gradient(circle at 54% 12%, rgba(255, 211, 137, 0.8) 0 1px, transparent 2px);
   background-repeat: no-repeat;
   filter: blur(0.15px);
@@ -268,17 +233,6 @@ a[aria-current='page'] {
 
 .motion-enabled [data-ambient].is-ambient-active .ambient-particles--embers {
   animation: ambient-embers 4.4s ease-in-out infinite;
-}
-
-.hero-ambient-embers {
-  position: absolute;
-  inset: 42% 14% 10% 43%;
-  opacity: 0;
-  pointer-events: none;
-}
-
-.hero-ambient-embers.is-active {
-  animation: ambient-embers 4.2s ease-in-out infinite;
 }
 
 .motion-enabled [data-reveal] {
@@ -301,20 +255,6 @@ a[aria-current='page'] {
   will-change: auto;
 }
 
-@keyframes material-marquee {
-  to {
-    transform: translateX(-50%);
-  }
-}
-
-.material-marquee {
-  animation: material-marquee 26s linear infinite;
-}
-
-.material-marquee:hover {
-  animation-play-state: paused;
-}
-
 @media (prefers-reduced-motion: reduce) {
   html:focus-within {
     scroll-behavior: auto;
@@ -327,17 +267,10 @@ a[aria-current='page'] {
     scroll-behavior: auto !important;
   }
 
-  .material-marquee {
-    animation: none;
-  }
-
-  .hero-ambient-media,
   .ambient-media {
     transform: none !important;
   }
 
-  .hero-ambient-overlay,
-  .hero-ambient-embers,
   .ambient-light,
   .ambient-particles {
     animation: none !important;
