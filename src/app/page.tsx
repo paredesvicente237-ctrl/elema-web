@@ -27,9 +27,9 @@ export default function HomePage() {
       <MotionController />
       <HeroCarousel />
 
-      <section id="pieza-emblematica" className="scroll-mt-20 bg-white px-4 py-24 sm:px-6 lg:px-8 lg:py-36">
+      <section id="pieza-emblematica" className="scroll-mt-20 bg-white px-4 pb-24 pt-14 sm:px-6 sm:pt-16 lg:px-8 lg:pb-36 lg:pt-20">
         <div className="mx-auto max-w-7xl">
-          <div data-reveal className="flex items-end justify-between border-b border-black/15 pb-5">
+          <div className="flex items-end justify-between border-b border-black/15 pb-5">
             <div>
               <p className="text-[0.62rem] uppercase tracking-[0.32em] text-[#80786f]">01 · Pieza emblemática</p>
               <h2 className="mt-3 font-serif text-4xl leading-none sm:text-5xl">Arquitectura para el fuego.</h2>

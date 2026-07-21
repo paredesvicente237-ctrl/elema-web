@@ -4,7 +4,7 @@ import { ArrowRight, ChevronDown } from 'lucide-react';
 
 export function HeroCarousel() {
   return (
-    <section data-ambient="coast" className="ambient-frame relative isolate mt-20 min-h-[calc(100svh-5rem)] overflow-hidden bg-[#090909] text-white">
+    <section data-ambient="coast" className="ambient-frame relative isolate mt-20 min-h-[calc(92svh-5rem)] overflow-hidden bg-[#090909] text-white lg:min-h-[calc(86svh-5rem)]">
       <Image
         src="/images/elema-generated/cocina-costera-hero.webp"
         alt=""
@@ -12,34 +12,39 @@ export function HeroCarousel() {
         priority
         quality={90}
         sizes="100vw"
-        className="ambient-media ambient-media--hero object-cover object-[58%_center] sm:object-center"
+        className="ambient-media ambient-media--hero object-cover object-[61%_center] sm:object-[58%_center] lg:object-center"
       />
       <span className="ambient-light ambient-light--coast" aria-hidden="true" />
-      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(6,7,8,0.78)_0%,rgba(6,7,8,0.43)_48%,rgba(6,7,8,0.08)_78%)]" />
-      <div className="absolute inset-x-0 bottom-0 h-72 bg-gradient-to-t from-black/45 to-transparent" />
+      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(6,7,8,0.69)_0%,rgba(6,7,8,0.34)_48%,rgba(6,7,8,0.04)_78%)]" />
+      <div className="absolute inset-x-0 bottom-0 h-64 bg-gradient-to-t from-black/50 via-black/15 to-transparent" />
 
-      <div className="relative z-10 mx-auto flex min-h-[calc(100svh-5rem)] max-w-7xl flex-col justify-end px-4 pb-8 pt-28 sm:px-6 sm:pb-10 lg:px-8 lg:pb-12">
-        <div className="max-w-4xl pb-16 sm:pb-20 lg:pb-24">
-          <p className="text-[0.65rem] uppercase tracking-[0.38em] text-[#d8d4cc]">ELEMA · Santiago, Chile</p>
-          <h1 className="mt-6 max-w-[900px] font-serif text-5xl leading-[0.88] text-[#f4f1ea] sm:text-7xl lg:text-[6.7rem]">
-            El metal, convertido en arquitectura.
-          </h1>
-          <p className="mt-7 max-w-xl text-base leading-8 text-[#e4ddd2] sm:text-lg">
-            Cocinas, fuego y piezas especiales desarrolladas desde el diseño, la ingeniería y la fabricación.
-          </p>
-          <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-            <Link href="/contacto" className="inline-flex items-center justify-center gap-3 bg-[#f4f1ea] px-6 py-4 text-[0.68rem] font-medium uppercase tracking-[0.24em] text-[#171717] transition-colors hover:bg-white">
-              Solicitar una conversación privada <ArrowRight size={14} />
-            </Link>
-            <Link href="/tienda" className="inline-flex items-center justify-center border border-white/35 px-6 py-4 text-[0.68rem] uppercase tracking-[0.24em] text-white transition-colors hover:bg-white/10">
-              Explorar piezas
-            </Link>
+      <div className="relative z-10 mx-auto flex min-h-[calc(92svh-5rem)] max-w-7xl flex-col justify-end px-4 pb-7 pt-24 sm:px-6 sm:pb-8 lg:min-h-[calc(86svh-5rem)] lg:px-8 lg:pb-9">
+        <div className="grid gap-8 pb-10 sm:pb-12 lg:grid-cols-[minmax(0,1.36fr)_minmax(17rem,0.64fr)] lg:items-end lg:gap-16 lg:pb-14">
+          <div>
+            <p className="text-[0.62rem] uppercase tracking-[0.27em] text-[#d8d4cc]">Cocinas · fuego · piezas especiales</p>
+            <h1 className="mt-5 max-w-[820px] font-serif text-[clamp(3.65rem,7.1vw,6.25rem)] leading-[0.86] tracking-[-0.035em] text-[#f4f1ea]">
+              Metal, fuego y arquitectura.
+            </h1>
+          </div>
+
+          <div className="border-l border-white/30 pl-5 sm:pl-6">
+            <p className="max-w-md text-[0.95rem] leading-7 text-[#e4ddd2] sm:text-base sm:leading-8">
+              Piezas desarrolladas desde el diseño hasta la fabricación, con precisión arquitectónica.
+            </p>
+            <div className="mt-7 flex flex-wrap items-center gap-x-7 gap-y-5">
+              <Link href="/contacto" className="inline-flex items-center justify-center gap-3 bg-[#f4f1ea] px-5 py-3.5 text-[0.65rem] font-medium uppercase tracking-[0.2em] text-[#171717] transition-colors hover:bg-white">
+                Iniciar un proyecto <ArrowRight size={14} />
+              </Link>
+              <Link href="/tienda" className="inline-flex items-center gap-3 border-b border-white/45 pb-1.5 text-[0.65rem] uppercase tracking-[0.2em] text-white transition-colors hover:border-white">
+                Ver piezas <ArrowRight size={13} />
+              </Link>
+            </div>
           </div>
         </div>
 
-        <div className="flex items-center justify-between border-t border-white/25 pt-5">
-          <p className="text-[0.58rem] uppercase tracking-[0.28em] text-white/60">Diseño · Ingeniería · Fabricación</p>
-          <Link href="#pieza-emblematica" className="flex items-center gap-2 text-[0.58rem] uppercase tracking-[0.28em] text-white/65 transition-colors hover:text-white">
+        <div className="flex items-center justify-between gap-6 border-t border-white/25 pt-4">
+          <p className="text-[0.56rem] uppercase tracking-[0.2em] text-white/60">Diseño / Ingeniería / Fabricación</p>
+          <Link href="#pieza-emblematica" className="flex shrink-0 items-center gap-2 text-[0.56rem] uppercase tracking-[0.2em] text-white/70 transition-colors hover:text-white">
             Descubrir <ChevronDown size={13} />
           </Link>
         </div>

@@ -79,22 +79,22 @@ export function Header() {
 
   return (
     <header className={`fixed inset-x-0 top-0 z-50 border-b border-black/10 bg-[#f4f1ea]/95 text-[#171717] backdrop-blur-xl transition-shadow duration-500 ${scrolled ? 'shadow-[0_12px_40px_rgba(0,0,0,0.08)]' : ''}`}>
-      <div className="mx-auto flex h-20 max-w-7xl items-center gap-8 px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto flex h-20 max-w-7xl items-center gap-7 px-4 sm:px-6 lg:px-8">
         <Link href="/" className="flex shrink-0 items-center gap-2.5 sm:gap-3" aria-label="ELEMA, inicio">
           <Image
             src="/brand/elema-logo-transparent.png"
             alt=""
             width={650}
             height={610}
-            className="h-8 w-auto shrink-0 brightness-0 sm:h-10"
+            className="h-8 w-auto shrink-0 brightness-0 sm:h-9"
             priority
           />
-          <span className="font-serif text-[1.25rem] uppercase tracking-[0.44em] text-[#171717] sm:text-[1.4rem]">
+          <span className="font-serif text-[1.25rem] uppercase tracking-[0.36em] text-[#171717] sm:text-[1.38rem]">
             ELEMA
           </span>
         </Link>
 
-        <nav className="ml-auto hidden items-center gap-7 text-[0.66rem] uppercase tracking-[0.24em] text-[#4f4b45] xl:flex">
+        <nav className="ml-auto hidden items-center gap-8 text-[0.64rem] uppercase tracking-[0.2em] text-[#4f4b45] xl:flex">
           {navItems.map((item) => (
             <Link key={item.href} href={item.href} className="relative py-2 transition hover:text-black after:absolute after:inset-x-0 after:bottom-0 after:h-px after:origin-left after:scale-x-0 after:bg-black after:transition-transform hover:after:scale-x-100" aria-current={isActive(item.href) ? 'page' : undefined}>
               {item.label}
@@ -102,13 +102,10 @@ export function Header() {
           ))}
         </nav>
 
-        <div className="hidden items-center gap-2 xl:flex">
-          <Link href="/contacto" className="border-l border-black/10 px-4 py-2.5 text-[0.62rem] font-medium uppercase tracking-[0.2em] text-[#171717] transition-colors hover:bg-white" aria-label="Solicitar una conversación privada">
-            Conversación privada
-          </Link>
+        <div className="hidden items-center gap-2 border-l border-black/10 pl-4 xl:flex">
           <Link href="/mi-elema" className="inline-flex items-center gap-2 px-2 py-2.5 text-[#4f4b45] transition-colors hover:text-black" aria-label="Ingresar a Mi ELEMA">
             <CircleUserRound size={17} />
-            <span className="text-[0.62rem] uppercase tracking-[0.18em]">Mi ELEMA</span>
+            <span className="text-[0.6rem] uppercase tracking-[0.16em]">Mi ELEMA</span>
           </Link>
           <Link href="/carrito" className="inline-flex items-center gap-2 border border-black/15 px-3 py-2.5 text-sm text-[#4f4b45] transition-colors hover:border-black/30 hover:text-black" aria-label={`Carrito, ${cartCount} piezas`}>
             <ShoppingBag size={16} />
@@ -142,7 +139,7 @@ export function Header() {
               </Link>
             ))}
             <Link href="/contacto" className="border-t border-black/10 pt-4" onClick={() => setOpen(false)}>
-              Conversación privada
+              Iniciar un proyecto
             </Link>
             <Link href="/mi-elema" className="flex items-center gap-2 pt-2" onClick={() => setOpen(false)}>
               <CircleUserRound size={16} /> Mi ELEMA
