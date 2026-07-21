@@ -4,7 +4,7 @@ import { ArrowRight, ChevronDown } from 'lucide-react';
 
 export function HeroCarousel() {
   return (
-    <section data-ambient="coast" className="ambient-frame relative isolate mt-20 min-h-[calc(92svh-5rem)] overflow-hidden bg-[#090909] text-white lg:min-h-[calc(86svh-5rem)]">
+    <section data-ambient="coast" className="ambient-frame relative isolate mt-20 min-h-[calc(100svh-5rem)] overflow-hidden bg-[#090909] text-white">
       <Image
         src="/images/elema-generated/cocina-costera-hero.webp"
         alt=""
@@ -15,20 +15,20 @@ export function HeroCarousel() {
         className="ambient-media ambient-media--hero object-cover object-[61%_center] sm:object-[58%_center] lg:object-center"
       />
       <span className="ambient-light ambient-light--coast" aria-hidden="true" />
-      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(6,7,8,0.69)_0%,rgba(6,7,8,0.34)_48%,rgba(6,7,8,0.04)_78%)]" />
-      <div className="absolute inset-x-0 bottom-0 h-64 bg-gradient-to-t from-black/50 via-black/15 to-transparent" />
+      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(6,7,8,0.78)_0%,rgba(6,7,8,0.5)_48%,rgba(6,7,8,0.1)_78%)]" />
+      <div className="absolute inset-x-0 bottom-0 h-[68%] bg-[linear-gradient(to_top,rgba(5,6,7,0.82)_0%,rgba(5,6,7,0.32)_58%,transparent_100%)]" />
 
-      <div className="relative z-10 mx-auto flex min-h-[calc(92svh-5rem)] max-w-7xl flex-col justify-end px-4 pb-7 pt-24 sm:px-6 sm:pb-8 lg:min-h-[calc(86svh-5rem)] lg:px-8 lg:pb-9">
+      <div className="relative z-10 mx-auto flex min-h-[calc(100svh-5rem)] max-w-7xl flex-col justify-end px-4 pb-7 pt-24 sm:px-6 sm:pb-8 lg:px-8 lg:pb-9">
         <div className="grid gap-8 pb-10 sm:pb-12 lg:grid-cols-[minmax(0,1.36fr)_minmax(17rem,0.64fr)] lg:items-end lg:gap-16 lg:pb-14">
           <div>
-            <p className="text-[0.62rem] uppercase tracking-[0.27em] text-[#d8d4cc]">Cocinas · fuego · piezas especiales</p>
-            <h1 className="mt-5 max-w-[820px] font-serif text-[clamp(3.65rem,7.1vw,6.25rem)] leading-[0.86] tracking-[-0.035em] text-[#f4f1ea]">
+            <p className="text-[0.62rem] uppercase tracking-[0.27em] text-[#ece7df] drop-shadow-[0_2px_8px_rgba(0,0,0,0.65)]">Cocinas · fuego · piezas especiales</p>
+            <h1 className="mt-5 max-w-[820px] font-serif text-[clamp(3.65rem,7.1vw,6.25rem)] font-semibold leading-[0.86] tracking-[-0.035em] text-[#f4f1ea] drop-shadow-[0_3px_12px_rgba(0,0,0,0.55)]">
               Metal, fuego y arquitectura.
             </h1>
           </div>
 
-          <div className="border-l border-white/30 pl-5 sm:pl-6">
-            <p className="max-w-md text-[0.95rem] leading-7 text-[#e4ddd2] sm:text-base sm:leading-8">
+          <div className="border-l border-white/45 pl-5 sm:pl-6">
+            <p className="max-w-md text-[0.95rem] leading-7 text-[#f0ebe3] drop-shadow-[0_2px_8px_rgba(0,0,0,0.7)] sm:text-base sm:leading-8">
               Piezas desarrolladas desde el diseño hasta la fabricación, con precisión arquitectónica.
             </p>
             <div className="mt-7 flex flex-wrap items-center gap-x-7 gap-y-5">
