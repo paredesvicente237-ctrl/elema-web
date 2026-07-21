@@ -27,11 +27,68 @@ export default function HomePage() {
       <MotionController />
       <HeroCarousel />
 
+      <section id="vision-elema" className="scroll-mt-20 bg-[#e9e3d9] px-4 py-24 sm:px-6 lg:px-8 lg:py-36">
+        <div className="mx-auto max-w-7xl">
+          <div className="grid gap-10 border-t border-black/15 pt-8 lg:grid-cols-[0.82fr_1.18fr] lg:items-end">
+            <div data-reveal>
+              <p className="text-[0.62rem] uppercase tracking-[0.32em] text-[#777067]">01 · Visión ELEMA</p>
+              <h2 className="mt-5 max-w-xl font-serif text-5xl leading-[0.94] sm:text-6xl">Espacios imaginados en metal.</h2>
+            </div>
+            <div data-reveal className="lg:justify-self-end">
+              <p className="max-w-xl text-base leading-8 text-[#56514b]">Exploraciones conceptuales que traducen una dirección: el acero como volumen, la extracción como arquitectura y la cocina como centro del espacio.</p>
+              <p className="mt-5 max-w-xl text-[0.62rem] uppercase leading-5 tracking-[0.2em] text-[#847b72]">Visualizaciones conceptuales · No corresponden a proyectos ejecutados</p>
+            </div>
+          </div>
+
+          <div className="mt-14 grid gap-4 lg:grid-cols-[1.18fr_0.82fr]">
+            <figure data-reveal data-ambient="studio" className="ambient-frame relative min-h-[520px] overflow-hidden bg-[#171717] lg:min-h-[720px]">
+              <Image src="/images/elema-generated/elema-concepto-campana-suspendida-v1.png" alt="Visualización conceptual de una campana suspendida en acero oscuro" fill sizes="(min-width: 1024px) 58vw, 100vw" className="ambient-media ambient-media--push object-cover object-[56%_center]" />
+              <span className="ambient-light ambient-light--studio" aria-hidden="true" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-black/5" />
+              <figcaption className="absolute inset-x-0 bottom-0 z-10 flex items-end justify-between gap-5 p-6 text-white sm:p-8">
+                <span className="font-serif text-3xl leading-none sm:text-4xl">Campana suspendida</span>
+                <span className="shrink-0 text-[0.58rem] uppercase tracking-[0.24em] text-white/70">Concepto 01</span>
+              </figcaption>
+            </figure>
+
+            <div className="grid gap-4 lg:grid-rows-[1fr_auto]">
+              <figure data-reveal data-ambient="daylight" className="ambient-frame relative min-h-[480px] overflow-hidden bg-[#171717] lg:min-h-0">
+                <Image src="/images/elema-generated/elema-concepto-isla-monolitica-v1.png" alt="Visualización conceptual de una isla monolítica de acero frente al mar" fill sizes="(min-width: 1024px) 40vw, 100vw" className="ambient-media ambient-media--detail object-cover object-[46%_center]" />
+                <span className="ambient-light ambient-light--daylight" aria-hidden="true" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-transparent" />
+                <figcaption className="absolute inset-x-0 bottom-0 z-10 flex items-end justify-between gap-5 p-6 text-white sm:p-8">
+                  <span className="font-serif text-3xl leading-none">Isla monolítica</span>
+                  <span className="shrink-0 text-[0.58rem] uppercase tracking-[0.24em] text-white/70">Concepto 02</span>
+                </figcaption>
+              </figure>
+
+              <div data-reveal className="bg-[#171717] p-7 text-white sm:p-8">
+                <p className="text-[0.58rem] uppercase tracking-[0.25em] text-white/50">Una dirección, no un catálogo</p>
+                <h3 className="mt-5 max-w-md font-serif text-3xl leading-[0.98] sm:text-4xl">Cada concepto comienza en el espacio y termina en una solución propia.</h3>
+                <Link href="/diseno-a-medida" className="mt-7 inline-flex items-center gap-3 text-[0.66rem] uppercase tracking-[0.23em] text-[#e9e3d9] transition-colors hover:text-white">Diseñar una pieza <ArrowRight size={13} /></Link>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-10 grid border-y border-black/15 sm:grid-cols-3">
+            {projectStages.map((stage) => (
+              <div key={stage.number} data-reveal className="grid grid-cols-[auto_1fr] gap-5 border-b border-black/15 py-7 last:border-b-0 sm:block sm:border-b-0 sm:border-r sm:px-7 sm:first:pl-0 sm:last:border-r-0 sm:last:pr-0">
+                <span className="font-serif text-2xl text-[#968d83]">{stage.number}</span>
+                <div className="sm:mt-8">
+                  <h3 className="text-[0.68rem] font-medium uppercase tracking-[0.27em]">{stage.title}</h3>
+                  <p className="mt-3 max-w-sm text-sm leading-7 text-[#625c55]">{stage.detail}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section id="pieza-emblematica" className="scroll-mt-20 bg-white px-4 pb-24 pt-14 sm:px-6 sm:pt-16 lg:px-8 lg:pb-36 lg:pt-20">
         <div className="mx-auto max-w-7xl">
           <div className="flex items-end justify-between border-b border-black/15 pb-5">
             <div>
-              <p className="text-[0.62rem] uppercase tracking-[0.32em] text-[#80786f]">01 · Pieza emblemática</p>
+              <p className="text-[0.62rem] uppercase tracking-[0.32em] text-[#80786f]">02 · Pieza emblemática</p>
               <h2 className="mt-3 font-serif text-4xl leading-none sm:text-5xl">Arquitectura para el fuego.</h2>
             </div>
             <Link href="/tienda" className="hidden items-center gap-2 text-[0.64rem] uppercase tracking-[0.26em] text-[#59534d] transition-colors hover:text-black sm:inline-flex">
@@ -80,40 +137,6 @@ export default function HomePage() {
               </div>
               <p className="mt-5 max-w-lg text-xs leading-6 text-[#777067]">La disponibilidad, el despacho y la forma de pago se confirman personalmente antes de procesar la compra.</p>
             </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="bg-[#e9e3d9] px-4 py-24 sm:px-6 lg:px-8 lg:py-36">
-        <div className="mx-auto max-w-7xl">
-          <div className="grid gap-10 border-t border-black/15 pt-8 lg:grid-cols-[0.72fr_1.28fr] lg:items-end">
-            <div data-reveal>
-              <p className="text-[0.62rem] uppercase tracking-[0.32em] text-[#777067]">02 · Proyectos privados</p>
-              <h2 className="mt-5 max-w-xl font-serif text-5xl leading-[0.94] sm:text-6xl">Nada se adapta. Todo se resuelve.</h2>
-            </div>
-            <div data-reveal className="lg:justify-self-end">
-              <p className="max-w-xl text-base leading-8 text-[#56514b]">Cada proyecto parte del espacio, la materialidad y sus condiciones reales. Diseño, ingeniería y fabricación avanzan como una misma disciplina.</p>
-              <Link href="/diseno-a-medida" className="mt-7 inline-flex items-center gap-3 text-[0.68rem] uppercase tracking-[0.25em] text-[#171717] transition-colors hover:text-[#6c655e]">Iniciar un proyecto privado <ArrowRight size={13} /></Link>
-            </div>
-          </div>
-
-          <div data-reveal data-ambient="daylight" className="ambient-frame relative mt-14 min-h-[540px] overflow-hidden bg-[#191919] lg:min-h-[720px]">
-            <Image src="/images/elema-generated/isla-monumental.webp" alt="Isla metálica de diseño arquitectónico" fill sizes="100vw" className="ambient-media ambient-media--push object-cover object-center" />
-            <span className="ambient-light ambient-light--daylight" aria-hidden="true" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
-            <p className="absolute bottom-6 left-6 z-10 max-w-sm text-[0.58rem] uppercase tracking-[0.28em] text-white/75 sm:bottom-8 sm:left-8">Cocinas · Islas · Mobiliario metálico · Piezas especiales</p>
-          </div>
-
-          <div className="mt-10 grid border-y border-black/15 sm:grid-cols-3">
-            {projectStages.map((stage) => (
-              <div key={stage.number} data-reveal className="grid grid-cols-[auto_1fr] gap-5 border-b border-black/15 py-7 last:border-b-0 sm:block sm:border-b-0 sm:border-r sm:px-7 sm:first:pl-0 sm:last:border-r-0 sm:last:pr-0">
-                <span className="font-serif text-2xl text-[#968d83]">{stage.number}</span>
-                <div className="sm:mt-8">
-                  <h3 className="text-[0.68rem] font-medium uppercase tracking-[0.27em]">{stage.title}</h3>
-                  <p className="mt-3 max-w-sm text-sm leading-7 text-[#625c55]">{stage.detail}</p>
-                </div>
-              </div>
-            ))}
           </div>
         </div>
       </section>
