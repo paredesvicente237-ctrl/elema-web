@@ -6,13 +6,13 @@ export function HeroCarousel() {
   return (
     <section data-ambient="coast" className="ambient-frame relative isolate mt-20 min-h-[calc(100svh-5rem)] overflow-hidden bg-[#090909] text-white">
       <Image
-        src="/images/elema-generated/cocina-costera-hero.webp"
+        src="/images/elema-generated/cocina-exterior-mar-atardecer-acero-oscuro-hero-v4.png"
         alt=""
         fill
         priority
         quality={90}
         sizes="100vw"
-        className="ambient-media ambient-media--hero object-cover object-[61%_center] sm:object-[58%_center] lg:object-center"
+        className="ambient-media ambient-media--hero object-cover object-[54%_center] sm:object-[58%_center] lg:object-center"
       />
       <span className="ambient-light ambient-light--coast" aria-hidden="true" />
       <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(6,7,8,0.78)_0%,rgba(6,7,8,0.5)_48%,rgba(6,7,8,0.1)_78%)]" />
