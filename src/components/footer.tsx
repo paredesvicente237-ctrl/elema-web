@@ -4,7 +4,7 @@ const links = [
   { label: 'Colecciones', href: '/colecciones' },
   { label: 'Piezas', href: '/tienda' },
   { label: 'Proyectos a medida', href: '/diseno-a-medida' },
-  { label: 'Estudio', href: '/nosotros' },
+  { label: 'Sobre ELEMA', href: '/nosotros' },
   { label: 'Profesionales', href: '/profesionales' },
 ];
 
