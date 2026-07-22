@@ -11,11 +11,12 @@ type AddToCartButtonProps = {
     price: number;
     customizable?: boolean;
   };
+  className?: string;
 };
 
 type CartItem = AddToCartButtonProps['product'] & { quantity: number };
 
-export function AddToCartButton({ product }: AddToCartButtonProps) {
+export function AddToCartButton({ product, className = '' }: AddToCartButtonProps) {
   const [added, setAdded] = useState(false);
 
   const addToCart = () => {
@@ -39,7 +40,8 @@ export function AddToCartButton({ product }: AddToCartButtonProps) {
     <button
       type="button"
       onClick={addToCart}
-      className="inline-flex items-center justify-center gap-2 bg-[#171717] px-5 py-3 text-center text-xs uppercase tracking-[0.22em] text-[#f6efe6] transition hover:bg-[#303030]"
+      aria-live="polite"
+      className={`inline-flex items-center justify-center gap-2 bg-[#171717] px-5 py-3 text-center text-xs uppercase tracking-[0.22em] text-[#f6efe6] transition-colors hover:bg-[#303030] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#171717] ${className}`}
     >
       {added ? <Check size={15} /> : <ShoppingBag size={15} />}
       {added ? 'Pieza añadida' : 'Adquirir pieza'}

@@ -22,6 +22,153 @@ export type Product = {
   demo?: boolean;
 };
 
+type QuoteProductSeed = Pick<Product, 'id' | 'slug' | 'name' | 'category' | 'shortDescription' | 'description' | 'materials' | 'dimensions' | 'finishes' | 'features'> & {
+  image: string;
+};
+
+function createQuoteProduct(seed: QuoteProductSeed): Product {
+  return {
+    id: seed.id,
+    slug: seed.slug,
+    name: seed.name,
+    category: seed.category,
+    shortDescription: seed.shortDescription,
+    description: seed.description,
+    priceOnRequest: true,
+    images: [seed.image],
+    materials: seed.materials,
+    dimensions: seed.dimensions,
+    finishes: seed.finishes,
+    features: seed.features,
+    estimatedTime: 'A confirmar durante la cotización',
+    featured: false,
+    available: false,
+    customizable: false,
+    tag: 'A cotizar',
+    shipping: 'Cotización de despacho según ubicación.',
+    demo: true,
+  };
+}
+
+const charcoalSeries = [
+  {
+    slug: 'parrilla-pro-inoxidable',
+    name: 'Parrilla PRO Inoxidable',
+    image: '/images/parrilla-lumen.png',
+    materials: ['Acero inoxidable'],
+    shortDescription: 'Parrilla a carbón de frente extendido en acero inoxidable.',
+    description: 'Una configuración de mayor frente útil para proyectos exteriores que requieren presencia material y una superficie de cocción amplia.',
+    sizes: [['S', '110 x 50 cm'], ['M', '120 x 50 cm'], ['L', '130 x 50 cm']],
+  },
+  {
+    slug: 'parrilla-inoxidable',
+    name: 'Parrilla Inoxidable',
+    image: '/images/elema-generated/parrilla-montana-hero.webp',
+    materials: ['Acero inoxidable'],
+    shortDescription: 'Parrilla a carbón compacta en acero inoxidable.',
+    description: 'Una pieza de proporción contenida para integrar cocción a carbón en quinchos y espacios exteriores de distintas escalas.',
+    sizes: [['S', '80 x 50 cm'], ['M', '90 x 50 cm'], ['L', '100 x 50 cm']],
+  },
+  {
+    slug: 'parrilla-clasica',
+    name: 'Parrilla Clásica',
+    image: '/images/parrilla-lumen.png',
+    materials: ['Acero al carbono'],
+    shortDescription: 'Parrilla a carbón de expresión directa en acero al carbono.',
+    description: 'Una configuración esencial que concentra la experiencia de fuego en una estructura sobria y de lectura técnica.',
+    sizes: [['S', '80 x 50 cm'], ['M', '90 x 50 cm'], ['L', '100 x 50 cm']],
+  },
+] as const;
+
+const charcoalProducts: Product[] = charcoalSeries.flatMap((series) => series.sizes.map(([size, dimensions]) => createQuoteProduct({
+  id: `concept-${series.slug}-${size.toLowerCase()}`,
+  slug: `${series.slug}-${size.toLowerCase()}`,
+  name: `${series.name} ${size}`,
+  category: 'Parrillas',
+  shortDescription: series.shortDescription,
+  description: series.description,
+  image: series.image,
+  materials: [...series.materials],
+  dimensions,
+  finishes: ['Terminación a definir'],
+  features: ['Cocción a carbón', 'Formato empotrable', 'Especificación técnica por confirmar'],
+})));
+
+charcoalProducts.push(
+  createQuoteProduct({
+    id: 'concept-parrilla-multiuso',
+    slug: 'parrilla-multiuso-130x80',
+    name: 'Parrilla Multiuso',
+    category: 'Parrillas',
+    shortDescription: 'Superficie amplia para distintas configuraciones de cocción a carbón.',
+    description: 'Una parrilla de gran formato pensada para organizar distintas zonas de preparación dentro de una sola pieza.',
+    image: '/images/elema-generated/parrilla-montana-hero.webp',
+    materials: ['Materialidad a confirmar'],
+    dimensions: '130 x 80 cm',
+    finishes: ['Terminación a definir'],
+    features: ['Cocción a carbón', 'Formato de gran superficie', 'Especificación técnica por confirmar'],
+  }),
+  createQuoteProduct({
+    id: 'concept-parrilla-carbon-portatil',
+    slug: 'parrilla-carbon-portatil',
+    name: 'Parrilla a Carbón Portátil',
+    category: 'Parrillas',
+    shortDescription: 'Formato transportable para cocinar a carbón fuera del quincho.',
+    description: 'Una solución compacta concebida para trasladar la experiencia de fuego sin depender de una instalación permanente.',
+    image: '/images/elema-generated/parrilla-montana-hero.webp',
+    materials: ['Materialidad a confirmar'],
+    dimensions: 'Formato portátil · medidas a confirmar',
+    finishes: ['Terminación a definir'],
+    features: ['Cocción a carbón', 'Formato portátil', 'Especificación técnica por confirmar'],
+  }),
+  createQuoteProduct({
+    id: 'concept-parrilla-montana',
+    slug: 'parrilla-de-montana',
+    name: 'Parrilla de Montaña',
+    category: 'Parrillas',
+    shortDescription: 'Parrilla compacta para cocinar directamente sobre el fuego.',
+    description: 'Una pieza esencial de escala reducida, concebida para escenarios exteriores donde importan la movilidad y el contacto directo con el fuego.',
+    image: '/images/elema-generated/parrilla-montana-hero.webp',
+    materials: ['Materialidad a confirmar'],
+    dimensions: 'Formato compacto · medidas a confirmar',
+    finishes: ['Terminación a definir'],
+    features: ['Cocción a carbón', 'Formato compacto', 'Especificación técnica por confirmar'],
+  }),
+);
+
+const hoodSeries = [
+  {
+    slug: 'campana-conica',
+    name: 'Campana Cónica',
+    image: '/images/campana-noctis.png',
+    shortDescription: 'Campana de geometría cónica para proyectos de quincho.',
+    description: 'Una pieza suspendida de lectura escultórica que concentra la extracción sobre el área de fuego.',
+  },
+  {
+    slug: 'campana-mediterranea',
+    name: 'Campana Mediterránea',
+    image: '/images/elema-generated/elema-concepto-campana-suspendida-v1.png',
+    shortDescription: 'Campana de volumen longitudinal y presencia arquitectónica.',
+    description: 'Una campana de desarrollo horizontal concebida para acompañar parrillas de distintos frentes dentro de una composición integrada.',
+  },
+] as const;
+
+const hoodSizes = [['S', '110 x 70 x 80 cm'], ['M', '165 x 70 x 80 cm'], ['L', '220 x 70 x 80 cm'], ['XL', '275 x 70 x 80 cm']] as const;
+
+const hoodProducts: Product[] = hoodSeries.flatMap((series) => hoodSizes.map(([size, dimensions]) => createQuoteProduct({
+  id: `concept-${series.slug}-${size.toLowerCase()}`,
+  slug: `${series.slug}-${size.toLowerCase()}`,
+  name: `${series.name} ${size}`,
+  category: 'Campanas',
+  shortDescription: series.shortDescription,
+  description: series.description,
+  image: series.image,
+  materials: ['Materialidad a confirmar'],
+  dimensions,
+  finishes: ['Terminación a definir'],
+  features: ['Formato de extracción', 'Configuración según proyecto', 'Especificación técnica por confirmar'],
+})));
+
 export const products: Product[] = [
   {
     id: 'demo-01',
@@ -86,6 +233,8 @@ export const products: Product[] = [
     shipping: 'Despacho disponible en Chile continental.',
     demo: true,
   },
+  ...charcoalProducts,
+  ...hoodProducts,
 ];
 
 export const collectionSlugs = ['cocinas', 'parrillas', 'campanas', 'soluciones-personalizadas'];

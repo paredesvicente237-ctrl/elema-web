@@ -15,16 +15,26 @@ type CartItem = {
 
 export default function CartPage() {
   const [items, setItems] = useState<CartItem[]>([]);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     const stored = window.localStorage.getItem('elema-cart');
-    if (stored) setItems(JSON.parse(stored));
+    if (stored) {
+      try {
+        const parsed: unknown = JSON.parse(stored);
+        if (Array.isArray(parsed)) setItems(parsed as CartItem[]);
+      } catch {
+        setItems([]);
+      }
+    }
+    setIsLoaded(true);
   }, []);
 
   useEffect(() => {
+    if (!isLoaded) return;
     window.localStorage.setItem('elema-cart', JSON.stringify(items));
     window.dispatchEvent(new Event('cart:updated'));
-  }, [items]);
+  }, [isLoaded, items]);
 
   const subtotal = useMemo(() => items.reduce((sum, item) => sum + (item.price ?? 0) * item.quantity, 0), [items]);
 
@@ -45,7 +55,9 @@ export default function CartPage() {
         </div>
         <div className="mt-10 grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
           <div className="space-y-4">
-            {items.length === 0 ? (
+            {!isLoaded ? (
+              <div className="border border-black/10 bg-[#f8f5ef] p-8 text-sm text-[#625c55]" role="status">Cargando selección…</div>
+            ) : items.length === 0 ? (
               <div className="border border-black/10 bg-[#f8f5ef] p-8 text-[#625c55]">
                 <p className="font-serif text-3xl text-[#171717]">El carrito está vacío.</p>
                 <p className="mt-3 text-sm leading-7">Explora la tienda y agrega las piezas que quieras comprar.</p>

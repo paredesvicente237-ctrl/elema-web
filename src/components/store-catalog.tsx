@@ -38,11 +38,11 @@ export function StoreCatalog({ products }: { products: Product[] }) {
         {visibleProducts.map((product) => (
           <article key={product.id} className="group">
             <Link href={`/producto/${product.slug}`} className="block overflow-hidden bg-[#171717]">
-              <Image src={product.images[0]} alt={product.name} width={900} height={700} className="aspect-[4/3] w-full object-cover transition duration-700 group-hover:scale-[1.025]" />
+              <Image src={product.images[0]} alt={product.name} width={900} height={700} sizes="(min-width: 1280px) 30vw, (min-width: 768px) 50vw, 100vw" className="aspect-[4/3] w-full object-cover transition duration-700 group-hover:scale-[1.025]" />
             </Link>
             <div className="mt-5 flex items-center justify-between border-t border-black/15 pt-4">
               <p className="text-[0.68rem] uppercase tracking-[0.28em] text-[#777067]">{product.category}</p>
-              <span className="text-[0.64rem] uppercase tracking-[0.22em] text-[#777067]">{product.demo ? 'Concepto' : product.tag}</span>
+              <span className="text-[0.64rem] uppercase tracking-[0.22em] text-[#777067]">{product.demo ? 'A cotizar' : product.tag}</span>
             </div>
             <h2 className="mt-3 font-serif text-3xl text-[#171717]">{product.name}</h2>
             <p className="mt-3 min-h-14 text-sm leading-7 text-[#56514b]">{product.shortDescription}</p>
