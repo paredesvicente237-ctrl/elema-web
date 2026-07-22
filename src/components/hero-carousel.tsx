@@ -21,7 +21,7 @@ export function HeroCarousel() {
       <div className="relative z-10 mx-auto flex min-h-[calc(100svh-5rem)] max-w-7xl flex-col justify-end px-4 pb-7 pt-24 sm:px-6 sm:pb-8 lg:px-8 lg:pb-9">
         <div className="grid gap-8 pb-10 sm:pb-12 lg:grid-cols-[minmax(0,1.36fr)_minmax(17rem,0.64fr)] lg:items-end lg:gap-16 lg:pb-14">
           <div>
-            <p className="text-[0.62rem] uppercase tracking-[0.27em] text-[#ece7df] drop-shadow-[0_2px_8px_rgba(0,0,0,0.65)]">Cocinas · fuego · piezas especiales</p>
+            <p className="text-[0.62rem] uppercase tracking-[0.27em] text-[#ece7df] drop-shadow-[0_2px_8px_rgba(0,0,0,0.65)]">Parrillas · cocinas · campanas</p>
             <h1 className="mt-5 max-w-[820px] font-serif text-[clamp(3.65rem,7.1vw,6.25rem)] font-semibold leading-[0.86] tracking-[-0.035em] text-[#f4f1ea] drop-shadow-[0_3px_12px_rgba(0,0,0,0.55)]">
               Metal, fuego y arquitectura.
             </h1>
