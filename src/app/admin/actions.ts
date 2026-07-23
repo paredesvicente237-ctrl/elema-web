@@ -43,8 +43,8 @@ export async function updateOrder(formData: FormData) {
   revalidatePath('/admin');
   revalidatePath('/admin/pedidos');
   revalidatePath(`/admin/pedidos/${id}`);
-  revalidatePath('/mi-elema');
-  revalidatePath(`/mi-elema/pedidos/${id}`);
+  revalidatePath('/mi-elem');
+  revalidatePath(`/mi-elem/pedidos/${id}`);
   redirect(`/admin/pedidos/${id}?guardado=1`);
 }
 

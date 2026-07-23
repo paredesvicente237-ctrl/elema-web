@@ -33,7 +33,7 @@ export function AuthUrlHandler() {
         return;
       }
 
-      const destination = ['invite', 'recovery'].includes(type ?? '') ? '/actualizar-clave' : '/mi-elema';
+      const destination = ['invite', 'recovery'].includes(type ?? '') ? '/actualizar-clave' : '/mi-elem';
       window.location.replace(destination);
     });
   }, []);

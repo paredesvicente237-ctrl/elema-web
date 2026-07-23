@@ -1,4 +1,4 @@
-# Activación de Mi ELEMA
+# Activación de Mi ELEM
 
 1. Crear un proyecto en Supabase.
 2. Ejecutar `migrations/202607180001_customer_portal.sql` desde SQL Editor o Supabase CLI.

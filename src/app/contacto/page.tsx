@@ -13,7 +13,7 @@ export default function ContactPage() {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const message = [
-      'Hola, quiero conversar sobre un proyecto ELEMA.',
+      'Hola, quiero conversar sobre un proyecto ELEM.',
       `Nombre: ${data.get('nombre')} ${data.get('apellido')}`,
       `Correo: ${data.get('correo')}`,
       `Teléfono: ${data.get('telefono') || 'No indicado'}`,

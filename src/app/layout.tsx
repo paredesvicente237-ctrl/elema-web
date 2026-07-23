@@ -24,13 +24,13 @@ export const metadata: Metadata = {
     (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : 'http://localhost:3000'),
   ),
   title: {
-    default: 'ELEMA | Diseño y fabricación en acero',
-    template: '%s | ELEMA',
+    default: 'ELEM | Diseño y fabricación en acero',
+    template: '%s | ELEM',
   },
   description: 'Cocinas, parrillas, campanas y soluciones arquitectónicas fabricadas a medida en Chile con diseño, ingeniería y precisión metalmecánica.',
   keywords: ['cocinas a medida', 'parrillas premium', 'campanas de acero', 'mobiliario inoxidable', 'fabricación en acero', 'diseño a medida Chile'],
   openGraph: {
-    title: 'ELEMA | Diseño y fabricación en acero',
+    title: 'ELEM | Diseño y fabricación en acero',
     description: 'Cocinas, parrillas, campanas y soluciones arquitectónicas fabricadas a medida en Chile.',
     type: 'website',
     locale: 'es_CL',

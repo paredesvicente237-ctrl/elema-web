@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ClipboardList, LayoutDashboard, LogOut, UsersRound } from 'lucide-react';
 import { requireAdmin } from '@/lib/admin';
-import { signOut } from '@/app/mi-elema/actions';
+import { signOut } from '@/app/mi-elem/actions';
 
 export const metadata: Metadata = { title: 'Administración', robots: { index: false, follow: false } };
 export const dynamic = 'force-dynamic';
@@ -24,7 +24,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
             <div>
               <p className="text-[0.62rem] uppercase tracking-[0.34em] text-white/45">Acceso privado</p>
               <div className="mt-2 flex items-baseline gap-3">
-                <Link href="/admin" className="font-serif text-3xl">Administración ELEMA</Link>
+                <Link href="/admin" className="font-serif text-3xl">Administración ELEM</Link>
                 <span className="hidden text-xs text-white/45 sm:inline">{user.email}</span>
               </div>
             </div>

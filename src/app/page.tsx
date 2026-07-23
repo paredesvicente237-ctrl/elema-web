@@ -27,11 +27,11 @@ export default function HomePage() {
       <MotionController />
       <HeroCarousel />
 
-      <section id="vision-elema" className="scroll-mt-20 bg-[#e9e3d9] px-4 py-24 sm:px-6 lg:px-8 lg:py-36">
+      <section id="vision-elem" className="scroll-mt-20 bg-[#e9e3d9] px-4 py-24 sm:px-6 lg:px-8 lg:py-36">
         <div className="mx-auto max-w-7xl">
           <div className="grid gap-10 border-t border-black/15 pt-8 lg:grid-cols-[0.82fr_1.18fr] lg:items-end">
             <div data-reveal>
-              <p className="text-[0.62rem] uppercase tracking-[0.32em] text-[#777067]">01 · Visión ELEMA</p>
+              <p className="text-[0.62rem] uppercase tracking-[0.32em] text-[#777067]">01 · Visión ELEM</p>
               <h2 className="mt-5 max-w-xl font-serif text-5xl leading-[0.94] sm:text-6xl">Espacios imaginados en metal.</h2>
             </div>
             <div data-reveal className="lg:justify-self-end">
@@ -182,7 +182,7 @@ export default function HomePage() {
             </div>
             <div className="max-w-3xl">
               <h2 className="font-serif text-5xl leading-[0.92] sm:text-7xl">Una conversación antes que un catálogo.</h2>
-              <p className="mt-6 max-w-xl text-base leading-8 text-[#ded7cc]">Cuéntanos sobre el espacio, el uso y la materialidad que buscas. ELEMA revisará los antecedentes para definir el siguiente paso.</p>
+              <p className="mt-6 max-w-xl text-base leading-8 text-[#ded7cc]">Cuéntanos sobre el espacio, el uso y la materialidad que buscas. ELEM revisará los antecedentes para definir el siguiente paso.</p>
               <div className="mt-9 flex flex-col gap-3 sm:flex-row">
                 <Link href="/contacto" className="inline-flex items-center justify-center gap-3 bg-[#f4f1ea] px-6 py-4 text-[0.68rem] font-medium uppercase tracking-[0.24em] text-[#171717] transition-colors hover:bg-white">Solicitar una conversación <ArrowRight size={13} /></Link>
                 <Link href="/profesionales" className="inline-flex items-center justify-center border border-white/30 px-6 py-4 text-[0.68rem] uppercase tracking-[0.24em] transition-colors hover:bg-white/10">Acceso profesionales</Link>

@@ -22,7 +22,7 @@ async function resendRequest(path: string, body: Record<string, unknown>, method
 }
 
 export async function sendOrderConfirmation(order: OrderEmail) {
-  const from = process.env.RESEND_FROM_EMAIL;
+  const from = process.env.RESEND_FROM_EMAIL?.replace(/^ELEMA(?=\s*<)/i, 'ELEM');
   if (!from) return { skipped: true };
 
   return resendRequest('/emails', {
@@ -31,11 +31,11 @@ export async function sendOrderConfirmation(order: OrderEmail) {
     subject: `Recibimos tu pedido ${order.orderNumber}`,
     html: `
       <div style="font-family:Arial,sans-serif;color:#171717;max-width:600px;margin:auto;padding:32px">
-        <p style="letter-spacing:.18em;font-size:12px">ELEMA</p>
+        <p style="letter-spacing:.18em;font-size:12px">ELEM</p>
         <h1 style="font-family:Georgia,serif;font-weight:400">Recibimos tu solicitud.</h1>
         <p>Hola ${escapeHtml(order.firstName)}, tu pedido <strong>${escapeHtml(order.orderNumber)}</strong> ya está en revisión.</p>
         <p>Subtotal referencial: <strong>$${order.subtotal.toLocaleString('es-CL')} CLP</strong>.</p>
-        <p>Te contactaremos para confirmar disponibilidad, despacho y forma de pago. Puedes revisar el avance en Mi ELEMA.</p>
+        <p>Te contactaremos para confirmar disponibilidad, despacho y forma de pago. Puedes revisar el avance en Mi ELEM.</p>
       </div>`,
   });
 }

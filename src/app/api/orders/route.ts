@@ -62,7 +62,7 @@ export async function POST(request: Request) {
 
   const [{ error: itemsError }, { error: eventError }] = await Promise.all([
     admin.from('order_items').insert(lineItems.map((item) => ({ order_id: order.id, ...item }))),
-    admin.from('order_events').insert({ order_id: order.id, status: 'pending_confirmation', title: 'Solicitud recibida', description: 'ELEMA revisará disponibilidad, despacho y forma de pago.' }),
+    admin.from('order_events').insert({ order_id: order.id, status: 'pending_confirmation', title: 'Solicitud recibida', description: 'ELEM revisará disponibilidad, despacho y forma de pago.' }),
   ]);
   if (itemsError || eventError) {
     await admin.from('orders').delete().eq('id', order.id);

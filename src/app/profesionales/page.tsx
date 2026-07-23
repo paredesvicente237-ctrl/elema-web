@@ -16,7 +16,7 @@ export default function ProfessionalsPage() {
           <div>
             <p className="text-sm uppercase tracking-[0.35em] text-[#77716a]">Profesionales</p>
             <h1 className="mt-4 font-serif text-5xl leading-[0.98] sm:text-6xl">Colaboraciones para arquitectos, diseñadores y constructoras.</h1>
-            <p className="mt-6 text-lg leading-8 text-[#57514b]">ELEMA trabaja con equipos que exigen detalle y coordinación, transformando planos, prototipos o requerimientos funcionales en soluciones fabricables.</p>
+            <p className="mt-6 text-lg leading-8 text-[#57514b]">ELEM trabaja con equipos que exigen detalle y coordinación, transformando planos, prototipos o requerimientos funcionales en soluciones fabricables.</p>
           </div>
           <div className="overflow-hidden border border-black/10 bg-[#e3ddd3] shadow-[0_24px_70px_rgba(20,16,10,0.10)]">
             <Image src="/images/editorial-profesionales.jpg" alt="Equipo profesional revisando planos junto a una pieza metálica" width={1536} height={1024} className="aspect-[16/10] w-full object-cover" priority />
@@ -33,7 +33,7 @@ export default function ProfessionalsPage() {
         </div>
         <div className="mt-10 flex flex-col gap-5 border border-black/10 bg-white p-8 sm:flex-row sm:items-center sm:justify-between">
           <p className="max-w-xl font-serif text-3xl">Integramos diseño y fabricación desde el inicio del proyecto.</p>
-          <Link href="/contacto" className="inline-flex w-fit bg-[#171717] px-6 py-3.5 text-xs uppercase tracking-[0.2em] text-white">Trabajar con ELEMA</Link>
+          <Link href="/contacto" className="inline-flex w-fit bg-[#171717] px-6 py-3.5 text-xs uppercase tracking-[0.2em] text-white">Trabajar con ELEM</Link>
         </div>
       </div>
     </main>

@@ -1,7 +1,7 @@
 # AGENTS.md
 
-## Identidad ELEMA
-- ELEMA es una marca chilena de lujo enfocada en cocinas premium, parrillas, campanas, islas, mobiliario metálico y soluciones arquitectónicas personalizadas.
+## Identidad ELEM
+- ELEM es una marca chilena de lujo enfocada en cocinas premium, parrillas, campanas, islas, mobiliario metálico y soluciones arquitectónicas personalizadas.
 - El tono debe sentirse internacional, arquitectónico, preciso, sofisticado y exclusivo.
 
 ## Visual

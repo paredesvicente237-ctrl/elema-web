@@ -10,7 +10,7 @@ const navItems = [
   { label: 'Colecciones', href: '/colecciones' },
   { label: 'Piezas', href: '/tienda' },
   { label: 'A medida', href: '/diseno-a-medida' },
-  { label: 'Sobre ELEMA', href: '/nosotros' },
+  { label: 'Sobre ELEM', href: '/nosotros' },
 ];
 
 export function Header() {
@@ -80,7 +80,7 @@ export function Header() {
   return (
     <header className={`fixed inset-x-0 top-0 z-50 border-b border-black/10 bg-[#f4f1ea]/95 text-[#171717] backdrop-blur-xl transition-shadow duration-500 ${scrolled ? 'shadow-[0_12px_40px_rgba(0,0,0,0.08)]' : ''}`}>
       <div className="mx-auto flex h-20 max-w-7xl items-center gap-7 px-4 sm:px-6 lg:px-8">
-        <Link href="/" className="flex shrink-0 items-center gap-2.5 sm:gap-3" aria-label="ELEMA, inicio">
+        <Link href="/" className="flex shrink-0 items-center gap-2.5 sm:gap-3" aria-label="ELEM, inicio">
           <Image
             src="/brand/elema-logo-transparent.png"
             alt=""
@@ -90,7 +90,7 @@ export function Header() {
             priority
           />
           <span className="font-serif text-[1.25rem] uppercase tracking-[0.36em] text-[#171717] sm:text-[1.38rem]">
-            ELEMA
+            ELEM
           </span>
         </Link>
 
@@ -103,9 +103,9 @@ export function Header() {
         </nav>
 
         <div className="hidden items-center gap-2 border-l border-black/10 pl-4 xl:flex">
-          <Link href="/mi-elema" className="inline-flex items-center gap-2 px-2 py-2.5 text-[#4f4b45] transition-colors hover:text-black" aria-label="Ingresar a Mi ELEMA">
+          <Link href="/mi-elem" className="inline-flex items-center gap-2 px-2 py-2.5 text-[#4f4b45] transition-colors hover:text-black" aria-label="Ingresar a Mi ELEM">
             <CircleUserRound size={17} />
-            <span className="text-[0.6rem] uppercase tracking-[0.16em]">Mi ELEMA</span>
+            <span className="text-[0.6rem] uppercase tracking-[0.16em]">Mi ELEM</span>
           </Link>
           <Link href="/carrito" className="inline-flex items-center gap-2 border border-black/15 px-3 py-2.5 text-sm text-[#4f4b45] transition-colors hover:border-black/30 hover:text-black" aria-label={`Carrito, ${cartCount} piezas`}>
             <ShoppingBag size={16} />
@@ -141,8 +141,8 @@ export function Header() {
             <Link href="/contacto" className="border-t border-black/10 pt-4" onClick={() => setOpen(false)}>
               Iniciar un proyecto
             </Link>
-            <Link href="/mi-elema" className="flex items-center gap-2 pt-2" onClick={() => setOpen(false)}>
-              <CircleUserRound size={16} /> Mi ELEMA
+            <Link href="/mi-elem" className="flex items-center gap-2 pt-2" onClick={() => setOpen(false)}>
+              <CircleUserRound size={16} /> Mi ELEM
             </Link>
           </div>
         </div>

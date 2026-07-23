@@ -29,7 +29,7 @@ function ProductTechnicalSheet({ product, variant }: { product: Product; variant
     <section aria-labelledby={headingId} className="mt-9">
       <div className="flex items-end justify-between border-b border-black/15 pb-4">
         <h2 id={headingId} className="text-[0.62rem] uppercase tracking-[0.28em] text-[#554f48]">Ficha de fabricación</h2>
-        <span className="text-right font-serif text-lg text-[#948b80] sm:text-xl">{product.demo ? 'ELEMA / PIEZA A COTIZAR' : `ELEMA / ${product.id.toUpperCase()}`}</span>
+        <span className="text-right font-serif text-lg text-[#948b80] sm:text-xl">{product.demo ? 'ELEM / PIEZA A COTIZAR' : `ELEM / ${product.id.toUpperCase()}`}</span>
       </div>
       <dl className="divide-y divide-black/10 text-sm">
         <div className="grid grid-cols-[7rem_1fr] gap-5 py-4">
@@ -67,7 +67,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
       src: image,
       alt: index === 0 ? product.name : `${product.name}, vista ${index + 1}`,
       label: product.demo ? 'Referencia de configuración' : index === 0 ? 'La pieza' : `Vista ${String(index + 1).padStart(2, '0')}`,
-      caption: product.demo ? 'Visual referencial ELEMA' : index === 0 ? 'Vista principal' : 'Detalle de la pieza',
+      caption: product.demo ? 'Visual referencial ELEM' : index === 0 ? 'Vista principal' : 'Detalle de la pieza',
     })),
     ...(isLumen ? [
       {

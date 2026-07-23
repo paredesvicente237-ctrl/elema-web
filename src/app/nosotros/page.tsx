@@ -15,7 +15,7 @@ export default function AboutPage() {
           <div>
             <p className="text-sm uppercase tracking-[0.35em] text-[#77716a]">La marca</p>
             <h1 className="mt-4 font-serif text-5xl leading-[0.98] sm:text-6xl">Más que productos. Presencia.</h1>
-            <p className="mt-6 text-lg leading-8 text-[#57514b]">ELEMA reúne diseño, ingeniería y fabricación metalmecánica para crear cocinas, parrillas, campanas y piezas arquitectónicas con carácter propio.</p>
+            <p className="mt-6 text-lg leading-8 text-[#57514b]">ELEM reúne diseño, ingeniería y fabricación metalmecánica para crear cocinas, parrillas, campanas y piezas arquitectónicas con carácter propio.</p>
           </div>
           <div className="overflow-hidden border border-black/10 bg-[#e3ddd3] shadow-[0_24px_70px_rgba(20,16,10,0.10)]">
             <Image src="/images/editorial-nosotros.jpg" alt="Detalle editorial de mobiliario metálico y cubierta de piedra" width={1536} height={1024} className="aspect-[16/10] w-full object-cover" priority />

@@ -1,6 +1,6 @@
 export const orderStatuses = {
   pending_confirmation: { label: 'Solicitud recibida', detail: 'Estamos validando disponibilidad y despacho.' },
-  confirmed: { label: 'Pedido confirmado', detail: 'Tu pedido fue confirmado por ELEMA.' },
+  confirmed: { label: 'Pedido confirmado', detail: 'Tu pedido fue confirmado por ELEM.' },
   in_production: { label: 'En preparación', detail: 'Estamos preparando tu pedido.' },
   ready_for_dispatch: { label: 'Listo para despacho', detail: 'Tu pedido está listo para coordinar su entrega.' },
   shipped: { label: 'En camino', detail: 'El pedido fue entregado al transporte.' },

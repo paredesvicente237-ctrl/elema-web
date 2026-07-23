@@ -19,7 +19,7 @@ export function AuthPanel() {
   const [success, setSuccess] = useState(false);
   const [confirmationEmail, setConfirmationEmail] = useState('');
   const requestedNext = params.get('next');
-  const next = requestedNext?.startsWith('/') && !requestedNext.startsWith('//') ? requestedNext : '/mi-elema';
+  const next = requestedNext?.startsWith('/') && !requestedNext.startsWith('//') ? requestedNext : '/mi-elem';
 
   async function submit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -28,7 +28,7 @@ export function AuthPanel() {
     setSuccess(false);
     const supabase = createClient();
     if (!supabase) {
-      setMessage('Mi ELEMA está listo para conectarse. Falta configurar las credenciales de Supabase.');
+      setMessage('Mi ELEM está listo para conectarse. Falta configurar las credenciales de Supabase.');
       setLoading(false);
       return;
     }
@@ -60,7 +60,7 @@ export function AuthPanel() {
       else {
         setSuccess(true);
         setConfirmationEmail(email);
-        setMessage('Revisa tu correo y confirma la cuenta para entrar a Mi ELEMA. Si ya tenías una cuenta o recibiste una invitación, recupera tu contraseña en lugar de volver a registrarte.');
+        setMessage('Revisa tu correo y confirma la cuenta para entrar a Mi ELEM. Si ya tenías una cuenta o recibiste una invitación, recupera tu contraseña en lugar de volver a registrarte.');
       }
     }
     setLoading(false);
@@ -93,7 +93,7 @@ export function AuthPanel() {
 
           <div className="relative z-10 flex w-full flex-col justify-between">
             <div className="flex items-center justify-between gap-5 border-b border-white/25 pb-4">
-              <p className="text-[0.62rem] uppercase tracking-[0.3em] text-white/75">Mi ELEMA</p>
+              <p className="text-[0.62rem] uppercase tracking-[0.3em] text-white/75">Mi ELEM</p>
               <p className="text-[0.54rem] uppercase tracking-[0.22em] text-white/55">Acceso privado</p>
             </div>
 
@@ -152,13 +152,13 @@ export function AuthPanel() {
                 </div>
               ) : null}
               <button disabled={loading} className="group inline-flex w-full items-center justify-center gap-3 bg-[#171717] px-5 py-4 text-xs uppercase tracking-[0.22em] text-white transition hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black disabled:cursor-wait disabled:opacity-60">
-                {loading ? 'Procesando…' : mode === 'login' ? 'Ingresar a Mi ELEMA' : 'Crear mi cuenta'} <ArrowRight size={15} className="transition-transform group-hover:translate-x-1" />
+                {loading ? 'Procesando…' : mode === 'login' ? 'Ingresar a Mi ELEM' : 'Crear mi cuenta'} <ArrowRight size={15} className="transition-transform group-hover:translate-x-1" />
               </button>
             </form>
 
             <div className="mt-7 flex items-center gap-3 border-t border-black/10 pt-5 text-[0.68rem] leading-5 text-[#77716a]">
               <LockKeyhole size={15} className="shrink-0" />
-              <p>Acceso protegido para clientes ELEMA.</p>
+              <p>Acceso protegido para clientes ELEM.</p>
             </div>
           </div>
         </section>
