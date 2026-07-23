@@ -26,6 +26,7 @@ export function AuthPanel() {
     setLoading(true);
     setMessage('');
     setSuccess(false);
+    setConfirmationEmail('');
     const supabase = createClient();
     if (!supabase) {
       setMessage('Mi ELEM está listo para conectarse. Falta configurar las credenciales de Supabase.');
@@ -40,6 +41,7 @@ export function AuthPanel() {
     if (mode === 'login') {
       const { error } = await supabase.auth.signInWithPassword({ email, password });
       if (error) {
+        if (isEmailNotConfirmed(error.message)) setConfirmationEmail(email);
         setMessage(authErrorMessage(error.message));
       } else {
         window.location.assign(next);
@@ -141,10 +143,10 @@ export function AuthPanel() {
               {message ? (
                 <div role="status" aria-live="polite" className={`border px-4 py-3 text-sm leading-6 ${success ? 'border-emerald-700/20 bg-emerald-50 text-emerald-900' : 'border-red-800/20 bg-red-50 text-red-900'}`}>
                   <p>{message}</p>
-                  {success && confirmationEmail ? (
+                  {confirmationEmail ? (
                     <div className="mt-3 flex flex-wrap gap-x-5 gap-y-2 text-xs">
                       <button type="button" onClick={resendConfirmation} disabled={resending} className="underline underline-offset-4 disabled:opacity-50">
-                        {resending ? 'Reenviando…' : 'Reenviar confirmación'}
+                        {resending ? 'Reenviando…' : 'Reenviar correo de confirmación'}
                       </button>
                       <Link href="/recuperar" className="underline underline-offset-4">Recuperar contraseña</Link>
                     </div>
@@ -169,9 +171,13 @@ export function AuthPanel() {
 
 function authErrorMessage(message: string) {
   if (message === 'Invalid login credentials') return 'Correo o contraseña incorrectos.';
-  if (message === 'Email not confirmed') return 'Debes confirmar tu correo antes de ingresar. Revisa tu bandeja de entrada o solicita un nuevo enlace.';
+  if (isEmailNotConfirmed(message)) return 'Debes confirmar tu correo antes de ingresar. Puedes solicitar un enlace nuevo aquí mismo.';
   if (message.toLowerCase().includes('rate limit')) return 'Se hicieron demasiados intentos. Espera unos minutos antes de volver a intentar.';
   return message;
+}
+
+function isEmailNotConfirmed(message: string) {
+  return message.toLowerCase().includes('email not confirmed');
 }
 
 function AuthField({ label, name, type = 'text', autoComplete }: { label: string; name: string; type?: string; autoComplete: string }) {

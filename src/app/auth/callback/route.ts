@@ -7,8 +7,12 @@ export async function GET(request: Request) {
   const code = url.searchParams.get('code');
   const tokenHash = url.searchParams.get('token_hash');
   const type = url.searchParams.get('type') as EmailOtpType | null;
+  const authError = url.searchParams.get('error_description') ?? url.searchParams.get('error');
   const requestedNext = url.searchParams.get('next');
-  const next = requestedNext?.startsWith('/') && !requestedNext.startsWith('//') ? requestedNext : '/mi-elem';
+  const fallbackNext = ['invite', 'recovery'].includes(type ?? '') ? '/actualizar-clave' : '/mi-elem';
+  const next = requestedNext?.startsWith('/') && !requestedNext.startsWith('//') ? requestedNext : fallbackNext;
+
+  if (authError) return redirectToLogin(url, authError);
 
   const supabase = await createClient();
   if (supabase) {
@@ -21,5 +25,11 @@ export async function GET(request: Request) {
     }
   }
 
-  return NextResponse.redirect(new URL('/ingresar?error=El+enlace+no+es+v%C3%A1lido+o+ya+expir%C3%B3.+Solicita+uno+nuevo.', url.origin));
+  return redirectToLogin(url, 'El enlace no es válido o ya expiró. Solicita uno nuevo.');
+}
+
+function redirectToLogin(url: URL, message: string) {
+  const login = new URL('/ingresar', url.origin);
+  login.searchParams.set('error', message);
+  return NextResponse.redirect(login);
 }

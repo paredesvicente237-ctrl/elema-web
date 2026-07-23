@@ -16,8 +16,10 @@ export default function RecoverPage() {
     const email = String(new FormData(event.currentTarget).get('email') ?? '');
     if (!supabase) setMessage('El servicio de cuentas aún no está conectado.');
     else {
-      await supabase.auth.resetPasswordForEmail(email, { redirectTo: `${window.location.origin}/auth/callback?next=/actualizar-clave` });
-      setMessage('Si existe una cuenta con ese correo, recibirás un enlace para crear una nueva contraseña.');
+      const { error } = await supabase.auth.resetPasswordForEmail(email, { redirectTo: `${window.location.origin}/auth/callback?next=/actualizar-clave` });
+      setMessage(error
+        ? 'No pudimos enviar el enlace. Espera unos minutos e inténtalo nuevamente.'
+        : 'Si existe una cuenta con ese correo, recibirás un enlace para crear una nueva contraseña.');
     }
     setLoading(false);
   }
