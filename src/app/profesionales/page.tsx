@@ -2,10 +2,10 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 const capabilities = [
-  { title: 'Desarrollo técnico', description: 'Interpretación de planos, modelado CAD/Inventor, revisión de factibilidad y preparación para fabricación.' },
-  { title: 'Transformación del metal', description: 'Corte láser y guillotina, plegado y curvado de tubos para resolver piezas y conjuntos especiales.' },
-  { title: 'Armado y terminaciones', description: 'Soldadura MIG/TIG y láser, armado controlado y terminaciones definidas según el uso del proyecto.' },
-  { title: 'Materiales', description: 'Acero inoxidable y carbono, galvanizado, aluminio, cobre, bronce y planchas especiales según especificación.' },
+  { title: 'Elementos de proyecto', description: 'Interpretación de planos, modelado CAD/Inventor y revisión de factibilidad para coordinar cada componente.' },
+  { title: 'Elementos metálicos', description: 'Corte láser y guillotina, plegado y curvado de tubos para resolver elementos y conjuntos especiales.' },
+  { title: 'Elementos de unión', description: 'Soldadura MIG/TIG y láser, armado controlado y terminaciones definidas según el uso del proyecto.' },
+  { title: 'Elementos materiales', description: 'Acero inoxidable y carbono, galvanizado, aluminio, cobre, bronce y planchas especiales según especificación.' },
 ];
 
 export default function ProfessionalsPage() {
@@ -14,12 +14,12 @@ export default function ProfessionalsPage() {
       <div className="mx-auto max-w-7xl">
         <div className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-end">
           <div>
-            <p className="text-sm uppercase tracking-[0.35em] text-[#77716a]">Profesionales</p>
-            <h1 className="mt-4 font-serif text-5xl leading-[0.98] sm:text-6xl">Colaboraciones para arquitectos, diseñadores y constructoras.</h1>
-            <p className="mt-6 text-lg leading-8 text-[#57514b]">ELEM trabaja con equipos que exigen detalle y coordinación, transformando planos, prototipos o requerimientos funcionales en soluciones fabricables.</p>
+            <p className="text-sm uppercase tracking-[0.35em] text-[#77716a]">ELEM para profesionales</p>
+            <h1 className="mt-4 font-serif text-5xl leading-[0.98] sm:text-6xl">Cada elemento coordinado desde el origen.</h1>
+            <p className="mt-6 text-lg leading-8 text-[#57514b]">Colaboramos con arquitectos, diseñadores y constructoras para transformar planos, prototipos y requerimientos funcionales en conjuntos fabricables.</p>
           </div>
           <div className="overflow-hidden border border-black/10 bg-[#e3ddd3] shadow-[0_24px_70px_rgba(20,16,10,0.10)]">
-            <Image src="/images/editorial-profesionales.jpg" alt="Equipo profesional revisando planos junto a una pieza metálica" width={1536} height={1024} className="aspect-[16/10] w-full object-cover" priority />
+            <Image src="/images/editorial-profesionales.jpg" alt="Equipo profesional revisando planos junto a un elemento metálico" width={1536} height={1024} className="aspect-[16/10] w-full object-cover" priority />
           </div>
         </div>
         <div className="mt-10 grid gap-6 md:grid-cols-2">
@@ -32,8 +32,8 @@ export default function ProfessionalsPage() {
           ))}
         </div>
         <div className="mt-10 flex flex-col gap-5 border border-black/10 bg-white p-8 sm:flex-row sm:items-center sm:justify-between">
-          <p className="max-w-xl font-serif text-3xl">Integramos diseño y fabricación desde el inicio del proyecto.</p>
-          <Link href="/contacto" className="inline-flex w-fit bg-[#171717] px-6 py-3.5 text-xs uppercase tracking-[0.2em] text-white">Trabajar con ELEM</Link>
+          <p className="max-w-xl font-serif text-3xl">Integramos cada elemento al proyecto antes de entrar en fabricación.</p>
+          <Link href="/contacto" className="inline-flex w-fit bg-[#171717] px-6 py-3.5 text-xs uppercase tracking-[0.2em] text-white">Coordinar con ELEM</Link>
         </div>
       </div>
     </main>

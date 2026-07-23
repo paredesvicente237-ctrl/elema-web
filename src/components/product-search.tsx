@@ -17,13 +17,13 @@ export function ProductSearch({ products }: { products: Product[] }) {
   return (
     <div className="mt-10">
       <label className="relative block">
-        <span className="sr-only">Buscar productos</span>
+        <span className="sr-only">Buscar elementos</span>
         <Search className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-[#777067]" size={19} />
         <input
           value={query}
           onChange={(event) => setQuery(event.target.value)}
           className="w-full border border-black/20 bg-[#f6efe6] py-4 pl-12 pr-4 text-[#171717] outline-none transition placeholder:text-[#8a837a] focus:border-black/50"
-          placeholder="Buscar por nombre, colección o material"
+          placeholder="Buscar un elemento por nombre, colección o material"
           autoFocus
         />
       </label>
@@ -33,10 +33,10 @@ export function ProductSearch({ products }: { products: Product[] }) {
           <Link key={product.id} href={`/producto/${product.slug}`} className="grid gap-3 py-6 transition hover:pl-2 sm:grid-cols-[0.3fr_1fr_auto] sm:items-center">
             <p className="text-[0.68rem] uppercase tracking-[0.26em] text-[#777067]">{product.category}</p>
             <div><h2 className="font-serif text-2xl">{product.name}</h2><p className="mt-1 text-sm text-[#56514b]">{product.shortDescription}</p></div>
-            <span className="text-[0.68rem] uppercase tracking-[0.22em]">Ver pieza</span>
+            <span className="text-[0.68rem] uppercase tracking-[0.22em]">Ver elemento</span>
           </Link>
         ))}
-        {results.length === 0 ? <div className="py-12 text-center text-[#56514b]">No encontramos piezas con ese término.</div> : null}
+        {results.length === 0 ? <div className="py-12 text-center text-[#56514b]">No encontramos elementos con ese término.</div> : null}
       </div>
     </div>
   );

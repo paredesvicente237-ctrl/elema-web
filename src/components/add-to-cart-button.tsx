@@ -44,7 +44,7 @@ export function AddToCartButton({ product, className = '' }: AddToCartButtonProp
       className={`inline-flex items-center justify-center gap-2 bg-[#171717] px-5 py-3 text-center text-xs uppercase tracking-[0.22em] text-[#f6efe6] transition-colors hover:bg-[#303030] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#171717] ${className}`}
     >
       {added ? <Check size={15} /> : <ShoppingBag size={15} />}
-      {added ? 'Pieza añadida' : 'Adquirir pieza'}
+      {added ? 'Elemento añadido' : 'Adquirir elemento'}
     </button>
   );
 }

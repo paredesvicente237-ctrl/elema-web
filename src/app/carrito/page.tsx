@@ -50,8 +50,8 @@ export default function CartPage() {
     <main className="min-h-screen bg-[#eee8de] px-4 pb-24 pt-32 text-[#171717] sm:px-6 lg:px-8 lg:pt-40">
       <div className="mx-auto max-w-7xl">
         <div className="max-w-3xl">
-          <p className="text-sm uppercase tracking-[0.35em] text-[#77716a]">Carrito</p>
-          <h1 className="mt-4 font-serif text-5xl sm:text-6xl">Tu selección.</h1>
+          <p className="text-sm uppercase tracking-[0.35em] text-[#77716a]">Tu selección ELEM</p>
+          <h1 className="mt-4 font-serif text-5xl sm:text-6xl">Los elementos de tu proyecto.</h1>
         </div>
         <div className="mt-10 grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
           <div className="space-y-4">
@@ -59,9 +59,9 @@ export default function CartPage() {
               <div className="border border-black/10 bg-[#f8f5ef] p-8 text-sm text-[#625c55]" role="status">Cargando selección…</div>
             ) : items.length === 0 ? (
               <div className="border border-black/10 bg-[#f8f5ef] p-8 text-[#625c55]">
-                <p className="font-serif text-3xl text-[#171717]">El carrito está vacío.</p>
-                <p className="mt-3 text-sm leading-7">Explora la tienda y agrega las piezas que quieras comprar.</p>
-                <Link href="/tienda" className="mt-6 inline-flex border border-black/20 px-5 py-3 text-xs uppercase tracking-[0.18em] text-[#171717]">Continuar comprando</Link>
+                <p className="font-serif text-3xl text-[#171717]">Aún no has elegido elementos.</p>
+                <p className="mt-3 text-sm leading-7">Explora las colecciones y comienza a componer tu selección.</p>
+                <Link href="/tienda" className="mt-6 inline-flex border border-black/20 px-5 py-3 text-xs uppercase tracking-[0.18em] text-[#171717]">Explorar elementos</Link>
               </div>
             ) : (
               items.map((item) => (
@@ -82,7 +82,7 @@ export default function CartPage() {
             )}
           </div>
           <div className="border border-black/10 bg-white p-6 shadow-[0_24px_70px_rgba(20,16,10,0.08)]">
-            <h2 className="font-serif text-3xl">Resumen</h2>
+            <h2 className="font-serif text-3xl">El conjunto</h2>
             <div className="mt-6 space-y-4 text-sm text-[#625c55]">
               <div className="flex items-center justify-between">
                 <span>Subtotal</span>
@@ -93,8 +93,8 @@ export default function CartPage() {
                 <span>Por cotizar</span>
               </div>
             </div>
-            {items.length > 0 ? <><p className="mt-7 text-xs leading-6 text-[#77716a]">El siguiente paso envía una solicitud de compra. No se realizará un cobro todavía.</p><Link href="/checkout" className="mt-4 inline-flex w-full items-center justify-center bg-[#171717] px-5 py-3.5 text-xs uppercase tracking-[0.18em] text-white">Continuar solicitud</Link></> : null}
-            <Link href="/tienda" className="mt-3 inline-flex w-full items-center justify-center border border-black/20 px-5 py-3.5 text-xs uppercase tracking-[0.18em]">Continuar comprando</Link>
+            {items.length > 0 ? <><p className="mt-7 text-xs leading-6 text-[#77716a]">El siguiente paso envía una solicitud de compra. No se realizará un cobro todavía.</p><Link href="/checkout" className="mt-4 inline-flex w-full items-center justify-center bg-[#171717] px-5 py-3.5 text-xs uppercase tracking-[0.18em] text-white">Confirmar el conjunto</Link></> : null}
+            <Link href="/tienda" className="mt-3 inline-flex w-full items-center justify-center border border-black/20 px-5 py-3.5 text-xs uppercase tracking-[0.18em]">Agregar elementos</Link>
           </div>
         </div>
       </div>

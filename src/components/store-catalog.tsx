@@ -31,7 +31,7 @@ export function StoreCatalog({ products }: { products: Product[] }) {
             </button>
           ))}
         </div>
-        <p className="text-[0.68rem] uppercase tracking-[0.24em] text-[#777067]">{visibleProducts.length} piezas</p>
+        <p className="text-[0.68rem] uppercase tracking-[0.24em] text-[#777067]">{visibleProducts.length} elementos</p>
       </div>
 
       <div className="mt-10 grid gap-x-7 gap-y-14 md:grid-cols-2 xl:grid-cols-3">
@@ -51,7 +51,7 @@ export function StoreCatalog({ products }: { products: Product[] }) {
                 {product.demo ? 'Proyecto a cotizar' : product.priceOnRequest ? 'Precio a solicitud' : `CLP ${product.price?.toLocaleString('es-CL')}`}
               </p>
               <Link href={`/producto/${product.slug}`} aria-label={`Ver ${product.name}`} className="inline-flex items-center gap-2 border-b border-black/25 pb-1 text-[0.68rem] uppercase tracking-[0.22em] transition hover:border-black">
-                Ver pieza <ArrowRight size={13} />
+                Ver elemento <ArrowRight size={13} />
               </Link>
             </div>
           </article>

@@ -8,7 +8,7 @@ import { CircleUserRound, Menu, ShoppingBag, X } from 'lucide-react';
 
 const navItems = [
   { label: 'Colecciones', href: '/colecciones' },
-  { label: 'Piezas', href: '/tienda' },
+  { label: 'Elementos', href: '/tienda' },
   { label: 'A medida', href: '/diseno-a-medida' },
   { label: 'Sobre ELEM', href: '/nosotros' },
 ];
@@ -107,7 +107,7 @@ export function Header() {
             <CircleUserRound size={17} />
             <span className="text-[0.6rem] uppercase tracking-[0.16em]">Mi ELEM</span>
           </Link>
-          <Link href="/carrito" className="inline-flex items-center gap-2 border border-black/15 px-3 py-2.5 text-sm text-[#4f4b45] transition-colors hover:border-black/30 hover:text-black" aria-label={`Carrito, ${cartCount} piezas`}>
+          <Link href="/carrito" className="inline-flex items-center gap-2 border border-black/15 px-3 py-2.5 text-sm text-[#4f4b45] transition-colors hover:border-black/30 hover:text-black" aria-label={`Carrito, ${cartCount} elementos`}>
             <ShoppingBag size={16} />
             <span className="tabular-nums">{cartCount}</span>
           </Link>
@@ -139,7 +139,7 @@ export function Header() {
               </Link>
             ))}
             <Link href="/contacto" className="border-t border-black/10 pt-4" onClick={() => setOpen(false)}>
-              Iniciar un proyecto
+              Definir un proyecto
             </Link>
             <Link href="/mi-elem" className="flex items-center gap-2 pt-2" onClick={() => setOpen(false)}>
               <CircleUserRound size={16} /> Mi ELEM

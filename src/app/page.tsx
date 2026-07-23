@@ -7,9 +7,9 @@ import { MotionController } from '@/components/motion-controller';
 import { AddToCartButton } from '@/components/add-to-cart-button';
 
 const projectStages = [
-  { number: '01', title: 'Conversación', detail: 'El espacio, el uso y la intención material definen el punto de partida.' },
-  { number: '02', title: 'Desarrollo', detail: 'Diseño e ingeniería se resuelven como una sola decisión.' },
-  { number: '03', title: 'Fabricación', detail: 'Cada unión, pliegue y terminación responde al proyecto.' },
+  { number: '01', title: 'Leer el espacio', detail: 'Uso, escala y arquitectura revelan los elementos que el proyecto necesita.' },
+  { number: '02', title: 'Ordenar el conjunto', detail: 'Diseño e ingeniería articulan materia, función y proporción como una sola decisión.' },
+  { number: '03', title: 'Fabricar cada elemento', detail: 'Cada unión, pliegue y terminación responde a la precisión del conjunto.' },
 ];
 
 const capabilities = [
@@ -31,11 +31,11 @@ export default function HomePage() {
         <div className="mx-auto max-w-7xl">
           <div className="grid gap-10 border-t border-black/15 pt-8 lg:grid-cols-[0.82fr_1.18fr] lg:items-end">
             <div data-reveal>
-              <p className="text-[0.62rem] uppercase tracking-[0.32em] text-[#777067]">01 · Visión ELEM</p>
-              <h2 className="mt-5 max-w-xl font-serif text-5xl leading-[0.94] sm:text-6xl">Espacios imaginados en metal.</h2>
+              <p className="text-[0.62rem] uppercase tracking-[0.32em] text-[#777067]">01 · El principio ELEM</p>
+              <h2 className="mt-5 max-w-xl font-serif text-5xl leading-[0.94] sm:text-6xl">El conjunto nace de sus elementos.</h2>
             </div>
             <div data-reveal className="lg:justify-self-end">
-              <p className="max-w-xl text-base leading-8 text-[#56514b]">Exploraciones conceptuales que traducen una dirección: el acero como volumen, la extracción como arquitectura y la cocina como centro del espacio.</p>
+              <p className="max-w-xl text-base leading-8 text-[#56514b]">ELEM nace de una idea esencial: un espacio se transforma cuando materia, fuego, aire y función encuentran su proporción exacta.</p>
               <p className="mt-5 max-w-xl text-[0.62rem] uppercase leading-5 tracking-[0.2em] text-[#847b72]">Visualizaciones conceptuales · No corresponden a proyectos ejecutados</p>
             </div>
           </div>
@@ -63,9 +63,9 @@ export default function HomePage() {
               </figure>
 
               <div data-reveal className="bg-[#171717] p-7 text-white sm:p-8">
-                <p className="text-[0.58rem] uppercase tracking-[0.25em] text-white/50">Una dirección, no un catálogo</p>
-                <h3 className="mt-5 max-w-md font-serif text-3xl leading-[0.98] sm:text-4xl">Cada concepto comienza en el espacio y termina en una solución propia.</h3>
-                <Link href="/diseno-a-medida" className="mt-7 inline-flex items-center gap-3 text-[0.66rem] uppercase tracking-[0.23em] text-[#e9e3d9] transition-colors hover:text-white">Diseñar una pieza <ArrowRight size={13} /></Link>
+                <p className="text-[0.58rem] uppercase tracking-[0.25em] text-white/50">Elementos propios, no fórmulas</p>
+                <h3 className="mt-5 max-w-md font-serif text-3xl leading-[0.98] sm:text-4xl">Cada proyecto combina sus elementos para formar una solución irrepetible.</h3>
+                <Link href="/diseno-a-medida" className="mt-7 inline-flex items-center gap-3 text-[0.66rem] uppercase tracking-[0.23em] text-[#e9e3d9] transition-colors hover:text-white">Componer un elemento <ArrowRight size={13} /></Link>
               </div>
             </div>
           </div>
@@ -88,11 +88,11 @@ export default function HomePage() {
         <div className="mx-auto max-w-7xl">
           <div className="flex items-end justify-between border-b border-black/15 pb-5">
             <div>
-              <p className="text-[0.62rem] uppercase tracking-[0.32em] text-[#80786f]">02 · Pieza emblemática</p>
-              <h2 className="mt-3 font-serif text-4xl leading-none sm:text-5xl">Arquitectura para el fuego.</h2>
+              <p className="text-[0.62rem] uppercase tracking-[0.32em] text-[#80786f]">02 · Elemento emblemático</p>
+              <h2 className="mt-3 font-serif text-4xl leading-none sm:text-5xl">El fuego como elemento central.</h2>
             </div>
             <Link href="/tienda" className="hidden items-center gap-2 text-[0.64rem] uppercase tracking-[0.26em] text-[#59534d] transition-colors hover:text-black sm:inline-flex">
-              Ver todas las piezas <ArrowRight size={13} />
+              Ver todos los elementos <ArrowRight size={13} />
             </Link>
           </div>
 
@@ -101,7 +101,7 @@ export default function HomePage() {
               <Image src={featured.images[0]} alt={featured.name} fill sizes="(min-width: 1024px) 58vw, 100vw" className="ambient-media ambient-media--push object-cover" />
               <span className="ambient-light ambient-light--fire" aria-hidden="true" />
               <span className="ambient-particles ambient-particles--embers" aria-hidden="true" />
-              <span className="absolute left-5 top-5 z-10 bg-[#f4f1ea] px-4 py-2 text-[0.58rem] font-medium uppercase tracking-[0.26em] text-[#171717]">Pieza disponible</span>
+              <span className="absolute left-5 top-5 z-10 bg-[#f4f1ea] px-4 py-2 text-[0.58rem] font-medium uppercase tracking-[0.26em] text-[#171717]">Elemento disponible</span>
               <span className="absolute bottom-5 right-5 z-10 grid h-12 w-12 place-items-center bg-[#f4f1ea] text-black"><ArrowUpRight size={17} /></span>
             </Link>
 
@@ -109,7 +109,7 @@ export default function HomePage() {
               <p className="text-[0.62rem] uppercase tracking-[0.32em] text-[#80786f]">Colección fuego · Lumen</p>
               <h3 className="mt-5 max-w-lg font-serif text-5xl leading-[0.92] sm:text-6xl">{featured.name}</h3>
               <p className="mt-7 max-w-lg text-base leading-8 text-[#56514b]">
-                {featured.description} Una composición en acero inoxidable, piedra y cromo.
+                {featured.description} Acero inoxidable, piedra y cromo forman un conjunto preciso.
               </p>
 
               <dl className="mt-9 grid grid-cols-2 border-y border-black/15 py-5 text-sm">
@@ -125,7 +125,7 @@ export default function HomePage() {
 
               <div className="mt-7 flex items-end justify-between gap-6">
                 <div>
-                  <p className="text-[0.58rem] uppercase tracking-[0.25em] text-[#8a837a]">Precio de la pieza</p>
+                  <p className="text-[0.58rem] uppercase tracking-[0.25em] text-[#8a837a]">Precio del elemento</p>
                   <p className="mt-2 flex items-baseline gap-2"><span className="text-[0.58rem] uppercase tracking-[0.2em] text-[#777067]">CLP</span><span className="text-3xl font-medium tracking-[-0.04em] tabular-nums">{featured.price?.toLocaleString('es-CL')}</span></p>
                 </div>
                 <span className="h-2 w-2 rounded-full bg-[#4d7254]" aria-label="Disponible" />
@@ -145,15 +145,15 @@ export default function HomePage() {
         <div className="mx-auto max-w-7xl">
           <div className="grid gap-12 lg:grid-cols-[1.12fr_0.88fr] lg:items-start">
             <div data-reveal data-ambient="studio" className="ambient-frame relative min-h-[520px] overflow-hidden bg-[#171717] lg:min-h-[720px]">
-              <Image src="/images/elema-generated/taller-precision-editorial.webp" alt="Trabajo de precisión sobre una pieza de acero" fill sizes="(min-width: 1024px) 57vw, 100vw" className="ambient-media ambient-media--detail object-cover" />
+              <Image src="/images/elema-generated/taller-precision-editorial.webp" alt="Trabajo de precisión sobre un elemento de acero" fill sizes="(min-width: 1024px) 57vw, 100vw" className="ambient-media ambient-media--detail object-cover" />
               <span className="ambient-light ambient-light--studio" aria-hidden="true" />
               <span className="ambient-particles ambient-particles--sparks" aria-hidden="true" />
             </div>
 
             <div data-reveal className="lg:px-7 lg:pt-6">
-              <p className="text-[0.62rem] uppercase tracking-[0.32em] text-[#80786f]">03 · Materia y fabricación</p>
-              <h2 className="mt-5 max-w-xl font-serif text-5xl leading-[0.94] sm:text-6xl">La precisión también se ve.</h2>
-              <p className="mt-7 max-w-lg text-base leading-8 text-[#56514b]">El diseño se contrasta con materiales, tolerancias, uniones y condiciones reales de fabricación antes de convertirse en una pieza.</p>
+              <p className="text-[0.62rem] uppercase tracking-[0.32em] text-[#80786f]">03 · Elementos de fabricación</p>
+              <h2 className="mt-5 max-w-xl font-serif text-5xl leading-[0.94] sm:text-6xl">La precisión une cada elemento.</h2>
+              <p className="mt-7 max-w-lg text-base leading-8 text-[#56514b]">Materiales, tolerancias, uniones y terminaciones se resuelven por separado para funcionar como un conjunto exacto.</p>
 
               <ul className="mt-10 border-t border-black/15">
                 {capabilities.map((capability, index) => (
@@ -165,7 +165,7 @@ export default function HomePage() {
                 <Image src="/images/elema-generated/material-acero-piedra.webp" alt="Encuentro de acero cepillado y piedra clara" width={1774} height={887} className="ambient-media ambient-media--detail aspect-[2/1] w-full object-cover" />
                 <span className="ambient-light ambient-light--material" aria-hidden="true" />
               </div>
-              <Link href="/nosotros" className="mt-8 inline-flex items-center gap-3 text-[0.68rem] uppercase tracking-[0.25em] transition-colors hover:text-[#6c655e]">Conocer el estudio <ArrowRight size={13} /></Link>
+              <Link href="/nosotros" className="mt-8 inline-flex items-center gap-3 text-[0.68rem] uppercase tracking-[0.25em] transition-colors hover:text-[#6c655e]">Conocer el principio ELEM <ArrowRight size={13} /></Link>
             </div>
           </div>
         </div>
@@ -178,11 +178,11 @@ export default function HomePage() {
           <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(7,8,9,0.82)_0%,rgba(7,8,9,0.48)_55%,rgba(7,8,9,0.16)_100%)]" />
           <div className="relative z-10 flex min-h-[560px] flex-col justify-between p-7 sm:p-10 lg:min-h-[680px] lg:p-14">
             <div className="flex items-center justify-between border-b border-white/25 pb-5 text-[0.58rem] uppercase tracking-[0.28em] text-white/65">
-              <span>04 · Asesoría privada</span><span>Santiago, Chile</span>
+              <span>04 · Los elementos de tu proyecto</span><span>Santiago, Chile</span>
             </div>
             <div className="max-w-3xl">
-              <h2 className="font-serif text-5xl leading-[0.92] sm:text-7xl">Una conversación antes que un catálogo.</h2>
-              <p className="mt-6 max-w-xl text-base leading-8 text-[#ded7cc]">Cuéntanos sobre el espacio, el uso y la materialidad que buscas. ELEM revisará los antecedentes para definir el siguiente paso.</p>
+              <h2 className="font-serif text-5xl leading-[0.92] sm:text-7xl">Todo comienza por entender los elementos.</h2>
+              <p className="mt-6 max-w-xl text-base leading-8 text-[#ded7cc]">Cuéntanos sobre el espacio, el uso, la materia y la atmósfera que imaginas. ELEM los ordenará para definir una solución propia.</p>
               <div className="mt-9 flex flex-col gap-3 sm:flex-row">
                 <Link href="/contacto" className="inline-flex items-center justify-center gap-3 bg-[#f4f1ea] px-6 py-4 text-[0.68rem] font-medium uppercase tracking-[0.24em] text-[#171717] transition-colors hover:bg-white">Solicitar una conversación <ArrowRight size={13} /></Link>
                 <Link href="/profesionales" className="inline-flex items-center justify-center border border-white/30 px-6 py-4 text-[0.68rem] uppercase tracking-[0.24em] transition-colors hover:bg-white/10">Acceso profesionales</Link>

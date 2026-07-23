@@ -100,10 +100,10 @@ export function AuthPanel() {
             </div>
 
             <div>
-              <p className="mb-4 hidden text-[0.6rem] uppercase tracking-[0.26em] text-white/60 sm:block">Proyecto · Compra · Seguimiento</p>
-              <h1 className="max-w-2xl font-serif text-[2.8rem] leading-[0.9] tracking-[-0.025em] sm:text-6xl lg:text-[4.6rem]">Todo tu proyecto, en un solo lugar.</h1>
+              <p className="mb-4 hidden text-[0.6rem] uppercase tracking-[0.26em] text-white/60 sm:block">Elementos · Proyecto · Seguimiento</p>
+              <h1 className="max-w-2xl font-serif text-[2.8rem] leading-[0.9] tracking-[-0.025em] sm:text-6xl lg:text-[4.6rem]">Tu proyecto ELEM, elemento por elemento.</h1>
               <div className="mt-7 hidden grid-cols-3 border-t border-white/25 pt-6 text-[0.68rem] leading-5 text-white/70 sm:grid">
-                <p className="border-r border-white/20 pr-4"><PackageCheck size={17} className="mb-3 text-white" />Pedidos y avance</p>
+                <p className="border-r border-white/20 pr-4"><PackageCheck size={17} className="mb-3 text-white" />Elementos y avance</p>
                 <p className="border-r border-white/20 px-4"><LockKeyhole size={17} className="mb-3 text-white" />Información protegida</p>
                 <p className="pl-4"><Check size={17} className="mb-3 text-white" />Preferencias de contacto</p>
               </div>
@@ -119,7 +119,7 @@ export function AuthPanel() {
             </div>
             <h2 className="mt-5 font-serif text-5xl leading-[0.95] sm:text-6xl">{mode === 'login' ? 'Bienvenido de vuelta.' : 'Crea tu cuenta.'}</h2>
             <p className="mt-5 max-w-md text-sm leading-7 text-[#66615b]">
-              {mode === 'login' ? 'Ingresa para revisar compras, estados de fabricación y seguimiento.' : 'Tus próximos pedidos quedarán vinculados a este acceso.'}
+              {mode === 'login' ? 'Ingresa para revisar cada elemento, su fabricación y el avance del conjunto.' : 'Tus próximos elementos y pedidos quedarán vinculados a este acceso.'}
             </p>
 
             <div className="mt-9 grid grid-cols-2 border-b border-black/15" role="tablist" aria-label="Acceso o registro">

@@ -5,10 +5,10 @@ import type { Metadata } from 'next';
 import { products } from '@/data/products';
 
 const COLLECTIONS = {
-  cocinas: { title: 'Cocinas', description: 'Espacios de cocina que combinan precisión, composición y presencia.', href: '/colecciones/cocinas' },
-  parrillas: { title: 'Parrillas', description: 'Una propuesta de fuego y diseño para jardines, patios y espacios de hosting.', href: '/colecciones/parrillas' },
-  campanas: { title: 'Campanas', description: 'Elementos que unen arquitectura, proporciones y presencia.', href: '/colecciones/campanas' },
-  'soluciones-personalizadas': { title: 'Soluciones personalizadas', description: 'Fabricación y diseño a medida para proyectos de arquitectura y construcción.', href: '/colecciones/soluciones-personalizadas' },
+  cocinas: { title: 'Cocinas', description: 'Elementos de uso, encuentro y materia organizados como una arquitectura completa.', href: '/colecciones/cocinas' },
+  parrillas: { title: 'Parrillas', description: 'Elementos de fuego concebidos para ordenar el encuentro y transformar el exterior.', href: '/colecciones/parrillas' },
+  campanas: { title: 'Campanas', description: 'Elementos de aire y extracción que unen función, proporción y presencia.', href: '/colecciones/campanas' },
+  'soluciones-personalizadas': { title: 'Soluciones personalizadas', description: 'Elementos diseñados y fabricados para responder a una arquitectura específica.', href: '/colecciones/soluciones-personalizadas' },
 };
 
 export function generateStaticParams() {
@@ -52,16 +52,16 @@ export default async function CollectionPage({ params }: { params: Promise<{ slu
                 </div>
               </div>
               <Link href={`/producto/${product.slug}`} className="mt-6 inline-flex border-b border-black/30 pb-2 text-[0.7rem] uppercase tracking-[0.28em] transition group-hover:border-black">
-                Ver producto
+                Ver elemento
               </Link>
             </article>
           ))}
           {products.filter((product) => product.category.toLowerCase() === collection.title.toLowerCase()).length === 0 ? (
             <div className="col-span-full grid min-h-[420px] place-items-center border border-black/15 bg-[#e7ded1] px-6 text-center">
               <div className="max-w-xl">
-                <p className="text-[0.7rem] uppercase tracking-[0.35em] text-[#777067]">Fabricación especial</p>
-                <h2 className="mt-5 font-serif text-4xl">Cada solución comienza con tu espacio.</h2>
-                <Link href="/contacto" className="mt-8 inline-flex border-b border-black/30 pb-2 text-[0.7rem] uppercase tracking-[0.28em]">Conversar sobre un proyecto</Link>
+                <p className="text-[0.7rem] uppercase tracking-[0.35em] text-[#777067]">Elementos a medida</p>
+                <h2 className="mt-5 font-serif text-4xl">Cada solución comienza por leer el espacio.</h2>
+                <Link href="/contacto" className="mt-8 inline-flex border-b border-black/30 pb-2 text-[0.7rem] uppercase tracking-[0.28em]">Definir los elementos</Link>
               </div>
             </div>
           ) : null}

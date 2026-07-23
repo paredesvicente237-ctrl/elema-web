@@ -28,8 +28,8 @@ function ProductTechnicalSheet({ product, variant }: { product: Product; variant
   return (
     <section aria-labelledby={headingId} className="mt-9">
       <div className="flex items-end justify-between border-b border-black/15 pb-4">
-        <h2 id={headingId} className="text-[0.62rem] uppercase tracking-[0.28em] text-[#554f48]">Ficha de fabricación</h2>
-        <span className="text-right font-serif text-lg text-[#948b80] sm:text-xl">{product.demo ? 'ELEM / PIEZA A COTIZAR' : `ELEM / ${product.id.toUpperCase()}`}</span>
+        <h2 id={headingId} className="text-[0.62rem] uppercase tracking-[0.28em] text-[#554f48]">Elementos de fabricación</h2>
+        <span className="text-right font-serif text-lg text-[#948b80] sm:text-xl">{product.demo ? 'ELEM / ELEMENTO A COTIZAR' : `ELEM / ${product.id.toUpperCase()}`}</span>
       </div>
       <dl className="divide-y divide-black/10 text-sm">
         <div className="grid grid-cols-[7rem_1fr] gap-5 py-4">
@@ -66,21 +66,21 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
     ...product.images.map((image, index) => ({
       src: image,
       alt: index === 0 ? product.name : `${product.name}, vista ${index + 1}`,
-      label: product.demo ? 'Referencia de configuración' : index === 0 ? 'La pieza' : `Vista ${String(index + 1).padStart(2, '0')}`,
-      caption: product.demo ? 'Visual referencial ELEM' : index === 0 ? 'Vista principal' : 'Detalle de la pieza',
+      label: product.demo ? 'Referencia de configuración' : index === 0 ? 'El elemento' : `Vista ${String(index + 1).padStart(2, '0')}`,
+      caption: product.demo ? 'Visual referencial ELEM' : index === 0 ? 'El elemento en conjunto' : 'Detalle del elemento',
     })),
     ...(isLumen ? [
       {
         src: '/images/elema-generated/parrilla-montana-hero.webp',
         alt: 'Parrilla arquitectónica integrada en una terraza de montaña al atardecer',
         label: 'Atmósfera de colección',
-        caption: 'El fuego como centro del espacio exterior',
+        caption: 'El fuego como elemento central del exterior',
       },
       {
         src: '/images/elema-generated/material-acero-piedra.webp',
         alt: 'Encuentro de acero cepillado y piedra clara',
         label: 'Referencia material',
-        caption: 'Acero, piedra y precisión en el encuentro',
+        caption: 'Acero, piedra y precisión entre elementos',
       },
     ] satisfies ProductGalleryImage[] : []),
   ];
@@ -91,7 +91,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
 
       <div className="mx-auto max-w-[1480px] px-4 pb-24 pt-28 sm:px-6 lg:px-8 lg:pb-32 lg:pt-32">
         <nav aria-label="Ruta de navegación" className="flex flex-wrap items-center gap-2 border-b border-black/12 pb-5 text-[0.58rem] uppercase tracking-[0.24em] text-[#746d64]">
-          <Link href="/tienda" className="transition-colors hover:text-black">Piezas</Link>
+          <Link href="/tienda" className="transition-colors hover:text-black">Elementos</Link>
           <ChevronRight size={12} aria-hidden="true" />
           <Link href={`/colecciones/${collectionSlug}`} className="transition-colors hover:text-black">{product.category}</Link>
           <ChevronRight size={12} aria-hidden="true" />
@@ -116,7 +116,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
 
             <div className="mt-9 border-y border-black/15 py-6">
               <div className="flex items-end justify-between gap-6">
-                <p className="pb-1 text-[0.6rem] uppercase tracking-[0.25em] text-[#746d64]">{canPurchase ? 'Precio de la pieza' : 'Modalidad'}</p>
+                <p className="pb-1 text-[0.6rem] uppercase tracking-[0.25em] text-[#746d64]">{canPurchase ? 'Precio del elemento' : 'Modalidad'}</p>
                 {canPurchase ? (
                   <p className="flex shrink-0 items-baseline gap-2.5 text-[#171717]">
                     <span className="text-[0.58rem] font-medium uppercase tracking-[0.2em] text-[#746d64]">CLP</span>
@@ -137,8 +137,8 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                 </div>
               ) : (
                 <div className="mt-6 grid gap-3 sm:grid-cols-2">
-                  <Link href={`/contacto?producto=${product.slug}`} className="inline-flex min-h-12 items-center justify-center bg-[#171717] px-5 text-center text-[0.65rem] uppercase tracking-[0.2em] text-[#f6efe6]">Cotizar esta pieza</Link>
-                  <Link href="/diseno-a-medida" className="inline-flex min-h-12 items-center justify-center border border-black/20 px-5 text-center text-[0.65rem] uppercase tracking-[0.2em]">Diseñar mi espacio</Link>
+                  <Link href={`/contacto?producto=${product.slug}`} className="inline-flex min-h-12 items-center justify-center bg-[#171717] px-5 text-center text-[0.65rem] uppercase tracking-[0.2em] text-[#f6efe6]">Cotizar este elemento</Link>
+                  <Link href="/diseno-a-medida" className="inline-flex min-h-12 items-center justify-center border border-black/20 px-5 text-center text-[0.65rem] uppercase tracking-[0.2em]">Componer mi espacio</Link>
                 </div>
               )}
 
@@ -161,9 +161,9 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
         <div className="mx-auto max-w-7xl">
           <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
             <div data-reveal="left" className="lg:sticky lg:top-28">
-              <p className="text-[0.62rem] uppercase tracking-[0.3em] text-[#746d64]">Presencia y función</p>
-              <h2 className="mt-5 max-w-lg font-serif text-5xl leading-[0.92] sm:text-6xl">{product.category === 'Parrillas' ? 'El fuego ordena el espacio.' : 'La materia ordena el espacio.'}</h2>
-              <p className="mt-7 max-w-lg text-base leading-8 text-[#575149]">{product.name} reúne una materialidad precisa y una escala arquitectónica para convertir el uso y el encuentro en una misma escena.</p>
+              <p className="text-[0.62rem] uppercase tracking-[0.3em] text-[#746d64]">El elemento y el conjunto</p>
+              <h2 className="mt-5 max-w-lg font-serif text-5xl leading-[0.92] sm:text-6xl">{product.category === 'Parrillas' ? 'El fuego ordena los elementos.' : 'La materia ordena los elementos.'}</h2>
+              <p className="mt-7 max-w-lg text-base leading-8 text-[#575149]">{product.name} integra materia, escala y función para convertirse en un elemento inseparable de la arquitectura.</p>
               <Link href={`/colecciones/${collectionSlug}`} className="mt-8 inline-flex items-center gap-3 border-b border-black/30 pb-2 text-[0.65rem] uppercase tracking-[0.22em] transition-colors hover:border-black">
                 Explorar la colección <ArrowRight size={13} />
               </Link>
@@ -175,7 +175,13 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                   <span className="font-serif text-xl text-[#948b80]">0{index + 1}</span>
                   <div>
                     <h3 className="text-sm font-medium uppercase tracking-[0.18em] text-[#302c28]">{feature}</h3>
-                    <p className="mt-3 max-w-lg text-sm leading-7 text-[#625b53]">Definido en relación con la materialidad, la configuración de la pieza y su contexto de uso.</p>
+                    <p className="mt-3 max-w-lg text-sm leading-7 text-[#625b53]">
+                      {[
+                        "Resuelve una función precisa sin interrumpir la lectura del conjunto.",
+                        "Se integra con la escala, la arquitectura y los demás elementos del espacio.",
+                        "Materia, tolerancias y terminaciones se definen para una presencia exacta.",
+                      ][index % 3]}
+                    </p>
                   </div>
                 </div>
               ))}
@@ -194,11 +200,11 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
       <section className="bg-white px-4 py-24 sm:px-6 lg:px-8 lg:py-32">
         <div data-reveal className="mx-auto grid max-w-7xl gap-10 border-t border-black/15 pt-10 lg:grid-cols-[1fr_auto] lg:items-end">
           <div>
-            <p className="text-[0.62rem] uppercase tracking-[0.3em] text-[#746d64]">Asesoría privada</p>
-            <h2 className="mt-5 max-w-3xl font-serif text-5xl leading-[0.92] sm:text-6xl">Antes de decidir, conversemos sobre el espacio.</h2>
+            <p className="text-[0.62rem] uppercase tracking-[0.3em] text-[#746d64]">Los elementos de tu proyecto</p>
+            <h2 className="mt-5 max-w-3xl font-serif text-5xl leading-[0.92] sm:text-6xl">Antes de decidir, entendamos qué debe componer el espacio.</h2>
           </div>
           <Link href={`/contacto?producto=${product.slug}`} className="inline-flex min-h-14 items-center justify-center gap-3 bg-[#171717] px-7 text-[0.68rem] uppercase tracking-[0.22em] text-white transition-colors hover:bg-[#303030]">
-            Solicitar una conversación <ArrowRight size={14} />
+            Definir mi proyecto <ArrowRight size={14} />
           </Link>
         </div>
       </section>

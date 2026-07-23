@@ -2,11 +2,11 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 const steps = [
-  { number: '01', title: 'Levantamiento', description: 'Definimos el uso, las medidas, la materialidad, las tolerancias y la factibilidad técnica de la propuesta.' },
-  { number: '02', title: 'Diseño e ingeniería', description: 'Desarrollamos la solución en CAD y preparamos cada componente para una fabricación precisa y coordinada.' },
-  { number: '03', title: 'Selección de materiales', description: 'Especificamos aceros, metales, terminaciones y elementos complementarios según el espacio y su nivel de exigencia.' },
-  { number: '04', title: 'Fabricación', description: 'Integramos corte, plegado, curvado, armado y soldadura con control en cada etapa del proceso.' },
-  { number: '05', title: 'Entrega e instalación', description: 'Verificamos terminaciones y funcionamiento antes de coordinar el montaje o la entrega de la pieza terminada.' },
+  { number: '01', title: 'Leer los elementos', description: 'Definimos uso, medidas, arquitectura y exigencias para entender qué debe formar el conjunto.' },
+  { number: '02', title: 'Ordenar el conjunto', description: 'Diseño e ingeniería articulan cada componente en CAD antes de preparar su fabricación.' },
+  { number: '03', title: 'Definir la materia', description: 'Especificamos aceros, metales, terminaciones y encuentros según el espacio y su nivel de exigencia.' },
+  { number: '04', title: 'Fabricar cada elemento', description: 'Corte, plegado, curvado, armado y soldadura se controlan como partes de una misma composición.' },
+  { number: '05', title: 'Integrar en el espacio', description: 'Verificamos terminaciones y funcionamiento antes de coordinar el montaje del conjunto terminado.' },
 ];
 
 export default function CustomDesignPage() {
@@ -15,9 +15,9 @@ export default function CustomDesignPage() {
       <div className="mx-auto max-w-7xl">
         <div className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-end">
           <div>
-            <p className="text-sm uppercase tracking-[0.35em] text-[#77716a]">Diseño a medida</p>
-            <h1 className="mt-4 font-serif text-5xl leading-[0.98] sm:text-6xl">Proyectos concebidos desde la arquitectura y la intención.</h1>
-            <p className="mt-6 text-lg leading-8 text-[#57514b]">Cada proyecto avanza desde un requerimiento concreto hasta una solución fabricable, con decisiones visibles sobre proporción, materialidad, tolerancias y montaje.</p>
+            <p className="text-sm uppercase tracking-[0.35em] text-[#77716a]">Elementos a medida</p>
+            <h1 className="mt-4 font-serif text-5xl leading-[0.98] sm:text-6xl">Tu espacio define los elementos. ELEM define el conjunto.</h1>
+            <p className="mt-6 text-lg leading-8 text-[#57514b]">Cada proyecto avanza desde una necesidad concreta hasta una composición fabricable, donde proporción, materia, tolerancias y montaje responden a una sola intención.</p>
           </div>
           <div className="overflow-hidden border border-black/10 bg-[#e3ddd3] shadow-[0_24px_70px_rgba(20,16,10,0.10)]">
             <Image src="/images/editorial-diseno.jpg" alt="Mesa editorial de diseño técnico con planos y muestras metálicas" width={1536} height={1024} className="aspect-[16/10] w-full object-cover" priority />
@@ -33,8 +33,8 @@ export default function CustomDesignPage() {
           ))}
         </div>
         <div className="mt-10 flex flex-col gap-5 border border-black/10 bg-white p-8 sm:flex-row sm:items-center sm:justify-between">
-          <p className="max-w-xl font-serif text-3xl">Una solución precisa comienza con una buena conversación.</p>
-          <Link href="/contacto" className="inline-flex w-fit items-center bg-[#171717] px-6 py-3.5 text-xs uppercase tracking-[0.2em] text-white">Comenzar un proyecto</Link>
+          <p className="max-w-xl font-serif text-3xl">Una solución precisa comienza por reconocer cada elemento.</p>
+          <Link href="/contacto" className="inline-flex w-fit items-center bg-[#171717] px-6 py-3.5 text-xs uppercase tracking-[0.2em] text-white">Definir mi proyecto</Link>
         </div>
       </div>
     </main>

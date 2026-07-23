@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 const links = [
   { label: 'Colecciones', href: '/colecciones' },
-  { label: 'Piezas', href: '/tienda' },
+  { label: 'Elementos', href: '/tienda' },
   { label: 'Proyectos a medida', href: '/diseno-a-medida' },
   { label: 'Sobre ELEM', href: '/nosotros' },
   { label: 'Profesionales', href: '/profesionales' },
@@ -15,10 +15,10 @@ export function Footer() {
         <div>
           <p className="text-2xl font-semibold tracking-[0.35em]">ELEM</p>
           <p className="mt-4 max-w-md text-sm leading-7 text-[#d8d0c4]">
-            Diseño, ingeniería y fabricación para cocinas, fuego y piezas arquitectónicas especiales.
+            Elementos de materia, fuego y aire diseñados para formar cocinas, parrillas y campanas inseparables de su arquitectura.
           </p>
           <Link href="/contacto" className="mt-5 inline-flex border-b border-white/25 pb-1 text-[0.68rem] uppercase tracking-[0.22em] text-[#d8d0c4] transition-colors hover:text-white">
-            Solicitar una conversación
+            Definir un proyecto
           </Link>
           <a href="https://wa.me/56930751812" target="_blank" rel="noreferrer" className="mt-5 block w-fit text-sm text-[#a89d90] transition hover:text-[#f6efe6]">
             +56 9 3075 1812 · Santiago, Chile
@@ -47,7 +47,7 @@ export function Footer() {
       </div>
       <div className="mx-auto mt-10 flex max-w-7xl flex-col gap-3 border-t border-white/10 pt-6 text-sm text-[#a89d90] sm:flex-row sm:items-center sm:justify-between">
         <p>© {new Date().getFullYear()} ELEM. Todos los derechos reservados.</p>
-        <p>Diseñado y fabricado en Chile.</p>
+        <p>Cada elemento, diseñado y fabricado en Chile.</p>
       </div>
     </footer>
   );

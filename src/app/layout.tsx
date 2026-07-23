@@ -24,14 +24,14 @@ export const metadata: Metadata = {
     (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : 'http://localhost:3000'),
   ),
   title: {
-    default: 'ELEM | Diseño y fabricación en acero',
+    default: 'ELEM | Cada elemento define el espacio',
     template: '%s | ELEM',
   },
-  description: 'Cocinas, parrillas, campanas y soluciones arquitectónicas fabricadas a medida en Chile con diseño, ingeniería y precisión metalmecánica.',
+  description: 'ELEM diseña los elementos de materia, fuego y aire que componen cocinas, parrillas, campanas y soluciones arquitectónicas.',
   keywords: ['cocinas a medida', 'parrillas premium', 'campanas de acero', 'mobiliario inoxidable', 'fabricación en acero', 'diseño a medida Chile'],
   openGraph: {
-    title: 'ELEM | Diseño y fabricación en acero',
-    description: 'Cocinas, parrillas, campanas y soluciones arquitectónicas fabricadas a medida en Chile.',
+    title: 'ELEM | Cada elemento define el espacio',
+    description: 'Elementos de materia, fuego y aire para cocinas, parrillas, campanas y soluciones arquitectónicas.',
     type: 'website',
     locale: 'es_CL',
     images: ['/images/elema-generated/cocina-costera-hero.webp'],
