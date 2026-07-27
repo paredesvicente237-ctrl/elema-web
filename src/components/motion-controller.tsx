@@ -15,6 +15,16 @@ export function MotionController() {
       return;
     }
 
+    // Deja preparado el contenido visible y el inmediatamente siguiente antes
+    // de activar los estilos de entrada. Así un scroll rápido nunca muestra una
+    // sección vacía mientras IntersectionObserver procesa el siguiente frame.
+    elements.forEach((element) => {
+      const bounds = element.getBoundingClientRect();
+      if (bounds.top <= window.innerHeight * 1.18 && bounds.bottom >= -window.innerHeight * 0.18) {
+        element.classList.add('is-visible');
+      }
+    });
+
     root.classList.add('motion-enabled');
 
     const observer = new IntersectionObserver(
@@ -25,7 +35,7 @@ export function MotionController() {
           observer.unobserve(entry.target);
         });
       },
-      { rootMargin: '0px 0px -8% 0px', threshold: 0.08 },
+      { rootMargin: '18% 0px 18% 0px', threshold: 0.01 },
     );
 
     elements.forEach((element) => {

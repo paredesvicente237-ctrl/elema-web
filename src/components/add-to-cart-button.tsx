@@ -21,11 +21,22 @@ export function AddToCartButton({ product, className = '' }: AddToCartButtonProp
 
   const addToCart = () => {
     const stored = window.localStorage.getItem('elema-cart');
-    const cart: CartItem[] = stored ? JSON.parse(stored) : [];
+    let cart: CartItem[] = [];
+
+    if (stored) {
+      try {
+        const parsed: unknown = JSON.parse(stored);
+        if (Array.isArray(parsed)) cart = parsed as CartItem[];
+      } catch {
+        cart = [];
+      }
+    }
+
     const existing = cart.find((item) => item.id === product.id);
 
     if (existing) {
-      existing.quantity += 1;
+      const currentQuantity = Number.isFinite(Number(existing.quantity)) ? Number(existing.quantity) : 0;
+      existing.quantity = Math.min(20, Math.max(1, Math.trunc(currentQuantity) + 1));
     } else {
       cart.push({ ...product, quantity: 1 });
     }
@@ -41,7 +52,7 @@ export function AddToCartButton({ product, className = '' }: AddToCartButtonProp
       type="button"
       onClick={addToCart}
       aria-live="polite"
-      className={`inline-flex items-center justify-center gap-2 bg-[#171717] px-5 py-3 text-center text-xs uppercase tracking-[0.22em] text-[#f6efe6] transition-colors hover:bg-[#303030] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#171717] ${className}`}
+      className={`inline-flex min-h-12 items-center justify-center gap-2 bg-[#171717] px-5 py-3 text-center text-xs uppercase tracking-[0.22em] text-[#f6efe6] transition-colors hover:bg-[#303030] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#171717] ${className}`}
     >
       {added ? <Check size={15} /> : <ShoppingBag size={15} />}
       {added ? 'Elemento añadido' : 'Adquirir elemento'}

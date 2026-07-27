@@ -103,23 +103,23 @@ export function Header() {
         </nav>
 
         <div className="hidden items-center gap-2 border-l border-black/10 pl-4 xl:flex">
-          <Link href="/mi-elem" className="inline-flex items-center gap-2 px-2 py-2.5 text-[#4f4b45] transition-colors hover:text-black" aria-label="Ingresar a Mi ELEM">
+          <Link href="/mi-elem" className="inline-flex min-h-11 items-center gap-2 px-2 py-2.5 text-[#4f4b45] transition-colors hover:text-black" aria-label="Ingresar a Mi ELEM">
             <CircleUserRound size={17} />
             <span className="text-[0.6rem] uppercase tracking-[0.16em]">Mi ELEM</span>
           </Link>
-          <Link href="/carrito" className="inline-flex items-center gap-2 border border-black/15 px-3 py-2.5 text-sm text-[#4f4b45] transition-colors hover:border-black/30 hover:text-black" aria-label={`Carrito, ${cartCount} elementos`}>
+          <Link href="/carrito" className="inline-flex min-h-11 items-center gap-2 border border-black/15 px-3 py-2.5 text-sm text-[#4f4b45] transition-colors hover:border-black/30 hover:text-black" aria-label={`Carrito, ${cartCount} elementos`}>
             <ShoppingBag size={16} />
             <span className="tabular-nums">{cartCount}</span>
           </Link>
         </div>
 
         <div className="ml-auto flex items-center gap-2 sm:gap-3 xl:hidden">
-          <Link href="/carrito" className="inline-flex items-center gap-2 border border-black/15 px-3 py-2 text-sm text-[#4f4b45] transition hover:border-black/30 hover:text-black" aria-label="Carrito">
+          <Link href="/carrito" className="inline-flex min-h-11 items-center gap-2 border border-black/15 px-3 py-2 text-sm text-[#4f4b45] transition hover:border-black/30 hover:text-black" aria-label="Carrito">
             <ShoppingBag size={16} />
             <span>{cartCount}</span>
           </Link>
           <button
-            className="border border-black/15 p-2.5 text-[#4f4b45] xl:hidden"
+            className="grid h-11 w-11 place-items-center border border-black/15 text-[#4f4b45] xl:hidden"
             aria-label={open ? 'Cerrar menú' : 'Abrir menú'}
             aria-expanded={open}
             aria-controls="mobile-navigation"
@@ -134,14 +134,14 @@ export function Header() {
         <div id="mobile-navigation" className="border-t border-black/10 bg-[#f4f1ea] px-4 py-5 xl:hidden">
           <div className="flex flex-col gap-4 text-[0.72rem] uppercase tracking-[0.3em] text-[#4f4b45]">
             {navItems.map((item) => (
-              <Link key={item.href} href={item.href} className="transition-colors hover:text-black" aria-current={isActive(item.href) ? 'page' : undefined} onClick={() => setOpen(false)}>
+              <Link key={item.href} href={item.href} className="flex min-h-11 items-center transition-colors hover:text-black" aria-current={isActive(item.href) ? 'page' : undefined} onClick={() => setOpen(false)}>
                 {item.label}
               </Link>
             ))}
-            <Link href="/contacto" className="border-t border-black/10 pt-4" onClick={() => setOpen(false)}>
+            <Link href="/contacto" className="flex min-h-14 items-end border-t border-black/10 pt-4" onClick={() => setOpen(false)}>
               Definir un proyecto
             </Link>
-            <Link href="/mi-elem" className="flex items-center gap-2 pt-2" onClick={() => setOpen(false)}>
+            <Link href="/mi-elem" className="flex min-h-11 items-center gap-2 pt-2" onClick={() => setOpen(false)}>
               <CircleUserRound size={16} /> Mi ELEM
             </Link>
           </div>

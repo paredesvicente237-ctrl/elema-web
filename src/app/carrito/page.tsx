@@ -39,7 +39,8 @@ export default function CartPage() {
   const subtotal = useMemo(() => items.reduce((sum, item) => sum + (item.price ?? 0) * item.quantity, 0), [items]);
 
   const updateQuantity = (id: string, quantity: number) => {
-    setItems((current) => current.map((item) => (item.id === id ? { ...item, quantity: Math.max(1, quantity) } : item)));
+    const safeQuantity = Number.isFinite(quantity) ? Math.min(20, Math.max(1, Math.trunc(quantity))) : 1;
+    setItems((current) => current.map((item) => (item.id === id ? { ...item, quantity: safeQuantity } : item)));
   };
 
   const removeItem = (id: string) => {
@@ -61,7 +62,7 @@ export default function CartPage() {
               <div className="border border-black/10 bg-[#f8f5ef] p-8 text-[#625c55]">
                 <p className="font-serif text-3xl text-[#171717]">Aún no has elegido elementos.</p>
                 <p className="mt-3 text-sm leading-7">Explora las colecciones y comienza a componer tu selección.</p>
-                <Link href="/tienda" className="mt-6 inline-flex border border-black/20 px-5 py-3 text-xs uppercase tracking-[0.18em] text-[#171717]">Explorar elementos</Link>
+                <Link href="/tienda" className="mt-6 inline-flex min-h-11 items-center border border-black/20 px-5 py-3 text-xs uppercase tracking-[0.18em] text-[#171717]">Explorar elementos</Link>
               </div>
             ) : (
               items.map((item) => (
@@ -71,9 +72,21 @@ export default function CartPage() {
                     <h2 className="mt-2 font-serif text-3xl">{item.name}</h2>
                     <p className="mt-2 text-sm text-[#625c55]">CLP {item.price?.toLocaleString('es-CL')}</p>
                   </div>
-                  <div className="flex items-center gap-3">
-                    <input type="number" min="1" value={item.quantity} onChange={(event) => updateQuantity(item.id, Number(event.target.value))} className="w-20 border border-black/15 bg-white px-3 py-2" />
-                    <button onClick={() => removeItem(item.id)} className="border border-black/15 p-3 text-[#625c55] transition hover:border-black/35 hover:text-black" aria-label={`Eliminar ${item.name}`}>
+                  <div className="flex items-end gap-3">
+                    <label className="text-[0.62rem] uppercase tracking-[0.18em] text-[#77716a]">
+                      Cantidad
+                      <input
+                        type="number"
+                        min="1"
+                        max="20"
+                        inputMode="numeric"
+                        value={item.quantity}
+                        onChange={(event) => updateQuantity(item.id, Number(event.target.value))}
+                        aria-label={`Cantidad de ${item.name}`}
+                        className="mt-2 block h-11 w-20 border border-black/15 bg-white px-3 text-base text-[#171717]"
+                      />
+                    </label>
+                    <button onClick={() => removeItem(item.id)} className="grid h-11 w-11 place-items-center border border-black/15 text-[#625c55] transition hover:border-black/35 hover:text-black" aria-label={`Eliminar ${item.name}`}>
                       <Trash2 size={16} />
                     </button>
                   </div>
@@ -93,8 +106,8 @@ export default function CartPage() {
                 <span>Por cotizar</span>
               </div>
             </div>
-            {items.length > 0 ? <><p className="mt-7 text-xs leading-6 text-[#77716a]">El siguiente paso envía una solicitud de compra. No se realizará un cobro todavía.</p><Link href="/checkout" className="mt-4 inline-flex w-full items-center justify-center bg-[#171717] px-5 py-3.5 text-xs uppercase tracking-[0.18em] text-white">Confirmar el conjunto</Link></> : null}
-            <Link href="/tienda" className="mt-3 inline-flex w-full items-center justify-center border border-black/20 px-5 py-3.5 text-xs uppercase tracking-[0.18em]">Agregar elementos</Link>
+            {items.length > 0 ? <><p className="mt-7 text-xs leading-6 text-[#77716a]">El siguiente paso envía una solicitud de compra. No se realizará un cobro todavía.</p><Link href="/checkout" className="mt-4 inline-flex min-h-12 w-full items-center justify-center bg-[#171717] px-5 py-3.5 text-xs uppercase tracking-[0.18em] text-white">Confirmar el conjunto</Link></> : null}
+            <Link href="/tienda" className="mt-3 inline-flex min-h-12 w-full items-center justify-center border border-black/20 px-5 py-3.5 text-xs uppercase tracking-[0.18em]">Agregar elementos</Link>
           </div>
         </div>
       </div>
