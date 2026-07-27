@@ -2,10 +2,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 const collections = [
-  { title: 'Cocinas', href: '/colecciones/cocinas', description: 'Elementos de trabajo, encuentro y materia integrados en una sola arquitectura.', image: '/images/elem-editorial/cocina-isla-frontal.png', alt: 'Cocina ELEM de acero oscuro con isla central y cubierta de mármol' },
-  { title: 'Parrillas', href: '/colecciones/parrillas', description: 'Elementos que ordenan el fuego y lo convierten en el centro del espacio.', image: '/images/elem-editorial/cocina-exterior-atardecer.png', alt: 'Parrilla ELEM integrada en una cocina exterior frente al mar' },
-  { title: 'Campanas', href: '/colecciones/campanas', description: 'Elementos de aire y extracción concebidos como presencia arquitectónica.', image: '/images/elem-editorial/campana-suspendida-elem.png', alt: 'Campana suspendida ELEM de geometría rectangular' },
-  { title: 'Soluciones personalizadas', href: '/colecciones/soluciones-personalizadas', description: 'Elementos diseñados, coordinados y fabricados para una arquitectura específica.', image: '/images/elem-editorial/fabricacion-planta-elem.png', alt: 'Planta de fabricación metálica ELEM' },
+  { title: 'Cocinas', href: '/colecciones/cocinas', description: 'Elementos de trabajo, encuentro y materia integrados en una sola arquitectura.', image: '/images/elem-editorial/cocina-isla-frontal-hd.png', alt: 'Cocina ELEM de acero oscuro con isla central y cubierta de mármol' },
+  { title: 'Parrillas', href: '/colecciones/parrillas', description: 'Elementos que ordenan el fuego y lo convierten en el centro del espacio.', image: '/images/elem-editorial/cocina-exterior-atardecer-hd.png', alt: 'Parrilla ELEM integrada en una cocina exterior frente al mar' },
+  { title: 'Campanas', href: '/colecciones/campanas', description: 'Elementos de aire y extracción concebidos como presencia arquitectónica.', image: '/images/elem-editorial/campana-suspendida-elem-hd.png', alt: 'Campana suspendida ELEM de geometría rectangular' },
+  { title: 'Soluciones personalizadas', href: '/colecciones/soluciones-personalizadas', description: 'Elementos diseñados, coordinados y fabricados para una arquitectura específica.', image: '/images/elem-editorial/fabricacion-planta-elem-hd.png', alt: 'Planta de fabricación metálica ELEM' },
 ];
 
 export default function CollectionsPage() {

@@ -6,7 +6,7 @@ export function HeroCarousel() {
   return (
     <section data-ambient="coast" className="ambient-frame relative isolate mt-20 min-h-[calc(100svh-5rem)] overflow-hidden bg-[#090909] text-white">
       <Image
-        src="/images/elem-editorial/cocina-exterior-atardecer.png"
+        src="/images/elem-editorial/cocina-exterior-atardecer-hd.png"
         alt="Cocina exterior ELEM con parrilla integrada frente al mar al atardecer"
         fill
         priority

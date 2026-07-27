@@ -71,25 +71,25 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
     })),
     ...(isLumen ? [
       {
-        src: '/images/elem-editorial/cocina-exterior-atardecer.png',
+        src: '/images/elem-editorial/cocina-exterior-atardecer-hd.png',
         alt: 'Parrilla ELEM integrada en una cocina exterior frente al mar al atardecer',
         label: 'Atmósfera de colección',
         caption: 'El fuego como elemento central del exterior',
       },
       {
-        src: '/images/elem-editorial/parrilla-interior-iluminada.png',
+        src: '/images/elem-editorial/parrilla-interior-iluminada-hd.png',
         alt: 'Interior iluminado de parrilla ELEM con sistema de asador',
         label: 'Interior del elemento',
         caption: 'Luz, fuego y mecanismos integrados',
       },
       {
-        src: '/images/elem-editorial/perilla-mecanizada.png',
+        src: '/images/elem-editorial/perilla-mecanizada-hd.png',
         alt: 'Perilla circular mecanizada en metal',
         label: 'Detalle material',
         caption: 'Control táctil y precisión mecanizada',
       },
       {
-        src: '/images/elem-editorial/cocina-terraza-atardecer.png',
+        src: '/images/elem-editorial/cocina-terraza-atardecer-hd.png',
         alt: 'Cocina exterior ELEM integrada a una terraza al atardecer',
         label: 'El elemento en arquitectura',
         caption: 'Una composición continua entre cocina, agua y paisaje',

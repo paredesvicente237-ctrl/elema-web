@@ -43,7 +43,7 @@ export default function HomePage() {
 
           <div className="mt-14 grid gap-4 lg:grid-cols-[1.18fr_0.82fr]">
             <figure data-reveal data-ambient="coast" className="ambient-frame relative min-h-[520px] overflow-hidden bg-[#171717] lg:min-h-[720px]">
-              <Image src="/images/elem-editorial/cocina-terraza-atardecer.png" alt="Cocina exterior ELEM integrada a una terraza frente al mar" fill sizes="(min-width: 1024px) 58vw, 100vw" className="ambient-media ambient-media--push object-cover object-center" />
+              <Image src="/images/elem-editorial/cocina-terraza-atardecer-hd.png" alt="Cocina exterior ELEM integrada a una terraza frente al mar" fill sizes="(min-width: 1024px) 58vw, 100vw" className="ambient-media ambient-media--push object-cover object-center" />
               <span className="ambient-light ambient-light--studio" aria-hidden="true" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-black/5" />
               <figcaption className="absolute inset-x-0 bottom-0 z-10 flex items-end justify-between gap-5 p-6 text-white sm:p-8">
@@ -54,7 +54,7 @@ export default function HomePage() {
 
             <div className="grid gap-4">
               <figure data-reveal data-ambient="daylight" className="ambient-frame relative min-h-[480px] overflow-hidden bg-[#171717] lg:min-h-0">
-                <Image src="/images/elem-editorial/cocina-isla-marmol.png" alt="Cocina ELEM con isla monolítica de mármol y acero oscuro" fill sizes="(min-width: 1024px) 40vw, 100vw" className="ambient-media ambient-media--detail object-cover object-center" />
+                <Image src="/images/elem-editorial/cocina-isla-marmol-hd.png" alt="Cocina ELEM con isla monolítica de mármol y acero oscuro" fill sizes="(min-width: 1024px) 40vw, 100vw" className="ambient-media ambient-media--detail object-cover object-center" />
                 <span className="ambient-light ambient-light--daylight" aria-hidden="true" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-transparent" />
                 <figcaption className="absolute inset-x-0 bottom-0 z-10 flex items-end justify-between gap-5 p-6 text-white sm:p-8">
@@ -71,7 +71,7 @@ export default function HomePage() {
                 </div>
 
                 <figure data-reveal className="group relative min-h-[280px] overflow-hidden bg-[#090909] xl:min-h-0">
-                  <Image src="/images/elem-editorial/campana-suspendida-elem.png" alt="Campana suspendida ELEM iluminada sobre fondo oscuro" fill sizes="(min-width: 1280px) 20vw, (min-width: 1024px) 40vw, 100vw" className="object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.02]" />
+                  <Image src="/images/elem-editorial/campana-suspendida-elem-hd.png" alt="Campana suspendida ELEM iluminada sobre fondo oscuro" fill sizes="(min-width: 1280px) 20vw, (min-width: 1024px) 40vw, 100vw" className="object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.02]" />
                   <figcaption className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 bg-gradient-to-t from-black/80 to-transparent p-5 pt-20 text-white">
                     <span className="font-serif text-2xl leading-none">El aire como elemento</span>
                     <span className="shrink-0 text-[0.52rem] uppercase tracking-[0.2em] text-white/60">Escena 03</span>
@@ -174,7 +174,7 @@ export default function HomePage() {
           <div data-reveal className="mt-14 grid gap-4 lg:grid-cols-[1.15fr_0.85fr]">
             <figure className="group overflow-hidden bg-[#111]">
               <div className="relative aspect-[3/1]">
-                <Image src="/images/elem-editorial/fabricacion-planta-elem.png" alt="Planta de fabricación metálica ELEM" fill sizes="(min-width: 1024px) 57vw, 100vw" className="object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.015]" />
+                <Image src="/images/elem-editorial/fabricacion-planta-elem-hd.png" alt="Planta de fabricación metálica ELEM" fill sizes="(min-width: 1024px) 57vw, 100vw" className="object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.015]" />
               </div>
               <figcaption className="flex justify-between border-t border-white/10 px-5 py-4 text-[0.56rem] uppercase tracking-[0.22em] text-white/55">
                 <span>Planta de fabricación</span><span>Escala</span>
@@ -182,7 +182,7 @@ export default function HomePage() {
             </figure>
             <figure data-ambient="fire" className="ambient-frame group flex flex-col overflow-hidden bg-[#111]">
               <div className="relative aspect-[2.7/1] lg:aspect-auto lg:min-h-0 lg:flex-1">
-                <Image src="/images/elem-editorial/fabricacion-corte-laser.png" alt="Corte láser de una plancha de acero con proyección de chispas" fill sizes="(min-width: 1024px) 42vw, 100vw" className="ambient-media ambient-media--detail object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.015]" />
+                <Image src="/images/elem-editorial/fabricacion-corte-laser-hd.png" alt="Corte láser de una plancha de acero con proyección de chispas" fill sizes="(min-width: 1024px) 42vw, 100vw" className="ambient-media ambient-media--detail object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.015]" />
                 <span className="ambient-particles ambient-particles--sparks" aria-hidden="true" />
               </div>
               <figcaption className="flex justify-between border-t border-white/10 px-5 py-4 text-[0.56rem] uppercase tracking-[0.22em] text-white/55">
@@ -199,7 +199,7 @@ export default function HomePage() {
 
       <section className="bg-[#f4f1ea] px-4 py-24 sm:px-6 lg:px-8 lg:py-32">
         <div data-reveal data-ambient="daylight" className="ambient-frame relative mx-auto min-h-[560px] max-w-7xl overflow-hidden bg-[#111] text-white lg:min-h-[680px]">
-          <Image src="/images/elem-editorial/cocina-isla-frontal.png" alt="Cocina ELEM en acero oscuro y mármol iluminada frontalmente" fill sizes="100vw" className="ambient-media ambient-media--push object-cover object-center opacity-75" />
+          <Image src="/images/elem-editorial/cocina-isla-frontal-hd.png" alt="Cocina ELEM en acero oscuro y mármol iluminada frontalmente" fill sizes="100vw" className="ambient-media ambient-media--push object-cover object-center opacity-75" />
           <span className="ambient-light ambient-light--daylight" aria-hidden="true" />
           <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(7,8,9,0.82)_0%,rgba(7,8,9,0.48)_55%,rgba(7,8,9,0.16)_100%)]" />
           <div className="relative z-10 flex min-h-[560px] flex-col justify-between p-7 sm:p-10 lg:min-h-[680px] lg:p-14">

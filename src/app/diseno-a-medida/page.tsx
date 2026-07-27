@@ -20,12 +20,12 @@ export default function CustomDesignPage() {
             <p className="mt-6 text-lg leading-8 text-[#57514b]">Cada proyecto avanza desde una necesidad concreta hasta una composición fabricable, donde proporción, materia, tolerancias y montaje responden a una sola intención.</p>
           </div>
           <div className="overflow-hidden border border-black/10 bg-[#e3ddd3] shadow-[0_24px_70px_rgba(20,16,10,0.10)]">
-            <Image src="/images/elem-editorial/cocina-isla-marmol.png" alt="Cocina ELEM con isla monolítica de mármol y acero oscuro" width={788} height={1040} sizes="(min-width: 1024px) 58vw, 100vw" className="aspect-[16/10] w-full object-cover" priority />
+            <Image src="/images/elem-editorial/cocina-isla-marmol-hd.png" alt="Cocina ELEM con isla monolítica de mármol y acero oscuro" width={1089} height={1445} sizes="(min-width: 1024px) 58vw, 100vw" className="aspect-[16/10] w-full object-cover" priority />
           </div>
         </div>
         <figure className="mt-10 overflow-hidden bg-[#111] text-white">
           <div className="relative aspect-[2.7/1]">
-            <Image src="/images/elem-editorial/fabricacion-corte-laser.png" alt="Proceso de corte láser sobre una plancha de acero" fill sizes="100vw" className="object-cover" />
+            <Image src="/images/elem-editorial/fabricacion-corte-laser-hd.png" alt="Proceso de corte láser sobre una plancha de acero" fill sizes="100vw" className="object-cover" />
           </div>
           <figcaption className="flex flex-col gap-2 border-t border-white/10 px-5 py-4 text-[0.58rem] uppercase tracking-[0.22em] text-white/55 sm:flex-row sm:justify-between">
             <span>Del diseño al material</span><span>Corte · Plegado · Armado · Terminación</span>

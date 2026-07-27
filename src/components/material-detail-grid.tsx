@@ -2,32 +2,32 @@ import Image from 'next/image';
 
 const details = [
   {
-    src: '/images/elem-editorial/marca-acero-cepillado.png',
+    src: '/images/elem-editorial/marca-acero-cepillado-hd.png',
     alt: 'Nombre ELEM grabado sobre acero cepillado',
     label: 'Identidad material',
   },
   {
-    src: '/images/elem-editorial/union-acero-soldada.png',
+    src: '/images/elem-editorial/union-acero-soldada-hd.png',
     alt: 'Unión soldada de dos planos de acero oscuro',
     label: 'Unión',
   },
   {
-    src: '/images/elem-editorial/perilla-mecanizada.png',
+    src: '/images/elem-editorial/perilla-mecanizada-hd.png',
     alt: 'Perilla circular mecanizada en metal',
     label: 'Mecanizado',
   },
   {
-    src: '/images/elem-editorial/manilla-metalica.png',
+    src: '/images/elem-editorial/manilla-metalica-hd.png',
     alt: 'Manilla metálica moleteada de terminación precisa',
     label: 'Contacto',
   },
   {
-    src: '/images/elem-editorial/encuentro-panel-metalico.png',
+    src: '/images/elem-editorial/encuentro-panel-metalico-hd.png',
     alt: 'Encuentro limpio entre paneles metálicos oscuros',
     label: 'Encuentro',
   },
   {
-    src: '/images/elem-editorial/perforado-marca-elem.png',
+    src: '/images/elem-editorial/perforado-marca-elem-hd.png',
     alt: 'Panel metálico perforado con emblema ELEM',
     label: 'Ventilación',
   },
