@@ -2,10 +2,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 const collections = [
-  { title: 'Cocinas', href: '/colecciones/cocinas', description: 'Elementos de trabajo, encuentro y materia integrados en una sola arquitectura.', image: '/images/cocina-aurora.png' },
-  { title: 'Parrillas', href: '/colecciones/parrillas', description: 'Elementos que ordenan el fuego y lo convierten en el centro del espacio.', image: '/images/parrilla-lumen.png' },
-  { title: 'Campanas', href: '/colecciones/campanas', description: 'Elementos de aire y extracción concebidos como presencia arquitectónica.', image: '/images/campana-noctis.png' },
-  { title: 'Soluciones personalizadas', href: '/colecciones/soluciones-personalizadas', description: 'Elementos diseñados, coordinados y fabricados para una arquitectura específica.', image: '/images/editorial-diseno.jpg' },
+  { title: 'Cocinas', href: '/colecciones/cocinas', description: 'Elementos de trabajo, encuentro y materia integrados en una sola arquitectura.', image: '/images/elem-editorial/cocina-isla-frontal.png', alt: 'Cocina ELEM de acero oscuro con isla central y cubierta de mármol' },
+  { title: 'Parrillas', href: '/colecciones/parrillas', description: 'Elementos que ordenan el fuego y lo convierten en el centro del espacio.', image: '/images/elem-editorial/cocina-exterior-atardecer.png', alt: 'Parrilla ELEM integrada en una cocina exterior frente al mar' },
+  { title: 'Campanas', href: '/colecciones/campanas', description: 'Elementos de aire y extracción concebidos como presencia arquitectónica.', image: '/images/elem-editorial/campana-suspendida-elem.png', alt: 'Campana suspendida ELEM de geometría rectangular' },
+  { title: 'Soluciones personalizadas', href: '/colecciones/soluciones-personalizadas', description: 'Elementos diseñados, coordinados y fabricados para una arquitectura específica.', image: '/images/elem-editorial/fabricacion-planta-elem.png', alt: 'Planta de fabricación metálica ELEM' },
 ];
 
 export default function CollectionsPage() {
@@ -23,7 +23,7 @@ export default function CollectionsPage() {
           {collections.map((collection, index) => (
             <Link key={collection.title} href={collection.href} className={`group grid gap-6 lg:grid-cols-12 lg:items-end ${index % 2 ? 'lg:[&>div:first-child]:order-2' : ''}`}>
               <div className="overflow-hidden bg-[#171717] lg:col-span-8">
-                <Image src={collection.image} alt="" width={1400} height={900} className="aspect-[16/10] w-full object-cover transition duration-700 group-hover:scale-[1.02]" />
+                <Image src={collection.image} alt={collection.alt} width={1400} height={900} sizes="(min-width: 1024px) 66vw, 100vw" priority={index === 0} className="aspect-[16/10] w-full object-cover transition duration-700 group-hover:scale-[1.02]" />
               </div>
               <div className="border-t border-black/20 pt-5 lg:col-span-4 lg:pb-4">
                 <p className="text-[0.68rem] uppercase tracking-[0.35em] text-[#777067]">0{index + 1} · Colección</p>

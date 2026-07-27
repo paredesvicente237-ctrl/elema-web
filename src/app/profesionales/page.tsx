@@ -19,7 +19,7 @@ export default function ProfessionalsPage() {
             <p className="mt-6 text-lg leading-8 text-[#57514b]">Colaboramos con arquitectos, diseñadores y constructoras para transformar planos, prototipos y requerimientos funcionales en conjuntos fabricables.</p>
           </div>
           <div className="overflow-hidden border border-black/10 bg-[#e3ddd3] shadow-[0_24px_70px_rgba(20,16,10,0.10)]">
-            <Image src="/images/editorial-profesionales.jpg" alt="Equipo profesional revisando planos junto a un elemento metálico" width={1536} height={1024} className="aspect-[16/10] w-full object-cover" priority />
+            <Image src="/images/elem-editorial/fabricacion-planta-elem.png" alt="Planta ELEM preparada para fabricar conjuntos metálicos" width={1278} height={364} sizes="(min-width: 1024px) 58vw, 100vw" className="aspect-[3/1] w-full object-cover" priority />
           </div>
         </div>
         <div className="mt-10 grid gap-6 md:grid-cols-2">

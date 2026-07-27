@@ -5,6 +5,7 @@ import { availableProducts } from '@/data/products';
 import { HeroCarousel } from '@/components/hero-carousel';
 import { MotionController } from '@/components/motion-controller';
 import { AddToCartButton } from '@/components/add-to-cart-button';
+import { MaterialDetailGrid } from '@/components/material-detail-grid';
 
 const projectStages = [
   { number: '01', title: 'Leer el espacio', detail: 'Uso, escala y arquitectura revelan los elementos que el proyecto necesita.' },
@@ -41,31 +42,41 @@ export default function HomePage() {
           </div>
 
           <div className="mt-14 grid gap-4 lg:grid-cols-[1.18fr_0.82fr]">
-            <figure data-reveal data-ambient="studio" className="ambient-frame relative min-h-[520px] overflow-hidden bg-[#171717] lg:min-h-[720px]">
-              <Image src="/images/elema-generated/elema-concepto-campana-suspendida-v1.png" alt="Visualización conceptual de una campana suspendida en acero oscuro" fill sizes="(min-width: 1024px) 58vw, 100vw" className="ambient-media ambient-media--push object-cover object-[56%_center]" />
+            <figure data-reveal data-ambient="coast" className="ambient-frame relative min-h-[520px] overflow-hidden bg-[#171717] lg:min-h-[720px]">
+              <Image src="/images/elem-editorial/cocina-terraza-atardecer.png" alt="Cocina exterior ELEM integrada a una terraza frente al mar" fill sizes="(min-width: 1024px) 58vw, 100vw" className="ambient-media ambient-media--push object-cover object-center" />
               <span className="ambient-light ambient-light--studio" aria-hidden="true" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-black/5" />
               <figcaption className="absolute inset-x-0 bottom-0 z-10 flex items-end justify-between gap-5 p-6 text-white sm:p-8">
-                <span className="font-serif text-3xl leading-none sm:text-4xl">Campana suspendida</span>
-                <span className="shrink-0 text-[0.58rem] uppercase tracking-[0.24em] text-white/70">Concepto 01</span>
+                <span className="font-serif text-3xl leading-none sm:text-4xl">Arquitectura exterior</span>
+                <span className="shrink-0 text-[0.58rem] uppercase tracking-[0.24em] text-white/70">Escena 01</span>
               </figcaption>
             </figure>
 
-            <div className="grid gap-4 lg:grid-rows-[1fr_auto]">
+            <div className="grid gap-4">
               <figure data-reveal data-ambient="daylight" className="ambient-frame relative min-h-[480px] overflow-hidden bg-[#171717] lg:min-h-0">
-                <Image src="/images/elema-generated/elema-concepto-isla-monolitica-v1.png" alt="Visualización conceptual de una isla monolítica de acero frente al mar" fill sizes="(min-width: 1024px) 40vw, 100vw" className="ambient-media ambient-media--detail object-cover object-[46%_center]" />
+                <Image src="/images/elem-editorial/cocina-isla-marmol.png" alt="Cocina ELEM con isla monolítica de mármol y acero oscuro" fill sizes="(min-width: 1024px) 40vw, 100vw" className="ambient-media ambient-media--detail object-cover object-center" />
                 <span className="ambient-light ambient-light--daylight" aria-hidden="true" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-transparent" />
                 <figcaption className="absolute inset-x-0 bottom-0 z-10 flex items-end justify-between gap-5 p-6 text-white sm:p-8">
-                  <span className="font-serif text-3xl leading-none">Isla monolítica</span>
-                  <span className="shrink-0 text-[0.58rem] uppercase tracking-[0.24em] text-white/70">Concepto 02</span>
+                  <span className="font-serif text-3xl leading-none">Cocina monolítica</span>
+                  <span className="shrink-0 text-[0.58rem] uppercase tracking-[0.24em] text-white/70">Escena 02</span>
                 </figcaption>
               </figure>
 
-              <div data-reveal className="bg-[#171717] p-7 text-white sm:p-8">
-                <p className="text-[0.58rem] uppercase tracking-[0.25em] text-white/50">Elementos propios, no fórmulas</p>
-                <h3 className="mt-5 max-w-md font-serif text-3xl leading-[0.98] sm:text-4xl">Cada proyecto combina sus elementos para formar una solución irrepetible.</h3>
-                <Link href="/diseno-a-medida" className="mt-7 inline-flex items-center gap-3 text-[0.66rem] uppercase tracking-[0.23em] text-[#e9e3d9] transition-colors hover:text-white">Componer un elemento <ArrowRight size={13} /></Link>
+              <div className="grid gap-4 xl:grid-cols-2">
+                <div data-reveal className="bg-[#171717] p-7 text-white sm:p-8">
+                  <p className="text-[0.58rem] uppercase tracking-[0.25em] text-white/50">Elementos propios, no fórmulas</p>
+                  <h3 className="mt-5 max-w-md font-serif text-3xl leading-[0.98]">Cada proyecto combina sus elementos para formar una solución irrepetible.</h3>
+                  <Link href="/diseno-a-medida" className="mt-7 inline-flex items-center gap-3 text-[0.66rem] uppercase tracking-[0.23em] text-[#e9e3d9] transition-colors hover:text-white">Componer un elemento <ArrowRight size={13} /></Link>
+                </div>
+
+                <figure data-reveal className="group relative min-h-[280px] overflow-hidden bg-[#090909] xl:min-h-0">
+                  <Image src="/images/elem-editorial/campana-suspendida-elem.png" alt="Campana suspendida ELEM iluminada sobre fondo oscuro" fill sizes="(min-width: 1280px) 20vw, (min-width: 1024px) 40vw, 100vw" className="object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.02]" />
+                  <figcaption className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 bg-gradient-to-t from-black/80 to-transparent p-5 pt-20 text-white">
+                    <span className="font-serif text-2xl leading-none">El aire como elemento</span>
+                    <span className="shrink-0 text-[0.52rem] uppercase tracking-[0.2em] text-white/60">Escena 03</span>
+                  </figcaption>
+                </figure>
               </div>
             </div>
           </div>
@@ -143,37 +154,52 @@ export default function HomePage() {
 
       <section className="bg-white px-4 py-24 sm:px-6 lg:px-8 lg:py-36">
         <div className="mx-auto max-w-7xl">
-          <div className="grid gap-12 lg:grid-cols-[1.12fr_0.88fr] lg:items-start">
-            <div data-reveal data-ambient="studio" className="ambient-frame relative min-h-[520px] overflow-hidden bg-[#171717] lg:min-h-[720px]">
-              <Image src="/images/elema-generated/taller-precision-editorial.webp" alt="Trabajo de precisión sobre un elemento de acero" fill sizes="(min-width: 1024px) 57vw, 100vw" className="ambient-media ambient-media--detail object-cover" />
-              <span className="ambient-light ambient-light--studio" aria-hidden="true" />
-              <span className="ambient-particles ambient-particles--sparks" aria-hidden="true" />
-            </div>
-
-            <div data-reveal className="lg:px-7 lg:pt-6">
+          <div className="grid gap-12 border-t border-black/15 pt-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
+            <div data-reveal>
               <p className="text-[0.62rem] uppercase tracking-[0.32em] text-[#80786f]">03 · Elementos de fabricación</p>
               <h2 className="mt-5 max-w-xl font-serif text-5xl leading-[0.94] sm:text-6xl">La precisión une cada elemento.</h2>
               <p className="mt-7 max-w-lg text-base leading-8 text-[#56514b]">Materiales, tolerancias, uniones y terminaciones se resuelven por separado para funcionar como un conjunto exacto.</p>
+            </div>
 
-              <ul className="mt-10 border-t border-black/15">
+            <div data-reveal>
+              <ul className="border-t border-black/15">
                 {capabilities.map((capability, index) => (
                   <li key={capability} className="flex items-center justify-between border-b border-black/15 py-4 text-sm text-[#35312d]"><span>{capability}</span><span className="font-serif text-lg text-[#9a9186]">0{index + 1}</span></li>
                 ))}
               </ul>
-
-              <div data-ambient="material" className="ambient-frame relative mt-10 overflow-hidden bg-[#171717]">
-                <Image src="/images/elema-generated/material-acero-piedra.webp" alt="Encuentro de acero cepillado y piedra clara" width={1774} height={887} className="ambient-media ambient-media--detail aspect-[2/1] w-full object-cover" />
-                <span className="ambient-light ambient-light--material" aria-hidden="true" />
-              </div>
               <Link href="/nosotros" className="mt-8 inline-flex items-center gap-3 text-[0.68rem] uppercase tracking-[0.25em] transition-colors hover:text-[#6c655e]">Conocer el principio ELEM <ArrowRight size={13} /></Link>
             </div>
+          </div>
+
+          <div data-reveal className="mt-14 grid gap-4 lg:grid-cols-[1.15fr_0.85fr]">
+            <figure className="group overflow-hidden bg-[#111]">
+              <div className="relative aspect-[3/1]">
+                <Image src="/images/elem-editorial/fabricacion-planta-elem.png" alt="Planta de fabricación metálica ELEM" fill sizes="(min-width: 1024px) 57vw, 100vw" className="object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.015]" />
+              </div>
+              <figcaption className="flex justify-between border-t border-white/10 px-5 py-4 text-[0.56rem] uppercase tracking-[0.22em] text-white/55">
+                <span>Planta de fabricación</span><span>Escala</span>
+              </figcaption>
+            </figure>
+            <figure data-ambient="fire" className="ambient-frame group flex flex-col overflow-hidden bg-[#111]">
+              <div className="relative aspect-[2.7/1] lg:aspect-auto lg:min-h-0 lg:flex-1">
+                <Image src="/images/elem-editorial/fabricacion-corte-laser.png" alt="Corte láser de una plancha de acero con proyección de chispas" fill sizes="(min-width: 1024px) 42vw, 100vw" className="ambient-media ambient-media--detail object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.015]" />
+                <span className="ambient-particles ambient-particles--sparks" aria-hidden="true" />
+              </div>
+              <figcaption className="flex justify-between border-t border-white/10 px-5 py-4 text-[0.56rem] uppercase tracking-[0.22em] text-white/55">
+                <span>Corte láser</span><span>Precisión</span>
+              </figcaption>
+            </figure>
+          </div>
+
+          <div data-reveal className="mt-4">
+            <MaterialDetailGrid />
           </div>
         </div>
       </section>
 
       <section className="bg-[#f4f1ea] px-4 py-24 sm:px-6 lg:px-8 lg:py-32">
         <div data-reveal data-ambient="daylight" className="ambient-frame relative mx-auto min-h-[560px] max-w-7xl overflow-hidden bg-[#111] text-white lg:min-h-[680px]">
-          <Image src="/images/elema-generated/campana-noctis-editorial.webp" alt="" fill sizes="100vw" className="ambient-media ambient-media--push object-cover object-center opacity-75" />
+          <Image src="/images/elem-editorial/cocina-isla-frontal.png" alt="Cocina ELEM en acero oscuro y mármol iluminada frontalmente" fill sizes="100vw" className="ambient-media ambient-media--push object-cover object-center opacity-75" />
           <span className="ambient-light ambient-light--daylight" aria-hidden="true" />
           <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(7,8,9,0.82)_0%,rgba(7,8,9,0.48)_55%,rgba(7,8,9,0.16)_100%)]" />
           <div className="relative z-10 flex min-h-[560px] flex-col justify-between p-7 sm:p-10 lg:min-h-[680px] lg:p-14">

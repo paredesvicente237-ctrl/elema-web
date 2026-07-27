@@ -71,16 +71,28 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
     })),
     ...(isLumen ? [
       {
-        src: '/images/elema-generated/parrilla-montana-hero.webp',
-        alt: 'Parrilla arquitectónica integrada en una terraza de montaña al atardecer',
+        src: '/images/elem-editorial/cocina-exterior-atardecer.png',
+        alt: 'Parrilla ELEM integrada en una cocina exterior frente al mar al atardecer',
         label: 'Atmósfera de colección',
         caption: 'El fuego como elemento central del exterior',
       },
       {
-        src: '/images/elema-generated/material-acero-piedra.webp',
-        alt: 'Encuentro de acero cepillado y piedra clara',
-        label: 'Referencia material',
-        caption: 'Acero, piedra y precisión entre elementos',
+        src: '/images/elem-editorial/parrilla-interior-iluminada.png',
+        alt: 'Interior iluminado de parrilla ELEM con sistema de asador',
+        label: 'Interior del elemento',
+        caption: 'Luz, fuego y mecanismos integrados',
+      },
+      {
+        src: '/images/elem-editorial/perilla-mecanizada.png',
+        alt: 'Perilla circular mecanizada en metal',
+        label: 'Detalle material',
+        caption: 'Control táctil y precisión mecanizada',
+      },
+      {
+        src: '/images/elem-editorial/cocina-terraza-atardecer.png',
+        alt: 'Cocina exterior ELEM integrada a una terraza al atardecer',
+        label: 'El elemento en arquitectura',
+        caption: 'Una composición continua entre cocina, agua y paisaje',
       },
     ] satisfies ProductGalleryImage[] : []),
   ];
