@@ -7,6 +7,7 @@ import { usePathname } from 'next/navigation';
 import { CircleUserRound, Menu, ShoppingBag, X } from 'lucide-react';
 
 const navItems = [
+  { label: 'Inicio', href: '/' },
   { label: 'Colecciones', href: '/colecciones' },
   { label: 'Elementos', href: '/tienda' },
   { label: 'A medida', href: '/diseno-a-medida' },
