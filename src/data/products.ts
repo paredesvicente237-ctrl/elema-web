@@ -219,7 +219,7 @@ export const products: Product[] = [
     category: 'Parrillas',
     shortDescription: 'Fuego, superficie y guardado reunidos en un elemento móvil.',
     description: 'Una parrilla de gran formato que reúne cocción, plancha y almacenamiento en un solo elemento móvil para espacios exteriores.',
-    price: 699990,
+    price: 899990,
     images: [
       '/images/products/parrilla-multiuso-movil/parrilla-multiuso-movil-frontal.png',
       '/images/products/parrilla-multiuso-movil/parrilla-multiuso-movil-tres-cuartos.png',
