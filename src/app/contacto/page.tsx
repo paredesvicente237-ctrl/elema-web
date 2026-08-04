@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -12,6 +12,15 @@ export default function ContactPage() {
   const [submitState, setSubmitState] = useState<SubmitState>('idle');
   const [feedback, setFeedback] = useState('');
   const [whatsappUrl, setWhatsappUrl] = useState('https://wa.me/56930751812');
+  const [interest, setInterest] = useState('');
+  const [message, setMessage] = useState('');
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const product = params.get('producto');
+    setInterest((params.get('interes') ?? product?.replaceAll('-', ' ') ?? '').slice(0, 160));
+    setMessage((params.get('mensaje') ?? '').slice(0, 1200));
+  }, []);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -52,6 +61,8 @@ export default function ContactPage() {
       }
 
       form.reset();
+      setInterest('');
+      setMessage('');
       setSubmitState('success');
       setFeedback('Recibimos los elementos de tu proyecto. El equipo ELEM revisará la consulta y se pondrá en contacto contigo.');
     } catch {
@@ -90,12 +101,12 @@ export default function ContactPage() {
             <label className="text-sm text-[#57514b]">Tipo de cliente<select name="cliente" className="mt-2 w-full border border-black/15 bg-white px-4 py-3 outline-none transition focus:border-black/50"><option value="">Seleccionar</option>{clientTypes.map((type) => <option key={type} value={type}>{type}</option>)}</select></label>
             <label className="text-sm text-[#57514b]">Tipo de proyecto<select name="proyecto" className="mt-2 w-full border border-black/15 bg-white px-4 py-3 outline-none transition focus:border-black/50"><option value="">Seleccionar</option>{projectTypes.map((type) => <option key={type} value={type}>{type}</option>)}</select></label>
           </div>
-          <label className="mt-4 block text-sm text-[#57514b]">Elemento de interés<input name="interes" maxLength={160} className="mt-2 w-full border border-black/15 bg-white px-4 py-3 outline-none transition focus:border-black/50" /></label>
+          <label className="mt-4 block text-sm text-[#57514b]">Elemento de interés<input name="interes" value={interest} onChange={(event) => setInterest(event.target.value)} maxLength={160} className="mt-2 w-full border border-black/15 bg-white px-4 py-3 outline-none transition focus:border-black/50" /></label>
           <div className="mt-4 grid gap-4 sm:grid-cols-2">
             <label className="text-sm text-[#57514b]">Presupuesto aproximado<input name="presupuesto" maxLength={100} className="mt-2 w-full border border-black/15 bg-white px-4 py-3 outline-none transition focus:border-black/50" /></label>
             <label className="text-sm text-[#57514b]">Fecha estimada<input name="fecha" maxLength={100} className="mt-2 w-full border border-black/15 bg-white px-4 py-3 outline-none transition focus:border-black/50" /></label>
           </div>
-          <label className="mt-4 block text-sm text-[#57514b]">Mensaje<textarea name="mensaje" maxLength={1200} className="mt-2 min-h-32 w-full border border-black/15 bg-white px-4 py-3 outline-none transition focus:border-black/50" /></label>
+          <label className="mt-4 block text-sm text-[#57514b]">Mensaje<textarea name="mensaje" value={message} onChange={(event) => setMessage(event.target.value)} maxLength={1200} className="mt-2 min-h-32 w-full border border-black/15 bg-white px-4 py-3 outline-none transition focus:border-black/50" /></label>
           <label className="mt-4 flex min-h-11 items-start gap-3 text-sm text-[#625c55]"><input name="privacidad" type="checkbox" className="mt-1 h-5 w-5 shrink-0 accent-[#171717]" required /><span>Acepto la <Link href="/privacidad" className="underline underline-offset-4">política de privacidad</Link> y que ELEM me contacte por los datos indicados.</span></label>
           <button type="submit" disabled={submitState === 'submitting'} className="mt-6 inline-flex min-h-12 items-center justify-center bg-[#171717] px-6 py-3.5 text-xs uppercase tracking-[0.2em] text-white transition hover:bg-black disabled:cursor-wait disabled:opacity-60">
             {submitState === 'submitting' ? 'Enviando consulta…' : 'Compartir los elementos'}
