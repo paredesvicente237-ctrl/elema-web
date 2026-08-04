@@ -68,9 +68,9 @@ const modules: Record<StudioProduct, ModuleOption[]> = {
 };
 
 const finishOptions: Array<{ id: StudioFinish; label: string; detail: string; swatch: string }> = [
-  { id: 'grafito', label: 'Grafito', detail: 'Mate profundo', swatch: '#242625' },
-  { id: 'satinado', label: 'Satinado', detail: 'Acero luminoso', swatch: '#a9adac' },
-  { id: 'bronce', label: 'Bronce', detail: 'Metal cálido', swatch: '#5c4a3b' },
+  { id: 'satinado', label: 'Acero satinado', detail: 'Metal cepillado', swatch: '#d9dddb' },
+  { id: 'grafito', label: 'Acero grafito', detail: 'Metal oscuro', swatch: '#777d7b' },
+  { id: 'bronce', label: 'Bronce', detail: 'Metal cálido', swatch: '#a58b73' },
   { id: 'piedra', label: 'Piedra + acero', detail: 'Contraste mineral', swatch: '#d8d2c8' },
 ];
 
@@ -94,15 +94,15 @@ const dimensionRules: Record<StudioProduct, Record<'width' | 'depth' | 'height',
 
 const initialConfigs: Record<StudioProduct, StudioConfig> = {
   cocina: {
-    product: 'cocina', format: 'isla', finish: 'grafito', width: 3.2, depth: 0.72, height: 0.9,
+    product: 'cocina', format: 'isla', finish: 'satinado', width: 3.2, depth: 0.72, height: 0.9,
     modules: { lavaplatos: true, encimera: true, horno: true, cava: false, repisas: true, luz: true },
   },
   parrilla: {
-    product: 'parrilla', format: 'movil', finish: 'grafito', width: 1.8, depth: 0.82, height: 0.88,
+    product: 'parrilla', format: 'movil', finish: 'satinado', width: 1.8, depth: 0.82, height: 0.88,
     modules: { parrilla: true, plancha: false, puertas: true, asador: false, brasero: true, ruedas: true },
   },
   campana: {
-    product: 'campana', format: 'suspendida', finish: 'grafito', width: 1.5, depth: 0.62, height: 1.8,
+    product: 'campana', format: 'suspendida', finish: 'satinado', width: 1.5, depth: 0.62, height: 1.8,
     modules: { filtros: true, luz: true, panel: true, repisa: false },
   },
 };

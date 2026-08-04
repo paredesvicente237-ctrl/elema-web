@@ -26,10 +26,10 @@ type ViewportProps = {
 };
 
 const finishPalette: Record<StudioFinish, { color: string; metalness: number; roughness: number }> = {
-  grafito: { color: '#343736', metalness: 0.56, roughness: 0.29 },
-  satinado: { color: '#aeb2b1', metalness: 0.92, roughness: 0.18 },
-  bronce: { color: '#665142', metalness: 0.84, roughness: 0.25 },
-  piedra: { color: '#454846', metalness: 0.7, roughness: 0.31 },
+  grafito: { color: '#777d7b', metalness: 0.84, roughness: 0.28 },
+  satinado: { color: '#d9dddb', metalness: 0.86, roughness: 0.23 },
+  bronce: { color: '#a58b73', metalness: 0.86, roughness: 0.25 },
+  piedra: { color: '#969b99', metalness: 0.8, roughness: 0.3 },
 };
 
 export function ThreeStudioViewport({ config, view, sceneMode }: ViewportProps) {
@@ -144,7 +144,7 @@ function CameraRig({ config, view }: { config: StudioConfig; view: StudioView })
 
 function FinishMaterial({ finish, offset = 0 }: { finish: StudioFinish; offset?: number }) {
   const material = finishPalette[finish];
-  return <meshPhysicalMaterial color={material.color} metalness={material.metalness} roughness={Math.min(1, material.roughness + offset)} clearcoat={finish === 'satinado' ? 0.44 : 0.24} clearcoatRoughness={0.32} />;
+  return <meshPhysicalMaterial color={material.color} metalness={material.metalness} roughness={Math.min(1, material.roughness + offset)} envMapIntensity={1.65} clearcoat={finish === 'satinado' ? 0.62 : 0.38} clearcoatRoughness={0.2} />;
 }
 
 function StoneMaterial() {
@@ -309,7 +309,7 @@ function GrillModel({ config }: { config: StudioConfig }) {
 
       <mesh castShadow position={[0, cabinetTop + 0.025, 0]}>
         <boxGeometry args={[width + 0.05, 0.065, bodyDepth + 0.05]} />
-        <meshPhysicalMaterial color="#171918" metalness={0.74} roughness={0.3} clearcoat={0.25} />
+        <meshPhysicalMaterial color="#555b59" metalness={0.92} roughness={0.24} clearcoat={0.35} />
       </mesh>
 
       {config.modules.puertas !== false ? (
@@ -318,17 +318,17 @@ function GrillModel({ config }: { config: StudioConfig }) {
           <GrillMeshDoor width={doorWidth} height={cabinetHeight * 0.72} position={[width / 4, baseY + cabinetHeight * 0.46, bodyDepth / 2 + 0.026]} />
           <mesh position={[0, baseY + cabinetHeight * 0.36, 0]} receiveShadow>
             <boxGeometry args={[width * 0.84, 0.035, bodyDepth * 0.7]} />
-            <meshStandardMaterial color="#242625" metalness={0.6} roughness={0.42} />
+            <meshStandardMaterial color="#555b59" metalness={0.88} roughness={0.3} />
           </mesh>
         </>
       ) : null}
 
       <RoundedBox castShadow args={[width * 0.9, 0.27, bodyDepth * 0.78]} radius={0.025} smoothness={5} position={[0, fireboxY, 0]}>
-        <meshPhysicalMaterial color="#343736" metalness={0.9} roughness={0.2} clearcoat={0.38} clearcoatRoughness={0.2} />
+        <meshPhysicalMaterial color="#858b89" metalness={0.96} roughness={0.18} clearcoat={0.46} clearcoatRoughness={0.18} />
       </RoundedBox>
       <mesh castShadow position={[0, fireboxY, bodyDepth * 0.405]}>
         <boxGeometry args={[width * 0.84, 0.21, 0.026]} />
-        <meshPhysicalMaterial color="#777c7a" metalness={0.94} roughness={0.24} clearcoat={0.2} />
+        <meshPhysicalMaterial color="#b9bebb" metalness={0.98} roughness={0.16} clearcoat={0.4} clearcoatRoughness={0.18} />
       </mesh>
       <GrillBadge position={[-width * 0.27, fireboxY, bodyDepth * 0.425]} />
 
@@ -366,8 +366,8 @@ function GrillGrates({ width, depth, position }: { width: number; depth: number;
           <meshPhysicalMaterial color="#c7cac9" metalness={0.98} roughness={0.16} clearcoat={0.35} />
         </mesh>
       ))}
-      {[-1, 1].map((side) => <mesh key={side} position={[side * width / 2, -0.005, 0]}><boxGeometry args={[0.035, 0.045, depth + 0.05]} /><meshStandardMaterial color="#242625" metalness={0.82} roughness={0.28} /></mesh>)}
-      {[-1, 1].map((side) => <mesh key={side} position={[0, -0.005, side * depth / 2]}><boxGeometry args={[width + 0.05, 0.045, 0.035]} /><meshStandardMaterial color="#242625" metalness={0.82} roughness={0.28} /></mesh>)}
+      {[-1, 1].map((side) => <mesh key={side} position={[side * width / 2, -0.005, 0]}><boxGeometry args={[0.035, 0.045, depth + 0.05]} /><meshStandardMaterial color="#6f7573" metalness={0.94} roughness={0.22} /></mesh>)}
+      {[-1, 1].map((side) => <mesh key={side} position={[0, -0.005, side * depth / 2]}><boxGeometry args={[width + 0.05, 0.045, 0.035]} /><meshStandardMaterial color="#6f7573" metalness={0.94} roughness={0.22} /></mesh>)}
     </group>
   );
 }
@@ -378,13 +378,13 @@ function GrillMeshDoor({ width, height, position }: { width: number; height: num
   const diagonalLength = Math.min(meshHeight * 0.78, meshWidth * 0.82);
   return (
     <group position={position}>
-      <mesh position={[0, 0, -0.018]}><boxGeometry args={[width, height, 0.026]} /><meshStandardMaterial color="#111312" metalness={0.78} roughness={0.36} /></mesh>
-      {[-1, 1].map((x) => <mesh key={`v-${x}`} position={[x * width * 0.45, 0, 0.018]}><boxGeometry args={[0.045, height, 0.035]} /><meshStandardMaterial color="#232625" metalness={0.82} roughness={0.3} /></mesh>)}
-      {[-1, 1].map((y) => <mesh key={`h-${y}`} position={[0, y * height * 0.45, 0.018]}><boxGeometry args={[width, 0.045, 0.035]} /><meshStandardMaterial color="#232625" metalness={0.82} roughness={0.3} /></mesh>)}
+      <mesh position={[0, 0, -0.018]}><boxGeometry args={[width, height, 0.026]} /><meshStandardMaterial color="#303432" metalness={0.88} roughness={0.32} /></mesh>
+      {[-1, 1].map((x) => <mesh key={`v-${x}`} position={[x * width * 0.45, 0, 0.018]}><boxGeometry args={[0.045, height, 0.035]} /><meshStandardMaterial color="#565c5a" metalness={0.92} roughness={0.25} /></mesh>)}
+      {[-1, 1].map((y) => <mesh key={`h-${y}`} position={[0, y * height * 0.45, 0.018]}><boxGeometry args={[width, 0.045, 0.035]} /><meshStandardMaterial color="#565c5a" metalness={0.92} roughness={0.25} /></mesh>)}
       {Array.from({ length: 7 }).flatMap((_, index) => [-1, 1].map((direction) => (
         <mesh key={`${index}-${direction}`} position={[-meshWidth * 0.24 + (index / 6) * meshWidth * 0.48, 0, 0.024]} rotation={[0, 0, direction * 0.57]}>
           <boxGeometry args={[0.013, diagonalLength, 0.012]} />
-          <meshStandardMaterial color="#4b4e4d" metalness={0.88} roughness={0.27} />
+          <meshStandardMaterial color="#747a78" metalness={0.94} roughness={0.22} />
         </mesh>
       )))}
       <DoorHandle y={height * 0.34} />
