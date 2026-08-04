@@ -5,8 +5,8 @@ import { CustomDesignConfigurator } from '@/components/custom-design-configurato
 import { MotionController } from '@/components/motion-controller';
 
 export const metadata: Metadata = {
-  title: 'Configura tu proyecto a medida',
-  description: 'Elige una cocina, parrilla o campana y envía a ELEM una solicitud clara para recibir una propuesta personalizada y cotización.',
+  title: 'Estudio 3D para proyectos ELEM',
+  description: 'Construye una cocina, parrilla o campana en 3D, combina medidas, módulos y acabados, y envía tu configuración a ELEM.',
 };
 
 const steps = [
@@ -26,9 +26,9 @@ export default function CustomDesignPage() {
           <div className="grid gap-8 lg:grid-cols-[0.82fr_1.18fr] lg:items-end">
             <div data-reveal="left">
               <p className="text-sm uppercase tracking-[0.3em] text-[#77716a]">Proyectos a medida</p>
-              <h1 className="mt-4 font-serif text-5xl leading-[0.94] sm:text-6xl lg:text-7xl">Cuéntanos qué quieres. ELEM prepara la propuesta.</h1>
-              <p className="mt-6 max-w-xl text-lg leading-8 text-[#57514b]">En cuatro pasos puedes preparar una solicitud para una cocina, parrilla o campana. Después de enviarla, un especialista confirmará contigo las medidas y preparará una propuesta personalizada con cotización.</p>
-              <a href="#configurador" className="mt-8 inline-flex min-h-12 items-center border-b border-black/35 text-[0.66rem] uppercase tracking-[0.22em]">Configurar mi solicitud</a>
+              <h1 className="mt-4 font-serif text-5xl leading-[0.94] sm:text-6xl lg:text-7xl">Imagina el conjunto. Constrúyelo en 3D.</h1>
+              <p className="mt-6 max-w-xl text-lg leading-8 text-[#57514b]">Combina proporciones, módulos y materiales mientras observas cómo cambia tu cocina, parrilla o campana. ELEM convierte esa configuración inicial en una propuesta fabricable.</p>
+              <a href="#configurador" className="mt-8 inline-flex min-h-12 items-center border-b border-black/35 text-[0.66rem] uppercase tracking-[0.22em]">Abrir Estudio 3D</a>
             </div>
             <div data-reveal="right" className="overflow-hidden border border-black/10 bg-[#e3ddd3] shadow-[0_24px_70px_rgba(20,16,10,0.10)]">
               <Image src="/images/elem-editorial/cocina-isla-marmol-hd.png" alt="Cocina ELEM con isla monolítica de mármol y acero oscuro" width={1089} height={1445} sizes="(min-width: 1024px) 58vw, 100vw" className="aspect-[16/10] w-full object-cover" priority />
@@ -44,9 +44,9 @@ export default function CustomDesignPage() {
           <div data-reveal className="grid gap-8 border-b border-black/12 pb-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
             <div>
               <p className="text-[0.62rem] uppercase tracking-[0.28em] text-[#77716a]">Después de enviar</p>
-              <h2 className="mt-4 font-serif text-4xl leading-[0.96] sm:text-5xl">Así avanzamos desde tu solicitud hasta el proyecto.</h2>
+              <h2 className="mt-4 font-serif text-4xl leading-[0.96] sm:text-5xl">Del modelo conceptual al proyecto fabricable.</h2>
             </div>
-            <p className="max-w-2xl text-base leading-8 text-[#5d574f]">Nada se fabrica ni se cobra automáticamente. Primero revisamos contigo el espacio, el alcance y la factibilidad. El diseño técnico comienza únicamente después de aprobar la propuesta y la cotización.</p>
+            <p className="max-w-2xl text-base leading-8 text-[#5d574f]">La configuración 3D ayuda a comunicar tu intención, pero no reemplaza un levantamiento ni un plano técnico. Primero revisamos contigo el espacio, el alcance y la factibilidad. El diseño comienza únicamente después de aprobar la propuesta y la cotización.</p>
           </div>
 
           <figure data-reveal className="mt-10 overflow-hidden bg-[#111] text-white">

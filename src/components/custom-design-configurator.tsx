@@ -1,351 +1,342 @@
-"use client";
+'use client';
 
-import Image from 'next/image';
+import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { useMemo, useState } from 'react';
-import { ArrowLeft, ArrowRight, Check, RotateCcw } from 'lucide-react';
+import { ArrowRight, Box, Check, Eye, Moon, Redo2, Rotate3D, RotateCcw, Ruler, Save, SlidersHorizontal, Sun, Undo2 } from 'lucide-react';
+import type { SceneMode, StudioConfig, StudioFinish, StudioProduct, StudioView } from './three-studio-viewport';
 
-type ElementKind = 'cocina' | 'parrilla' | 'campana';
+const ThreeStudioViewport = dynamic(
+  () => import('./three-studio-viewport').then((module) => module.ThreeStudioViewport),
+  {
+    ssr: false,
+    loading: () => <div className="grid h-full min-h-[30rem] place-items-center bg-[#d9d4cb] text-[0.62rem] uppercase tracking-[0.2em] text-[#69635c]">Preparando estudio 3D…</div>,
+  },
+);
 
-type Choice = {
-  id: string;
-  label: string;
-  description: string;
+type FormatOption = { id: string; label: string; description: string };
+type ModuleOption = { id: string; label: string; description: string };
+type Timeline = { items: StudioConfig[]; index: number };
+
+const productLabels: Record<StudioProduct, string> = {
+  cocina: 'Cocina',
+  parrilla: 'Parrilla',
+  campana: 'Campana',
 };
 
-type ElementChoice = Choice & { id: ElementKind; image: string; imageAlt: string };
-
-const elementOptions: ElementChoice[] = [
-  {
-    id: 'cocina',
-    label: 'Cocina',
-    description: 'Superficies, guardado y equipamiento reunidos en una composición.',
-    image: '/images/elem-editorial/cocina-isla-frontal-hd.png',
-    imageAlt: 'Cocina ELEM con isla de piedra y mobiliario metálico',
-  },
-  {
-    id: 'parrilla',
-    label: 'Parrilla',
-    description: 'Fuego, preparación y apoyo organizados para el exterior.',
-    image: '/images/products/parrilla-multiuso-movil/parrilla-multiuso-movil-frontal.png',
-    imageAlt: 'Parrilla ELEM móvil con plancha y superficie de cocción',
-  },
-  {
-    id: 'campana',
-    label: 'Campana',
-    description: 'Extracción y presencia arquitectónica definidas como una sola pieza.',
-    image: '/images/campana-noctis.png',
-    imageAlt: 'Campana ELEM de formato vertical en acero oscuro',
-  },
-];
-
-const configurationOptions: Record<ElementKind, Choice[]> = {
+const formats: Record<StudioProduct, FormatOption[]> = {
   cocina: [
-    { id: 'lineal', label: 'Lineal', description: 'Una composición continua contra el muro.' },
-    { id: 'isla', label: 'Con isla', description: 'Un elemento central para cocinar y reunirse.' },
-    { id: 'en-l', label: 'En L', description: 'Dos frentes conectados para aprovechar una esquina.' },
+    { id: 'lineal', label: 'Lineal', description: 'Un frente continuo' },
+    { id: 'isla', label: 'Con isla', description: 'Dos volúmenes' },
+    { id: 'en-l', label: 'En L', description: 'Dos frentes unidos' },
   ],
   parrilla: [
-    { id: 'empotrada', label: 'Empotrada', description: 'Integrada al quincho o al mobiliario existente.' },
-    { id: 'movil', label: 'Móvil', description: 'Un elemento autónomo que puede cambiar de posición.' },
-    { id: 'modulo', label: 'Módulo completo', description: 'Parrilla, apoyo y guardado como un solo conjunto.' },
+    { id: 'movil', label: 'Carro parrillero', description: 'Mueble móvil ELEM' },
+    { id: 'empotrada', label: 'Empotrada', description: 'Integrada al quincho' },
+    { id: 'completa', label: 'Estación completa', description: 'Cocción y apoyo' },
   ],
   campana: [
-    { id: 'mural', label: 'Mural', description: 'Fijada al muro sobre la zona de cocción.' },
-    { id: 'suspendida', label: 'Suspendida', description: 'Una pieza central sobre una isla o parrilla.' },
-    { id: 'integrada', label: 'Integrada', description: 'Incorporada a la arquitectura con una lectura contenida.' },
+    { id: 'mural', label: 'Mural', description: 'Instalada al muro' },
+    { id: 'suspendida', label: 'Suspendida', description: 'Sobre una isla' },
+    { id: 'integrada', label: 'Integrada', description: 'Lectura contenida' },
   ],
 };
 
-const materialOptions: Choice[] = [
-  { id: 'grafito', label: 'Acero grafito', description: 'Oscuro, mate y de presencia contenida.' },
-  { id: 'satinado', label: 'Acero satinado', description: 'Luminoso, técnico y de lectura precisa.' },
-  { id: 'piedra-acero', label: 'Piedra + acero', description: 'Contraste mineral para una composición arquitectónica.' },
+const modules: Record<StudioProduct, ModuleOption[]> = {
+  cocina: [
+    { id: 'lavaplatos', label: 'Lavaplatos', description: 'Cubeta y grifería' },
+    { id: 'encimera', label: 'Encimera', description: 'Cuatro zonas' },
+    { id: 'horno', label: 'Horno', description: 'Integrado bajo cubierta' },
+    { id: 'cava', label: 'Cava', description: 'Conservación inferior' },
+    { id: 'repisas', label: 'Repisas', description: 'Dos planos abiertos' },
+    { id: 'luz', label: 'Luz cálida', description: 'Iluminación de tarea' },
+  ],
+  parrilla: [
+    { id: 'parrilla', label: 'Rejilla en acero', description: 'Barras de alta resistencia' },
+    { id: 'plancha', label: 'Plancha', description: 'Placa lateral lisa' },
+    { id: 'puertas', label: 'Puertas de malla', description: 'Guardado ventilado' },
+    { id: 'asador', label: 'Spiedo', description: 'Eje de rotación' },
+    { id: 'brasero', label: 'Brasero interior', description: 'Bandeja para carbón' },
+    { id: 'ruedas', label: 'Ruedas industriales', description: 'Movilidad reforzada' },
+  ],
+  campana: [
+    { id: 'filtros', label: 'Filtros', description: 'Tres módulos inferiores' },
+    { id: 'luz', label: 'Luz integrada', description: 'Tres focos cálidos' },
+    { id: 'panel', label: 'Control', description: 'Mando inferior' },
+    { id: 'repisa', label: 'Repisa', description: 'Plano mural de apoyo' },
+  ],
+};
+
+const finishOptions: Array<{ id: StudioFinish; label: string; detail: string; swatch: string }> = [
+  { id: 'grafito', label: 'Grafito', detail: 'Mate profundo', swatch: '#242625' },
+  { id: 'satinado', label: 'Satinado', detail: 'Acero luminoso', swatch: '#a9adac' },
+  { id: 'bronce', label: 'Bronce', detail: 'Metal cálido', swatch: '#5c4a3b' },
+  { id: 'piedra', label: 'Piedra + acero', detail: 'Contraste mineral', swatch: '#d8d2c8' },
 ];
 
-const priorityOptions: Choice[] = [
-  { id: 'recibir', label: 'Cocinar y recibir', description: 'El encuentro y la preparación tienen el mismo peso.' },
-  { id: 'capacidad', label: 'Máxima capacidad', description: 'Más superficie útil, guardado y organización.' },
-  { id: 'presencia', label: 'Presencia arquitectónica', description: 'El elemento debe definir visualmente el espacio.' },
-];
+const dimensionRules: Record<StudioProduct, Record<'width' | 'depth' | 'height', { min: number; max: number; step: number; label: string }>> = {
+  cocina: {
+    width: { min: 2, max: 5, step: 0.1, label: 'Ancho' },
+    depth: { min: 0.6, max: 1.2, step: 0.05, label: 'Profundidad' },
+    height: { min: 0.8, max: 1.05, step: 0.05, label: 'Altura cubierta' },
+  },
+  parrilla: {
+    width: { min: 1.2, max: 3.6, step: 0.1, label: 'Ancho' },
+    depth: { min: 0.6, max: 1.1, step: 0.05, label: 'Profundidad' },
+    height: { min: 0.75, max: 1.1, step: 0.05, label: 'Altura de trabajo' },
+  },
+  campana: {
+    width: { min: 0.9, max: 2.4, step: 0.1, label: 'Ancho' },
+    depth: { min: 0.45, max: 0.9, step: 0.05, label: 'Profundidad' },
+    height: { min: 1.4, max: 2.4, step: 0.1, label: 'Altura de instalación' },
+  },
+};
 
-const stepLabels = ['Producto', 'Formato', 'Acabado', 'Objetivo'];
+const initialConfigs: Record<StudioProduct, StudioConfig> = {
+  cocina: {
+    product: 'cocina', format: 'isla', finish: 'grafito', width: 3.2, depth: 0.72, height: 0.9,
+    modules: { lavaplatos: true, encimera: true, horno: true, cava: false, repisas: true, luz: true },
+  },
+  parrilla: {
+    product: 'parrilla', format: 'movil', finish: 'grafito', width: 1.8, depth: 0.82, height: 0.88,
+    modules: { parrilla: true, plancha: false, puertas: true, asador: false, brasero: true, ruedas: true },
+  },
+  campana: {
+    product: 'campana', format: 'suspendida', finish: 'grafito', width: 1.5, depth: 0.62, height: 1.8,
+    modules: { filtros: true, luz: true, panel: true, repisa: false },
+  },
+};
+
+const viewOptions: Array<{ id: StudioView; label: string }> = [
+  { id: 'perspectiva', label: 'Perspectiva' },
+  { id: 'frontal', label: 'Frontal' },
+  { id: 'superior', label: 'Superior' },
+];
 
 export function CustomDesignConfigurator() {
-  const [step, setStep] = useState(0);
-  const [element, setElement] = useState<ElementKind | null>(null);
-  const [configuration, setConfiguration] = useState('');
-  const [material, setMaterial] = useState('');
-  const [priority, setPriority] = useState('');
+  const [timeline, setTimeline] = useState<Timeline>({ items: [initialConfigs.cocina], index: 0 });
+  const [view, setView] = useState<StudioView>('perspectiva');
+  const [sceneMode, setSceneMode] = useState<SceneMode>('dia');
   const [notes, setNotes] = useState('');
+  const [saved, setSaved] = useState(false);
+  const config = timeline.items[timeline.index];
 
-  const selectedElement = elementOptions.find((option) => option.id === element);
-  const selectedConfiguration = element
-    ? configurationOptions[element].find((option) => option.id === configuration)
-    : undefined;
-  const selectedMaterial = materialOptions.find((option) => option.id === material);
-  const selectedPriority = priorityOptions.find((option) => option.id === priority);
-  const currentValue = [element, configuration, material, priority][step];
-  const isComplete = Boolean(element && configuration && material && priority);
-  const completedCount = [element, configuration, material, priority].filter(Boolean).length;
-
-  const contactHref = useMemo(() => {
-    if (!selectedElement || !selectedConfiguration || !selectedMaterial || !selectedPriority) return '/contacto';
-
-    const summary = [
-      'Solicitud creada en el configurador ELEM:',
-      `Producto: ${selectedElement.label}`,
-      `Formato: ${selectedConfiguration.label}`,
-      `Acabado: ${selectedMaterial.label}`,
-      `Objetivo: ${selectedPriority.label}`,
-      `Observaciones: ${notes.trim() || 'Sin observaciones adicionales'}`,
-    ].join('\n');
-    const params = new URLSearchParams({
-      interes: `${selectedElement.label} a medida · ${selectedConfiguration.label}`,
-      mensaje: summary,
+  const commit = (change: Partial<StudioConfig> | ((current: StudioConfig) => StudioConfig)) => {
+    setTimeline((current) => {
+      const base = current.items[current.index];
+      const next = typeof change === 'function' ? change(base) : { ...base, ...change };
+      const items = [...current.items.slice(0, current.index + 1), next];
+      return { items, index: items.length - 1 };
     });
+    setSaved(false);
+  };
 
-    return `/contacto?${params.toString()}`;
-  }, [notes, selectedConfiguration, selectedElement, selectedMaterial, selectedPriority]);
+  const switchProduct = (product: StudioProduct) => {
+    if (product === config.product) return;
+    commit({ ...initialConfigs[product], finish: config.finish });
+    setView('perspectiva');
+  };
 
-  const selectElement = (value: ElementKind) => {
-    setElement(value);
-    setConfiguration('');
-    setMaterial('');
-    setPriority('');
+  const toggleModule = (moduleId: string) => {
+    commit((current) => ({ ...current, modules: { ...current.modules, [moduleId]: !current.modules[moduleId] } }));
+  };
+
+  const undo = () => {
+    setTimeline((current) => ({ ...current, index: Math.max(0, current.index - 1) }));
+    setSaved(false);
+  };
+
+  const redo = () => {
+    setTimeline((current) => ({ ...current, index: Math.min(current.items.length - 1, current.index + 1) }));
+    setSaved(false);
   };
 
   const reset = () => {
-    setStep(0);
-    setElement(null);
-    setConfiguration('');
-    setMaterial('');
-    setPriority('');
+    setTimeline({ items: [initialConfigs[config.product]], index: 0 });
+    setView('perspectiva');
+    setSceneMode('dia');
     setNotes('');
+    setSaved(false);
   };
 
+  const saveLocally = () => {
+    window.localStorage.setItem('elem-3d-studio', JSON.stringify({ config, notes }));
+    setSaved(true);
+  };
+
+  const activeFormat = formats[config.product].find((option) => option.id === config.format);
+  const activeFinish = finishOptions.find((option) => option.id === config.finish);
+  const selectedModules = modules[config.product].filter((option) => config.modules[option.id]);
+
+  const contactHref = useMemo(() => {
+    const summary = [
+      'Configuración creada en el Estudio 3D ELEM:',
+      `Elemento: ${productLabels[config.product]}`,
+      `Formato: ${formats[config.product].find((option) => option.id === config.format)?.label ?? config.format}`,
+      `Medidas iniciales: ${config.width.toFixed(2)} m ancho × ${config.depth.toFixed(2)} m profundidad × ${config.height.toFixed(2)} m altura`,
+      `Acabado: ${finishOptions.find((option) => option.id === config.finish)?.label ?? config.finish}`,
+      `Módulos: ${modules[config.product].filter((option) => config.modules[option.id]).map((option) => option.label).join(', ') || 'Sin módulos adicionales'}`,
+      `Observaciones: ${notes.trim() || 'Sin observaciones adicionales'}`,
+      'Las medidas y la factibilidad deben ser verificadas por ELEM.',
+    ].join('\n');
+    const params = new URLSearchParams({ interes: `${productLabels[config.product]} · Estudio 3D`, mensaje: summary });
+    return `/contacto?${params.toString()}`;
+  }, [config, notes]);
+
   return (
-    <section id="configurador" aria-labelledby="configurator-title" className="mx-auto max-w-[1480px] px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
-      <div className="border border-black/12 bg-[#f8f5ef] shadow-[0_28px_90px_rgba(27,24,19,0.08)]">
+    <section id="configurador" aria-labelledby="studio-title" className="mx-auto max-w-[1560px] scroll-mt-28 px-3 py-12 sm:px-6 lg:px-8 lg:py-20">
+      <div className="border border-black/15 bg-[#f8f5ef] shadow-[0_34px_100px_rgba(24,20,15,0.12)]">
         <div className="grid gap-6 border-b border-black/12 px-5 py-7 sm:px-8 lg:grid-cols-[1fr_auto] lg:items-end lg:px-10">
           <div>
-            <p className="text-[0.62rem] uppercase tracking-[0.28em] text-[#746e66]">Configura tu solicitud</p>
-            <h2 id="configurator-title" className="mt-3 max-w-3xl font-serif text-4xl leading-[0.95] sm:text-5xl">Elige cuatro cosas para comenzar.</h2>
+            <p className="text-[0.62rem] uppercase tracking-[0.28em] text-[#746e66]">Estudio 3D ELEM</p>
+            <h2 id="studio-title" className="mt-3 max-w-4xl font-serif text-4xl leading-[0.95] sm:text-5xl">Construye el elemento mientras lo observas.</h2>
           </div>
-          <p className="max-w-md text-sm leading-7 text-[#625c54]">Al terminar tendrás una solicitud clara para enviar a ELEM. Todavía no estarás comprando ni encargando un plano definitivo.</p>
+          <div className="max-w-lg lg:text-right">
+            <p className="text-sm leading-7 text-[#625c54]">Gira el modelo, cambia sus proporciones y combina cada parte. No necesitas conocer términos técnicos.</p>
+            <p className="mt-2 text-[0.58rem] uppercase tracking-[0.16em] text-[#8a8278]">Visualización conceptual · No reemplaza planos técnicos</p>
+          </div>
         </div>
 
-        <div aria-label="Qué ocurre con tu solicitud" className="grid border-b border-black/12 bg-white sm:grid-cols-3">
-          <ProcessNote number="1" title="Eliges" text="Producto, formato, acabado y prioridad." />
-          <ProcessNote number="2" title="Envías" text="Tus elecciones junto con tus datos de contacto." />
-          <ProcessNote number="3" title="Recibes" text="Una propuesta personalizada y cotización, tras confirmar medidas." />
+        <div className="grid grid-cols-3 border-b border-black/12 bg-white" aria-label="Tipo de elemento">
+          {(Object.keys(productLabels) as StudioProduct[]).map((product) => (
+            <button key={product} type="button" aria-pressed={config.product === product} onClick={() => switchProduct(product)} className={`min-h-16 border-r border-black/10 px-3 py-4 text-center transition last:border-r-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-3px] ${config.product === product ? 'bg-[#171717] text-white' : 'hover:bg-[#f1ece4]'}`}>
+              <span className="block text-[0.6rem] uppercase tracking-[0.2em]">{productLabels[product]}</span>
+              <span className={`mt-1 hidden text-[0.65rem] sm:block ${config.product === product ? 'text-white/55' : 'text-[#817970]'}`}>{formats[product].length} formatos · {modules[product].length} elementos</span>
+            </button>
+          ))}
         </div>
 
-        <ol aria-label="Progreso del diseño" className="grid grid-cols-4 border-b border-black/12">
-          {stepLabels.map((label, index) => {
-            const completed = index < step || (index === step && Boolean(currentValue));
-            return (
-              <li key={label} aria-label={`Paso ${index + 1}: ${label}`} aria-current={index === step ? 'step' : undefined} className={`border-r border-black/10 px-3 py-4 last:border-r-0 sm:px-6 ${index === step ? 'bg-white' : ''}`}>
-                <div className="flex items-center gap-2">
-                  <span className={`grid h-5 w-5 shrink-0 place-items-center border text-[0.55rem] ${completed ? 'border-[#2f4a36] bg-[#2f4a36] text-white' : 'border-black/20 text-[#7c746b]'}`}>
-                    {completed ? <Check size={11} aria-hidden="true" /> : index + 1}
-                  </span>
-                  <span className={`hidden text-[0.58rem] uppercase tracking-[0.18em] sm:block ${index === step ? 'text-[#171717]' : 'text-[#817970]'}`}>{label}</span>
-                </div>
-              </li>
-            );
-          })}
-        </ol>
-
-        <div className="grid lg:grid-cols-[minmax(0,1.08fr)_minmax(360px,0.92fr)]">
-          <div className="flex min-h-[38rem] flex-col p-5 sm:p-8 lg:p-10">
-            <div className="flex items-center justify-between gap-4">
-              <p className="text-[0.62rem] uppercase tracking-[0.24em] text-[#817970]">Paso {step + 1} de 4</p>
-              <button type="button" onClick={reset} className="inline-flex min-h-11 items-center gap-2 px-2 text-[0.6rem] uppercase tracking-[0.18em] text-[#6b645c] transition hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4">
-                <RotateCcw size={13} aria-hidden="true" /> Reiniciar
-              </button>
+        <div className="grid lg:grid-cols-[minmax(0,1fr)_390px]">
+          <div className="relative isolate min-h-[34rem] overflow-hidden border-b border-black/12 bg-[#d9d4cb] lg:min-h-[48rem] lg:border-b-0 lg:border-r">
+            <div className="absolute left-3 top-3 z-10 max-w-[13rem] border border-white/15 bg-[#171717]/96 px-3 py-2.5 text-white shadow-lg sm:left-5 sm:top-5 sm:max-w-[15rem] sm:px-4 sm:py-3">
+              <p className="text-[0.55rem] uppercase tracking-[0.2em] text-white/52">Ahora editas</p>
+              <p className="mt-1 font-serif text-2xl">{productLabels[config.product]}</p>
+              <p className="mt-1 hidden text-[0.64rem] leading-5 text-white/62 sm:block">Arrastra horizontalmente para girar · cambia la vista desde los controles</p>
             </div>
 
-            {step === 0 ? (
-              <fieldset className="mt-8">
-                <legend className="font-serif text-3xl sm:text-4xl">¿Qué quieres cotizar?</legend>
-                <p className="mt-3 text-sm leading-7 text-[#665f57]">Elige una categoría. La imagen es referencial y no representa todavía el diseño final.</p>
-                <div className="mt-7 grid gap-4 md:grid-cols-3">
-                  {elementOptions.map((option) => (
-                    <button key={option.id} type="button" aria-pressed={element === option.id} onClick={() => selectElement(option.id)} className={`group overflow-hidden border bg-white text-left transition duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 ${element === option.id ? 'border-[#171717] shadow-[0_14px_35px_rgba(20,16,10,0.10)]' : 'border-black/12 hover:border-black/35'}`}>
-                      <div className="relative aspect-[4/3] overflow-hidden bg-[#ddd7ce]">
-                        <Image src={option.image} alt={option.imageAlt} fill priority sizes="(min-width: 1024px) 18vw, (min-width: 768px) 30vw, 100vw" className="object-cover transition duration-700 group-hover:scale-[1.025]" />
-                        {element === option.id ? <span className="absolute right-3 top-3 grid h-8 w-8 place-items-center bg-[#f8f5ef] text-[#171717]"><Check size={15} aria-hidden="true" /></span> : null}
-                      </div>
-                      <span className="block p-4">
-                        <span className="block font-serif text-2xl">{option.label}</span>
-                        <span className="mt-2 block text-xs leading-6 text-[#6b645c]">{option.description}</span>
-                      </span>
+            <div className="absolute right-3 top-3 z-10 flex border border-black/15 bg-[#f8f5ef]/92 p-1 shadow-lg backdrop-blur-sm sm:right-5 sm:top-5" aria-label="Vistas del modelo">
+              {viewOptions.map((option) => (
+                <button key={option.id} type="button" aria-pressed={view === option.id} onClick={() => setView(option.id)} className={`min-h-10 px-3 text-[0.52rem] uppercase tracking-[0.14em] transition ${view === option.id ? 'bg-[#171717] text-white' : 'text-[#625c55] hover:bg-white'}`}>
+                  <span className="hidden sm:inline">{option.label}</span><span className="sm:hidden">{option.id === 'perspectiva' ? '3D' : option.id === 'frontal' ? 'Frente' : 'Arriba'}</span>
+                </button>
+              ))}
+            </div>
+
+            <ThreeStudioViewport config={config} view={view} sceneMode={sceneMode} />
+
+            <div className="absolute inset-x-3 bottom-3 z-10 flex flex-wrap items-center justify-between gap-2 border border-black/15 bg-[#f8f5ef]/94 px-3 py-2 shadow-xl backdrop-blur-sm sm:inset-x-5 sm:bottom-5 sm:px-4">
+              <div className="flex items-center gap-3 text-[0.58rem] uppercase tracking-[0.14em] text-[#5e5851]">
+                <span className="inline-flex items-center gap-1.5"><Ruler size={13} aria-hidden="true" /> {config.width.toFixed(1)} × {config.depth.toFixed(2)} × {config.height.toFixed(2)} m</span>
+              </div>
+              <div className="flex items-center border-l border-black/10 pl-2">
+                <button type="button" onClick={() => setSceneMode('dia')} aria-pressed={sceneMode === 'dia'} aria-label="Iluminación de día" className={`grid h-10 w-10 place-items-center ${sceneMode === 'dia' ? 'bg-[#171717] text-white' : 'text-[#625c55] hover:bg-white'}`}><Sun size={15} /></button>
+                <button type="button" onClick={() => setSceneMode('noche')} aria-pressed={sceneMode === 'noche'} aria-label="Iluminación de noche" className={`grid h-10 w-10 place-items-center ${sceneMode === 'noche' ? 'bg-[#171717] text-white' : 'text-[#625c55] hover:bg-white'}`}><Moon size={15} /></button>
+              </div>
+            </div>
+          </div>
+
+          <aside aria-label="Controles del Estudio 3D" className="flex min-h-0 flex-col bg-[#f8f5ef]">
+            <div className="flex items-center justify-between border-b border-black/12 px-5 py-3">
+              <div className="flex items-center gap-1">
+                <ToolbarButton label="Deshacer" disabled={timeline.index === 0} onClick={undo}><Undo2 size={14} /></ToolbarButton>
+                <ToolbarButton label="Rehacer" disabled={timeline.index === timeline.items.length - 1} onClick={redo}><Redo2 size={14} /></ToolbarButton>
+              </div>
+              <ToolbarButton label="Reiniciar" onClick={reset}><RotateCcw size={14} /></ToolbarButton>
+            </div>
+
+            <div className="divide-y divide-black/12 lg:max-h-[42rem] lg:overflow-y-auto">
+              <ControlSection icon={<Box size={15} />} title="Formato" description="Define la composición general.">
+                <div className="grid grid-cols-3 gap-2">
+                  {formats[config.product].map((option) => (
+                    <button key={option.id} type="button" aria-pressed={config.format === option.id} onClick={() => commit({ format: option.id })} className={`min-h-20 border p-3 text-left transition ${config.format === option.id ? 'border-[#171717] bg-white shadow-[0_8px_20px_rgba(20,16,10,0.08)]' : 'border-black/12 bg-[#f1ece4] hover:border-black/35'}`}>
+                      <span className="block text-[0.66rem] font-medium">{option.label}</span>
+                      <span className="mt-1 block text-[0.55rem] leading-4 text-[#777067]">{option.description}</span>
                     </button>
                   ))}
                 </div>
-              </fieldset>
-            ) : null}
+              </ControlSection>
 
-            {step === 1 && element ? (
-              <ChoiceStep
-                legend="¿Qué formato buscas?"
-                hint="Elige la opción más parecida a tu idea. Las medidas exactas se confirman después con ELEM."
-                options={configurationOptions[element]}
-                value={configuration}
-                onChange={setConfiguration}
-              />
-            ) : null}
+              <ControlSection icon={<Ruler size={15} />} title="Medidas" description="Mueve cada control y observa el cambio.">
+                <div className="space-y-5">
+                  {(Object.keys(dimensionRules[config.product]) as Array<'width' | 'depth' | 'height'>).map((dimension) => {
+                    const rule = dimensionRules[config.product][dimension];
+                    return (
+                      <label key={dimension} className="block">
+                        <span className="flex items-center justify-between gap-4 text-xs"><span>{rule.label}</span><output className="tabular-nums text-[#625c55]">{config[dimension].toFixed(2)} m</output></span>
+                        <input type="range" min={rule.min} max={rule.max} step={rule.step} value={config[dimension]} onChange={(event) => commit({ [dimension]: Number(event.target.value) })} className="mt-3 h-1.5 w-full cursor-pointer appearance-none bg-[#d6d0c7] accent-[#171717]" />
+                        <span className="mt-1 flex justify-between text-[0.52rem] text-[#918980]"><span>{rule.min} m</span><span>{rule.max} m</span></span>
+                      </label>
+                    );
+                  })}
+                </div>
+              </ControlSection>
 
-            {step === 2 ? (
-              <ChoiceStep
-                legend="¿Qué acabado te gusta más?"
-                hint="Esta elección define la apariencia general. Las muestras reales se revisan antes de fabricar."
-                options={materialOptions}
-                value={material}
-                onChange={setMaterial}
-                material
-              />
-            ) : null}
+              <ControlSection icon={<SlidersHorizontal size={15} />} title="Elementos" description="Activa o retira piezas directamente.">
+                <div className="grid grid-cols-2 gap-2">
+                  {modules[config.product].map((option) => {
+                    const selected = Boolean(config.modules[option.id]);
+                    return (
+                      <button key={option.id} type="button" aria-pressed={selected} onClick={() => toggleModule(option.id)} className={`min-h-20 border p-3 text-left transition ${selected ? 'border-[#2f4a36] bg-[#edf1eb]' : 'border-black/12 bg-white hover:border-black/35'}`}>
+                        <span className="flex items-start justify-between gap-2"><span className="text-[0.66rem] font-medium">{option.label}</span><span className={`grid h-4 w-4 place-items-center border ${selected ? 'border-[#2f4a36] bg-[#2f4a36] text-white' : 'border-black/20 text-transparent'}`}><Check size={10} /></span></span>
+                        <span className="mt-1 block text-[0.55rem] leading-4 text-[#777067]">{option.description}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </ControlSection>
 
-            {step === 3 ? (
-              <fieldset className="mt-8">
-                <legend className="font-serif text-3xl sm:text-4xl">¿Qué es más importante para ti?</legend>
-                <p className="mt-3 text-sm leading-7 text-[#665f57]">Esto ayuda a ELEM a preparar una propuesta que responda a tu forma de usar el espacio.</p>
-                <div className="mt-7 grid gap-3 sm:grid-cols-3">
-                  {priorityOptions.map((option) => (
-                    <ChoiceButton key={option.id} option={option} selected={priority === option.id} onClick={() => setPriority(option.id)} />
+              <ControlSection icon={<Eye size={15} />} title="Materia" description="Compara el carácter del conjunto.">
+                <div className="grid grid-cols-2 gap-2">
+                  {finishOptions.map((option) => (
+                    <button key={option.id} type="button" aria-pressed={config.finish === option.id} onClick={() => commit({ finish: option.id })} className={`flex min-h-16 items-center gap-3 border p-3 text-left transition ${config.finish === option.id ? 'border-[#171717] bg-white' : 'border-black/12 bg-[#f1ece4] hover:border-black/35'}`}>
+                      <span aria-hidden="true" className="h-8 w-8 shrink-0 border border-black/15" style={{ background: option.id === 'piedra' ? 'linear-gradient(135deg,#d8d2c8 0 48%,#4b4e4c 49% 100%)' : option.swatch }} />
+                      <span><span className="block text-[0.64rem] font-medium">{option.label}</span><span className="mt-0.5 block text-[0.52rem] text-[#777067]">{option.detail}</span></span>
+                    </button>
                   ))}
                 </div>
-                <label className="mt-7 block text-sm text-[#57514b]">
-                  Cuéntanos brevemente sobre el espacio <span className="text-[#8b837a]">(opcional)</span>
-                  <textarea value={notes} onChange={(event) => setNotes(event.target.value.slice(0, 360))} maxLength={360} placeholder="Ejemplo: terraza techada, espacio para ocho personas y conexiones existentes." className="mt-2 min-h-28 w-full resize-y border border-black/15 bg-white px-4 py-3.5 leading-7 outline-none transition placeholder:text-[#9a9288] focus:border-black/55" />
-                </label>
-              </fieldset>
-            ) : null}
+              </ControlSection>
 
-            <div className="mt-auto flex flex-col-reverse gap-3 border-t border-black/10 pt-7 sm:flex-row sm:items-center sm:justify-between">
-              <button type="button" onClick={() => setStep((current) => Math.max(0, current - 1))} disabled={step === 0} className="inline-flex min-h-12 items-center justify-center gap-2 border border-black/15 px-5 text-[0.62rem] uppercase tracking-[0.2em] transition hover:border-black/40 disabled:invisible">
-                <ArrowLeft size={14} aria-hidden="true" /> Anterior
-              </button>
-              {step < 3 ? (
-                <button type="button" onClick={() => setStep((current) => Math.min(3, current + 1))} disabled={!currentValue} className="inline-flex min-h-12 items-center justify-center gap-2 bg-[#171717] px-6 text-[0.62rem] uppercase tracking-[0.2em] text-white transition hover:bg-black disabled:cursor-not-allowed disabled:opacity-35">
-                  Continuar <ArrowRight size={14} aria-hidden="true" />
-                </button>
-              ) : (
-                <Link href={contactHref} aria-disabled={!isComplete} tabIndex={isComplete ? undefined : -1} className={`inline-flex min-h-12 items-center justify-center gap-2 px-6 text-[0.62rem] uppercase tracking-[0.2em] transition ${isComplete ? 'bg-[#171717] text-white hover:bg-black' : 'pointer-events-none bg-black/15 text-black/35'}`}>
-                  Continuar a contacto <ArrowRight size={14} aria-hidden="true" />
-                </Link>
-              )}
+              <ControlSection icon={<Rotate3D size={15} />} title="Tu idea" description="Añade un dato que no se vea en el modelo.">
+                <textarea value={notes} onChange={(event) => setNotes(event.target.value.slice(0, 360))} maxLength={360} placeholder="Ejemplo: terraza techada, ocho personas y conexiones existentes." className="min-h-24 w-full resize-y border border-black/15 bg-white px-3 py-3 text-xs leading-6 outline-none transition placeholder:text-[#9a9288] focus:border-black/55" />
+              </ControlSection>
             </div>
-          </div>
 
-          <CompositionPreview
-            element={selectedElement}
-            configuration={selectedConfiguration}
-            material={selectedMaterial}
-            priority={selectedPriority}
-            completedCount={completedCount}
-          />
+            <div className="mt-auto border-t border-black/12 bg-white p-5">
+              <div className="grid grid-cols-2 gap-x-4 gap-y-2 text-[0.6rem]">
+                <SummaryLine label="Elemento" value={productLabels[config.product]} />
+                <SummaryLine label="Formato" value={activeFormat?.label ?? config.format} />
+                <SummaryLine label="Acabado" value={activeFinish?.label ?? config.finish} />
+                <SummaryLine label="Piezas activas" value={String(selectedModules.length)} />
+              </div>
+              <div className="mt-4 grid gap-2 sm:grid-cols-[auto_1fr] lg:grid-cols-1 xl:grid-cols-[auto_1fr]">
+                <button type="button" onClick={saveLocally} className="inline-flex min-h-12 items-center justify-center gap-2 border border-black/15 px-4 text-[0.58rem] uppercase tracking-[0.16em] transition hover:border-black/40"><Save size={14} /> {saved ? 'Guardado' : 'Guardar'}</button>
+                <Link href={contactHref} className="inline-flex min-h-12 items-center justify-center gap-2 bg-[#171717] px-5 text-[0.58rem] uppercase tracking-[0.17em] text-white transition hover:bg-black">Solicitar propuesta <ArrowRight size={14} /></Link>
+              </div>
+              <p className="mt-3 text-[0.56rem] leading-5 text-[#777067]">ELEM confirmará medidas, factibilidad y cotización antes de diseñar o fabricar.</p>
+            </div>
+          </aside>
         </div>
       </div>
     </section>
   );
 }
 
-function ProcessNote({ number, title, text }: { number: string; title: string; text: string }) {
+function ControlSection({ icon, title, description, children }: { icon: React.ReactNode; title: string; description: string; children: React.ReactNode }) {
   return (
-    <div className="grid grid-cols-[2rem_1fr] gap-3 border-b border-black/10 px-5 py-5 last:border-b-0 sm:border-b-0 sm:border-r sm:px-6 sm:last:border-r-0">
-      <span className="font-serif text-xl text-[#8a8278]">{number}</span>
-      <div>
-        <p className="text-sm font-medium text-[#292622]">{title}</p>
-        <p className="mt-1 text-xs leading-5 text-[#716a62]">{text}</p>
+    <section className="p-5">
+      <div className="flex items-start gap-3">
+        <span className="mt-0.5 grid h-7 w-7 shrink-0 place-items-center border border-black/15 text-[#625c55]">{icon}</span>
+        <div><h3 className="text-xs font-medium uppercase tracking-[0.16em]">{title}</h3><p className="mt-1 text-[0.62rem] leading-5 text-[#777067]">{description}</p></div>
       </div>
-    </div>
+      <div className="mt-4">{children}</div>
+    </section>
   );
 }
 
-function ChoiceStep({ legend, hint, options, value, onChange, material = false }: { legend: string; hint: string; options: Choice[]; value: string; onChange: (value: string) => void; material?: boolean }) {
-  return (
-    <fieldset className="mt-8">
-      <legend className="font-serif text-3xl sm:text-4xl">{legend}</legend>
-      <p className="mt-3 max-w-2xl text-sm leading-7 text-[#665f57]">{hint}</p>
-      <div className="mt-7 grid gap-3 sm:grid-cols-3">
-        {options.map((option) => (
-          <ChoiceButton key={option.id} option={option} selected={value === option.id} onClick={() => onChange(option.id)} swatch={material ? option.id : undefined} />
-        ))}
-      </div>
-    </fieldset>
-  );
+function ToolbarButton({ label, onClick, disabled = false, children }: { label: string; onClick: () => void; disabled?: boolean; children: React.ReactNode }) {
+  return <button type="button" onClick={onClick} disabled={disabled} className="inline-flex min-h-10 items-center gap-1.5 px-2.5 text-[0.54rem] uppercase tracking-[0.13em] text-[#625c55] transition hover:bg-white hover:text-black disabled:cursor-not-allowed disabled:opacity-25">{children}<span className="hidden sm:inline">{label}</span></button>;
 }
 
-function ChoiceButton({ option, selected, onClick, swatch }: { option: Choice; selected: boolean; onClick: () => void; swatch?: string }) {
-  return (
-    <button type="button" aria-pressed={selected} onClick={onClick} className={`min-h-36 border p-5 text-left transition duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 ${selected ? 'border-[#171717] bg-white shadow-[0_12px_30px_rgba(20,16,10,0.08)]' : 'border-black/12 bg-[#f4f0e9] hover:border-black/35 hover:bg-white'}`}>
-      <span className="flex items-start justify-between gap-4">
-        {swatch ? <MaterialSwatch material={swatch} /> : <span className="font-serif text-lg text-[#8a8278]">E</span>}
-        <span className={`grid h-5 w-5 place-items-center border ${selected ? 'border-[#2f4a36] bg-[#2f4a36] text-white' : 'border-black/20 text-transparent'}`}><Check size={11} aria-hidden="true" /></span>
-      </span>
-      <span className="mt-5 block font-serif text-2xl leading-none">{option.label}</span>
-      <span className="mt-3 block text-xs leading-6 text-[#6b645c]">{option.description}</span>
-    </button>
-  );
-}
-
-function MaterialSwatch({ material }: { material: string }) {
-  const className = material === 'grafito'
-    ? 'bg-[#242625]'
-    : material === 'satinado'
-      ? 'bg-[linear-gradient(135deg,#8f9494,#e2e3df,#9ba0a0)]'
-      : 'bg-[linear-gradient(135deg,#d9d2c7_0_48%,#555957_48%_52%,#b9bdbb_52%)]';
-  return <span aria-hidden="true" className={`h-7 w-12 border border-black/10 ${className}`} />;
-}
-
-function CompositionPreview({ element, configuration, material, priority, completedCount }: { element?: ElementChoice; configuration?: Choice; material?: Choice; priority?: Choice; completedCount: number }) {
-  return (
-    <aside aria-label="Resumen de tu solicitud" className="flex min-h-[34rem] flex-col border-t border-black/12 bg-white p-6 text-[#171717] sm:p-8 lg:min-h-full lg:border-l lg:border-t-0 lg:p-10">
-      <div className="flex items-start justify-between gap-5 border-b border-black/12 pb-5">
-        <div>
-          <p className="text-[0.58rem] uppercase tracking-[0.25em] text-[#777067]">Tu solicitud</p>
-          <p className="mt-2 font-serif text-3xl">{element?.label ?? 'Aún sin comenzar'}</p>
-        </div>
-        <span className="text-[0.58rem] uppercase tracking-[0.18em] text-[#777067]">{completedCount} / 4 completo</span>
-      </div>
-
-      {element ? (
-        <figure className="mt-6">
-          <div className="relative aspect-[16/10] overflow-hidden bg-[#ddd7ce]">
-            <Image src={element.image} alt={element.imageAlt} fill priority sizes="(min-width: 1024px) 38vw, 100vw" className="object-cover" />
-          </div>
-          <figcaption className="border-x border-b border-black/10 px-4 py-3 text-[0.58rem] uppercase tracking-[0.18em] text-[#777067]">Imagen referencial · El diseño final se define después</figcaption>
-        </figure>
-      ) : (
-        <div className="mt-6 grid aspect-[16/10] place-items-center border border-dashed border-black/20 bg-[#f4f1ea] px-8 text-center">
-          <p className="max-w-xs text-sm leading-7 text-[#6b645c]">Elige cocina, parrilla o campana para comenzar tu solicitud.</p>
-        </div>
-      )}
-
-      <dl className="mt-6 grid grid-cols-2 border-t border-black/12 text-xs">
-        <PreviewDatum label="Elemento" value={element?.label} />
-        <PreviewDatum label="Formato" value={configuration?.label} />
-        <PreviewDatum label="Acabado" value={material?.label} />
-        <PreviewDatum label="Objetivo" value={priority?.label} />
-      </dl>
-
-      <div className="mt-6 border border-[#607263]/25 bg-[#edf1eb] p-5">
-        <p className="text-[0.58rem] uppercase tracking-[0.2em] text-[#506254]">Qué recibirás después de enviar</p>
-        <p className="mt-3 text-sm leading-7 text-[#344238]">Un especialista de ELEM revisará tu selección, confirmará medidas y necesidades contigo, y preparará una propuesta personalizada con cotización.</p>
-        <p className="mt-3 border-t border-[#607263]/20 pt-3 text-xs leading-6 text-[#607064]">Esta herramienta no genera un plano final y no realiza ningún cobro.</p>
-      </div>
-    </aside>
-  );
-}
-
-function PreviewDatum({ label, value }: { label: string; value?: string }) {
-  return (
-    <div className="border-b border-r border-black/10 py-4 pr-3 even:border-r-0">
-      <dt className="text-[0.52rem] uppercase tracking-[0.2em] text-[#837b72]">{label}</dt>
-      <dd className="mt-2 min-h-5 text-[#3f3a35]">{value ?? 'Sin elegir'}</dd>
-    </div>
-  );
+function SummaryLine({ label, value }: { label: string; value: string }) {
+  return <div className="border-b border-black/10 pb-2"><p className="text-[0.5rem] uppercase tracking-[0.14em] text-[#8a8278]">{label}</p><p className="mt-1 truncate text-[#3f3a35]">{value}</p></div>;
 }
